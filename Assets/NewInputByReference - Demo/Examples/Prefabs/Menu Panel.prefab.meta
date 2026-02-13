@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d19bc603cc700b94e88793a52d70448e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220376
+  packageName: New Input By Reference - Demo
+  packageVersion: 1.1.0
+  assetPath: Assets/NewInputByReference - Demo/Examples/Prefabs/Menu Panel.prefab
+  uploadId: 501769

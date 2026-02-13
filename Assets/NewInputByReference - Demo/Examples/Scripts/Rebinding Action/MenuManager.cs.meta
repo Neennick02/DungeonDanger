@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: affec7219dd345e8bf7e9d2cfe645f09
+timeCreated: 1651348714
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220376
+  packageName: New Input By Reference - Demo
+  packageVersion: 1.1.0
+  assetPath: Assets/NewInputByReference - Demo/Examples/Scripts/Rebinding Action/MenuManager.cs
+  uploadId: 501769

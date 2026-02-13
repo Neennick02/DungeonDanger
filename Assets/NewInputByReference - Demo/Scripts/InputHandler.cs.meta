@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: eddd13c8ce8d4f3b8ff61f53466f6f06
+timeCreated: 1641127244
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220376
+  packageName: New Input By Reference - Demo
+  packageVersion: 1.1.0
+  assetPath: Assets/NewInputByReference - Demo/Scripts/InputHandler.cs
+  uploadId: 501769

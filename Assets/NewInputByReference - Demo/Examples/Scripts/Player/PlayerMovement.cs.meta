@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 619a7add9b16e524197aeb3f0e4e94ea
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220376
+  packageName: New Input By Reference - Demo
+  packageVersion: 1.1.0
+  assetPath: Assets/NewInputByReference - Demo/Examples/Scripts/Player/PlayerMovement.cs
+  uploadId: 501769

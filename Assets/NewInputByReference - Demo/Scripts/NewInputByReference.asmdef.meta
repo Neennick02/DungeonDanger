@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a15c4686da1f5a34694e6def39c8b6c8
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220376
+  packageName: New Input By Reference - Demo
+  packageVersion: 1.1.0
+  assetPath: Assets/NewInputByReference - Demo/Scripts/NewInputByReference.asmdef
+  uploadId: 501769

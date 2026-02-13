@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 331aa3c61bd26fd44bcf0ee9728f40d9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220376
+  packageName: New Input By Reference - Demo
+  packageVersion: 1.1.0
+  assetPath: Assets/NewInputByReference - Demo/Examples/Prefabs/Key.prefab
+  uploadId: 501769
