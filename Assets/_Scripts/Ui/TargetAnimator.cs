@@ -19,17 +19,21 @@ public class TargetAnimator : MonoBehaviour
 
     private void SelectAndUnselect()
     {
-        //if already targeting than untarget
-        if (!_isTargeting)
+        //only if targets are in pool
+        if (TargetFinder.pool.Count > 0)
         {
-            _animator.SetBool("IsTargeting", true);
-            _isTargeting = true;
-        }
-        //if not targeting target
-        else if(_isTargeting)
-        {
-            _animator.SetBool("IsTargeting", false);
-            _isTargeting = false;
+            //if already targeting than untarget
+            if (!_isTargeting)
+            {
+                _animator.SetBool("IsTargeting", true);
+                _isTargeting = true;
+            }
+            //if not targeting target
+            else if (_isTargeting)
+            {
+                _animator.SetBool("IsTargeting", false);
+                _isTargeting = false;
+            }
         }
     }
 }
