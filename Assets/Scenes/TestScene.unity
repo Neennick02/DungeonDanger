@@ -576,8 +576,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530989371}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.24149026, y: 0.65746516, z: -0.23566797, w: 0.67370814}
-  m_LocalPosition: {x: -1.5882807, y: 7.2953744, z: 15.145779}
+  m_LocalRotation: {x: 0.07392128, y: 0.04967707, z: -0.0036868693, w: 0.9960192}
+  m_LocalPosition: {x: 3.272, y: 4.869, z: 10.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -891,9 +891,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 601771035}
   _movementSpeed: 3
+  _rotationSpeed: 5
   _movementAcceleration: 3
   _gravity: -9.81
   _jumpForce: 4
+  _dodgeForce: 3
+  _dodgeDuration: 0.2
+  _dodgeCooldown: 1
 --- !u!143 &601771035
 CharacterController:
   m_ObjectHideFlags: 0
