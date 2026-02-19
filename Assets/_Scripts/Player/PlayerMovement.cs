@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(Vector2 input)
     {
+
         //get camera position
         Vector3 camForward = Camera.main.transform.forward;
         Vector3 camRight = Camera.main.transform.right;
@@ -55,8 +56,11 @@ public class PlayerMovement : MonoBehaviour
         //convert to 3d space
         Vector3 move = camForward * input.y + camRight * input.x;
 
+        //update dodge direction
+        _dodgeDirection = move.normalized;
+
         //rotate character in move direction
-        if(move != Vector3.zero)
+        if (move != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(move);
 
@@ -130,20 +134,27 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!_isJumping)
         {
-            _verticalVelocity = _jumpForce;
+            if (_isDodging)
+            {
+                _verticalVelocity = _jumpForce * 1.2f;
+            }
+            else
+            {
+                _verticalVelocity = _jumpForce;
+            }
             _isJumping = true;
         }
     }
 
     private void Dodge()
     {
-        if (_isDodging || _dodgeCooldownTimer > 0) return;
+        if (_isDodging || _dodgeCooldownTimer > 0 || !_characterController.isGrounded) return;
 
         if(_velocity.sqrMagnitude > 0.01f)
         {
             _isDodging = true;
             _dodgeTime = _dodgeDuration;
-            _dodgeDirection = new Vector3(_velocity.x, 0, _velocity.z).normalized;
+           // _dodgeDirection = new Vector3(_velocity.x, 0, _velocity.z).normalized;
             _dodgeCooldownTimer = _dodgeCooldown;
         }
     }
