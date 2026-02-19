@@ -13,7 +13,7 @@ public class TargetFinder : MonoBehaviour
     public List<Transform> poolView;
     public string currentTargetName; 
 
-    private Transform currentTarget;
+    public Transform currentTarget { get; private set; }
     
     [SerializeField] private CinemachineCamera playerCamera;
     [SerializeField] private CinemachineCamera targetCamera;
