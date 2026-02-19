@@ -16,8 +16,9 @@ public class PlayerInput : MonoBehaviour
 
     public static event Action OnTarget;
     public static event Action OnDodge;
-    public static event Action OnTargetRight;
-    public static event Action OnTargetLeft;
+    public static event Action<Vector2> OnMove;
+    public static event Action<int> OnTargetRight;
+    public static event Action<int> OnTargetLeft;
 
     private void OnEnable()
     {
@@ -33,24 +34,32 @@ public class PlayerInput : MonoBehaviour
     {
         moveAction = InputActions.FindAction("Move");
         dodgeAction = InputActions.FindAction("Dodge");
+
         targetAction = InputActions.FindAction("Target");
         targetRight = InputActions.FindAction("TargetRight");
         targetLeft = InputActions.FindAction("TargetLeft");
 
 
         //subscribe to action performed callbacks
+
+        //movement events
+        if (moveAction != null)
+            moveAction.performed += ctx => OnTarget?.Invoke();
+
+
+        if (dodgeAction != null)
+            dodgeAction.performed += ctx => OnMove?.Invoke(moveAction.ReadValue<Vector2>());
+
+
+        //target events
         if (targetAction != null)
             targetAction.performed += ctx => OnTarget?.Invoke();
 
         if (targetRight != null)
-            targetRight.performed += ctx => OnTargetRight?.Invoke();
+            targetRight.performed += ctx => OnTargetRight?.Invoke(1);
 
         if (targetLeft != null)
-            targetLeft.performed += ctx => OnTargetLeft?.Invoke();
-
-
-        if (dodgeAction != null)
-            dodgeAction.performed += ctx => OnDodge?.Invoke();
+            targetLeft.performed += ctx => OnTargetLeft?.Invoke(-1);
 
     }
 }

@@ -25,14 +25,14 @@ public class TargetFinder : MonoBehaviour
     private void OnEnable()
     {
         PlayerInput.OnTarget += TargetAndUntarget;
-        PlayerInput.OnTargetRight += SelectRight;
-        PlayerInput.OnTargetLeft += SelectLeft;
+        PlayerInput.OnTargetRight += SelectTarget;
+        PlayerInput.OnTargetLeft += SelectTarget;
     }
     private void OnDisable()
     {
         PlayerInput.OnTarget -= TargetAndUntarget;
-        PlayerInput.OnTargetRight -= SelectRight;
-        PlayerInput.OnTargetLeft -= SelectLeft;
+        PlayerInput.OnTargetRight -= SelectTarget;
+        PlayerInput.OnTargetLeft -= SelectTarget;
     }
     #endregion
 
@@ -74,16 +74,6 @@ public class TargetFinder : MonoBehaviour
         {
             LockOff();
         }
-    }
-
-    private void SelectRight()
-    {
-        SelectTarget(1);
-    }
-
-    private void SelectLeft()
-    {
-        SelectTarget(-1);
     }
 
     private void SelectTarget(int next)
