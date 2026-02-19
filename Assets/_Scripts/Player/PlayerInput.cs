@@ -11,12 +11,12 @@ public class PlayerInput : MonoBehaviour
     private InputAction targetRight;
     private InputAction targetLeft;
 
-    private Vector2 moveAmount;
-    private Vector2 lookAmount;
-
     public static event Action OnTarget;
     public static event Action OnDodge;
     public static event Action<Vector2> OnMove;
+    private Vector2 moveInput;
+
+
     public static event Action<int> OnTargetRight;
     public static event Action<int> OnTargetLeft;
 
@@ -43,12 +43,12 @@ public class PlayerInput : MonoBehaviour
         //subscribe to action performed callbacks
 
         //movement events
-        if (moveAction != null)
-            moveAction.performed += ctx => OnTarget?.Invoke();
-
+        /*if (moveAction != null)
+            moveAction.performed += ctx => OnMove?.Invoke(moveAction.ReadValue<Vector2>());
+*/
 
         if (dodgeAction != null)
-            dodgeAction.performed += ctx => OnMove?.Invoke(moveAction.ReadValue<Vector2>());
+            dodgeAction.performed += ctx => OnDodge.Invoke();
 
 
         //target events
@@ -61,5 +61,12 @@ public class PlayerInput : MonoBehaviour
         if (targetLeft != null)
             targetLeft.performed += ctx => OnTargetLeft?.Invoke(-1);
 
+    }
+
+    private void Update()
+    {
+        Vector2 move = moveAction.ReadValue<Vector2>();
+
+        OnMove?.Invoke(move);
     }
 }
