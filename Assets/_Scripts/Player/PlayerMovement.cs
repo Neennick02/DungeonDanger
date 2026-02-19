@@ -154,7 +154,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _isDodging = true;
             _dodgeTime = _dodgeDuration;
-           // _dodgeDirection = new Vector3(_velocity.x, 0, _velocity.z).normalized;
             _dodgeCooldownTimer = _dodgeCooldown;
         }
     }
