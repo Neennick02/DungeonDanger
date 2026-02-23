@@ -5,7 +5,6 @@ public class SignInterable : BaseInteractable
 {
     public UnityEvent CloseSign;
     private bool enabled = false;
-    [SerializeField] private string signText;
     protected override void Start()
     {
         base.Start();

@@ -4,11 +4,11 @@ using UnityEngine.Events;
 
 public class OnOffInteractable : BaseInteractable
 {
-    [SerializeField] private float resetDelay = 5f;
+    [SerializeField] protected float resetDelay = 5f;
     public UnityEvent OffInteract;
   
     public bool isLit = false;
-    private bool keepOn = false;
+    protected bool keepOn = false;
     protected override void Start()
     {
         base.Start();
@@ -28,7 +28,7 @@ public class OnOffInteractable : BaseInteractable
     IEnumerator ResetInteractable()
     {
         yield return new WaitForSeconds(resetDelay);
-        OffInteract.Invoke();
+        OffInteract?.Invoke();
         isLit = false;
     }
 

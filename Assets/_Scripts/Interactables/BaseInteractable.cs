@@ -13,7 +13,7 @@ public abstract class BaseInteractable : MonoBehaviour
     }
     public virtual void Interact()
     {
-        OnInteract.Invoke();
+        OnInteract?.Invoke();
     }
 
     protected void OnTriggerEnter(Collider other)

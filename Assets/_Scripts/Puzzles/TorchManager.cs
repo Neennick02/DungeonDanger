@@ -22,6 +22,6 @@ public class TorchManager : MonoBehaviour
         }
 
         //invoke event
-        OnAllTorchesLit.Invoke();
+        OnAllTorchesLit?.Invoke();
     }
 }
