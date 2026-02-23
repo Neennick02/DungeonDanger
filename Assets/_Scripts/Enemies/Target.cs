@@ -10,10 +10,13 @@ public class Target : MonoBehaviour
     private bool visible;
     private bool inPool;
 
+    private TargetFinder finder;
+
     private void Start()
     {
         m_collider = GetComponent<Collider>();
         cam = Camera.main;
+        finder = FindFirstObjectByType<TargetFinder>();
     }
 
     private void Update()
@@ -24,9 +27,14 @@ public class Target : MonoBehaviour
 
         if (visible)
         {
-            //add ourself to target pool
-            TargetFinder.AddToPool(this.transform);
-            inPool = true;
+            //check if target is in range
+            float distanceToPlayer = Vector3.Distance(finder.transform.position, transform.position);
+            if(distanceToPlayer < finder.maxTargetingDistance)
+            {
+                //add ourself to target pool
+                TargetFinder.AddToPool(this.transform);
+                inPool = true;
+            }
         }
         else
         {

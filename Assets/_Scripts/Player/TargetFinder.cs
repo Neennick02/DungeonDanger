@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 
 public class TargetFinder : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class TargetFinder : MonoBehaviour
     
     [SerializeField] private CinemachineCamera playerCamera;
     [SerializeField] private CinemachineCamera targetCamera;
-
+    public float maxTargetingDistance = 10f;
 
     private bool lockedOn;
 

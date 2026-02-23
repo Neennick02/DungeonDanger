@@ -7,9 +7,11 @@ public class PlayerInput : MonoBehaviour
 
     private InputAction moveAction;
     private InputAction dodgeAction;
+
     private InputAction targetAction;
     private InputAction targetRight;
     private InputAction targetLeft;
+
     private InputAction ActionButtonAction;
 
     public static event Action OnTarget;
