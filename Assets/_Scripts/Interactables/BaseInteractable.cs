@@ -24,7 +24,7 @@ public abstract class BaseInteractable : MonoBehaviour
             manager.AddInteractable(this);
         }
     }
-    protected void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
