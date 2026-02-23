@@ -145,9 +145,16 @@ public class PlayerMovement : MonoBehaviour
     {
         bool grounded = _characterController.isGrounded;
 
-        if(_wasGrounded && !grounded && !_isJumping)
+        if(_wasGrounded && !grounded)
         {
-            Jump();
+            if (!_isJumping && _velocity.sqrMagnitude > 0.5f)
+            {
+                Jump();
+            }
+            else
+            {
+                Debug.Log("Hang");
+            }
         }
 
         if (grounded) _isJumping = false;
