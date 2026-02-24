@@ -75,10 +75,7 @@ public class TargetFinder : MonoBehaviour
     }
 
     private void UpdatePointerPosition()
-    {
-//        Debug.Log(NearestTarget().position.ToString());
-  
-        
+    {       
         if (NearestTarget() != null)
         {
             if (Vector3.Distance(NearestTarget().position, lastTargetPosition.position) < 0.1f) return;
@@ -91,18 +88,6 @@ public class TargetFinder : MonoBehaviour
             _targetPointer.position = transform.position + new Vector3(0, -10, 0);
 
         }
-        /*{
-            //if no target in view remove the target pointer
-            _targetPointer.position = transform.position + new Vector3(0, -10, 0);
-        }
-        else if (NearestTarget().position == lastTargetPosition.position) return;
-
-
-        _targetPointer.position = NearestTarget().position + new Vector3(0, 2, 0);
-
-        lastTargetPosition = _targetPointer;*/
-
-
     }
 
     public void TargetAndUntarget()

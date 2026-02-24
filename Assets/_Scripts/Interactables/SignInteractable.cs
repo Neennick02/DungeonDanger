@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SignInterable : BaseInteractable
+public class SignInteractable : BaseInteractable
 {
     public UnityEvent CloseSign;
-    private bool enabled = false;
+    private bool _enabled = false;
     protected override void Start()
     {
         base.Start();
@@ -13,15 +13,15 @@ public class SignInterable : BaseInteractable
 
     public override void Interact()
     {
-        if (!enabled)
+        if (!_enabled)
         {
             base.Interact();
-            enabled = true;
+            _enabled = true;
         }
         else
         {
             CloseSign.Invoke();
-            enabled = false;
+            _enabled = false;
         }
         
     }
@@ -30,6 +30,6 @@ public class SignInterable : BaseInteractable
     {
         base.OnTriggerExit(other);
         CloseSign.Invoke();
-        enabled = false;
+        _enabled = false;
     }
 }
