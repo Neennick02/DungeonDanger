@@ -6,14 +6,18 @@ public class ItemAmountUpdater : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI keyCounter;
     [SerializeField] private TextMeshProUGUI potionCounter;
+    [SerializeField] private TextMeshProUGUI coinCounter;
+
     private void OnEnable()
     {
         PlayerInventory.OnKeyAmountChanged += UpdateKeyAmount;
         PlayerInventory.OnPotionAmountChanged += UpdatePotionAmount;
+        PlayerInventory.OnCoinAmountChanged += UpdateCoinAmount;
     }
 
     private void UpdateKeyAmount(int amount)
     {
+        //tes
         if (amount == 0)
         {
             keyCounter.text = " ";
@@ -40,9 +44,24 @@ public class ItemAmountUpdater : MonoBehaviour
             potionCounter.text = "Potions : " + amount.ToString();
         }
     }
+    private void UpdateCoinAmount(int amount)
+    {
+        if (amount == 0)
+        {
+            coinCounter.text = " ";
+            coinCounter.gameObject.SetActive(false);
+        }
+
+        else
+        {
+            coinCounter.gameObject.SetActive(true);
+            coinCounter.text = "Coins : " + amount.ToString();
+        }
+    }
     private void OnDisable()
     {
         PlayerInventory.OnKeyAmountChanged -= UpdateKeyAmount;
         PlayerInventory.OnPotionAmountChanged -= UpdatePotionAmount;
+        PlayerInventory.OnCoinAmountChanged -= UpdateCoinAmount;
     }
 }

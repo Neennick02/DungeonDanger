@@ -19,7 +19,7 @@ public class LockedDoorInteractable : DoorInteractable
             if (inventory.keyAmount > 0)
             {
                 //remove keys and disable lock
-                inventory.RemoveKey(1);
+                inventory.UpdateKeyAmount(-1);
                 isLocked = false;
 
                 //change popup
