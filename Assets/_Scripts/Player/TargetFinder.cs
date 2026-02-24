@@ -18,8 +18,12 @@ public class TargetFinder : MonoBehaviour
     
     [SerializeField] private CinemachineCamera playerCamera;
     [SerializeField] private CinemachineCamera targetCamera;
-    public float maxTargetingDistance = 10f;
 
+    [SerializeField] private Transform _targetPointer;
+    private Transform lastTargetPosition;
+    
+    
+    public float maxTargetingDistance = 10f;
     private bool lockedOn;
 
     #region OnEnable/Disable
@@ -48,6 +52,8 @@ public class TargetFinder : MonoBehaviour
         {
             dc = new DistanceClass();
         }
+
+        lastTargetPosition = _targetPointer;
     }
     private void Update()
     {
@@ -62,7 +68,41 @@ public class TargetFinder : MonoBehaviour
         {
             currentTargetName = null;
         }
+
+
+
+        UpdatePointerPosition();
+    }
+
+    private void UpdatePointerPosition()
+    {
+//        Debug.Log(NearestTarget().position.ToString());
+  
         
+        if (NearestTarget() != null)
+        {
+            if (Vector3.Distance(NearestTarget().position, lastTargetPosition.position) < 0.1f) return;
+
+            _targetPointer.position = NearestTarget().position + new Vector3(0, 2, 0);
+            lastTargetPosition = _targetPointer; 
+        }
+        else
+        {
+            _targetPointer.position = transform.position + new Vector3(0, -10, 0);
+
+        }
+        /*{
+            //if no target in view remove the target pointer
+            _targetPointer.position = transform.position + new Vector3(0, -10, 0);
+        }
+        else if (NearestTarget().position == lastTargetPosition.position) return;
+
+
+        _targetPointer.position = NearestTarget().position + new Vector3(0, 2, 0);
+
+        lastTargetPosition = _targetPointer;*/
+
+
     }
 
     public void TargetAndUntarget()
