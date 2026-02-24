@@ -6,6 +6,11 @@ public class PlayerInventory : MonoBehaviour
     public int keyAmount {get; private set;}
     public static event Action<int> OnKeyAmountChanged;
 
+    private void Start()
+    {
+        OnKeyAmountChanged?.Invoke(keyAmount);
+    }
+
     public void AddKey(int amount)
     {
         keyAmount += amount;
@@ -14,6 +19,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void RemoveKey(int amount)
     {
+        Debug.Log("remove");
         keyAmount -= amount;
         OnKeyAmountChanged?.Invoke(keyAmount);
     }

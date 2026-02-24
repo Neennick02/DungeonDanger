@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DoorInteractable : BaseInteractable
 {
-    private Animator _animator;
+    protected Animator _animator;
 
     protected override void Start()
     {
