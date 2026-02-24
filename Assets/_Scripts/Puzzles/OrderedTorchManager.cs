@@ -8,16 +8,20 @@ using System.Collections;
 public class OrderedTorchManager : MonoBehaviour
 {
     public List<int> CorrectOrder;
-    public List<OrderedOnOffInteractable> Torches;
+    private List<OrderedOnOffInteractable> torches;
     public UnityEvent OnPuzzleSolved;
 
-    public List<int> currentOrder = new List<int>();
+    private List<int> currentOrder = new List<int>();
 
     private void Start()
     {
-        foreach(var torch in Torches)
+        //fill list with child objects
+        torches = new List<OrderedOnOffInteractable>(GetComponentsInChildren<OrderedOnOffInteractable>(true));
+
+        //subscribe to event
+        foreach (var torch in torches)
         {
-            torch.OnLit.AddListener(CheckSolution);
+            torch.OnLit.AddListener(CheckSolution);            
         }
     }
     public void CheckSolution(int index)
@@ -41,7 +45,7 @@ public class OrderedTorchManager : MonoBehaviour
     private void PuzzleSolved()
     {
         OnPuzzleSolved?.Invoke();
-        foreach (var torch in Torches)
+        foreach (var torch in torches)
         {
             torch.KeepOn();
 
@@ -53,7 +57,7 @@ public class OrderedTorchManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         currentOrder.Clear();
 
-        foreach(var torch in Torches)
+        foreach(var torch in torches)
         {
             torch.TurnOff();
             

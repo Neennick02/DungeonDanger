@@ -19,7 +19,6 @@ public class PlayerInventory : MonoBehaviour
 
     public void RemoveKey(int amount)
     {
-        Debug.Log("remove");
         keyAmount -= amount;
         OnKeyAmountChanged?.Invoke(keyAmount);
     }

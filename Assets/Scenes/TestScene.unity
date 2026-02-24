@@ -4179,7 +4179,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.477, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.5, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 601771033}
@@ -6567,6 +6567,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 349912111}
     m_Modifications:
+    - target: {fileID: 560312347900357086, guid: 6ac0d1546023ec843bb7fbb17909b7e6, type: 3}
+      propertyPath: Torches.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 560312347900357086, guid: 6ac0d1546023ec843bb7fbb17909b7e6, type: 3}
       propertyPath: OnPuzzleSolved.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
