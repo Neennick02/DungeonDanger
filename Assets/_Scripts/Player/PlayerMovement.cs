@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -41,6 +42,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float pushDuration = 1.5f;
     private float pushTimer = 0f;
     private bool pushing = false;
+    private bool hitDetected = false;
+    private float maxDistance = 300f;
+    private RaycastHit hit;
+    private Vector3 targetPos;
     public enum PlayerState
     {
         Locomotion,
@@ -84,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleLocomotionMovement(Vector2 input)
     {
-
         //get camera position
         Vector3 camForward = Camera.main.transform.forward;
         Vector3 camRight = Camera.main.transform.right;
@@ -127,14 +131,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    [SerializeField] private Vector3 boxSizeMultiplier = Vector3.one * 0.5f;
+    [SerializeField] GameObject testcube;
     private void HandlePushingInput(Vector2 input)
     {
         HandleGravity();
+
         //handle rotation 
+        Quaternion targetRotation = Quaternion.LookRotation(pushAbleBlockObject.transform.position);
 
-        Quaternion targetRotation = Quaternion.LookRotation(pushAbleBlockObject.transform.position, Vector3.up);
-
-        transform.rotation = targetRotation;
         transform.rotation = Quaternion.Slerp(
         transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
 
@@ -162,8 +167,9 @@ public class PlayerMovement : MonoBehaviour
             offset = new Vector3(Mathf.Sign(direction.x) * pushOffset, 0, 0);
         }
 
+        Vector3 pushDirection = new Vector3(input.x, 0f, input.y).normalized;
 
-        Vector3 targetPos = currentPos + offset;
+        targetPos = currentPos + offset;
 
         //push block
         if(!pushing)
@@ -172,18 +178,53 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator PushBlockRoutine(Vector3 targetPos)
     {
+        BoxCollider box = pushAbleBlockObject.GetComponent<BoxCollider>();
+        PushInteractable pushScript = pushAbleBlockObject.GetComponent<PushInteractable>();
         pushing = true;
 
         while (Vector3.Distance(pushAbleBlockObject.transform.position, targetPos) > 0.1f)
         {
             pushTimer += Time.deltaTime;
 
-            pushAbleBlockObject.transform.position = Vector3.Lerp(
+            Vector3 nextPos = Vector3.Lerp(
                 pushAbleBlockObject.transform.position,
-                targetPos, pushTimer / pushDuration);
+                targetPos,
+                pushTimer / pushDuration
+            );
+
+            Vector3 halfExtents = box.bounds.extents;
+            Quaternion rotation = pushAbleBlockObject.transform.rotation;
+
+            box.enabled = false;
+            //Checks collision at NEXT position
+            bool blocked = Physics.CheckBox(
+                nextPos,                    
+                halfExtents,
+                rotation,
+                ~0,
+                QueryTriggerInteraction.Ignore
+            );
+            box.enabled = true;
+            if (blocked)
+            {
+                testcube.transform.position = nextPos;
+                Debug.Log("Collision detected");
+
+                pushTimer = 0f;
+                transform.parent = null;
+
+                pushAbleBlockObject.GetComponent<PushInteractable>().StopPushing();
+                StopPushBlock();
+                pushing = false;
+
+                yield break;
+            }
+
+            // Only move if not blocked
+            pushAbleBlockObject.transform.position = nextPos;
+
             yield return null;
         }
-
         //set position to target position
         pushAbleBlockObject.transform.position = targetPos;
 
@@ -196,8 +237,6 @@ public class PlayerMovement : MonoBehaviour
         pushAbleBlockObject.GetComponent<PushInteractable>().StopPushing() ;
         StopPushBlock();
         pushing = false;
-        Debug.Log("done");
-
     }
 
     private void RotateCharacter(Vector3 move)
@@ -365,5 +404,12 @@ public class PlayerMovement : MonoBehaviour
     public void StopPushBlock()
     {
         State = PlayerState.Locomotion;
+    }
+
+
+
+    void OnDrawGizmos()
+    {
+
     }
 }
