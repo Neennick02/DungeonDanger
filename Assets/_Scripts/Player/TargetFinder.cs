@@ -76,15 +76,21 @@ public class TargetFinder : MonoBehaviour
 
     private void UpdatePointerPosition()
     {       
-        if (NearestTarget() != null)
+        if (NearestTarget() != null && !lockedOn)
         {
+            //dont update position if it didnt change
             if (Vector3.Distance(NearestTarget().position, lastTargetPosition.position) < 0.1f) return;
 
+            //update position with offset
             _targetPointer.position = NearestTarget().position + new Vector3(0, 2, 0);
+            
+            //set position
             lastTargetPosition = _targetPointer; 
         }
         else
         {
+
+            //keep target under player when not in use
             _targetPointer.position = transform.position + new Vector3(0, -10, 0);
 
         }
