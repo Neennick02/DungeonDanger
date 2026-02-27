@@ -76,6 +76,8 @@ public class TargetFinder : MonoBehaviour
 
     private void UpdatePointerPosition()
     {       
+        //only update position when not targeting
+
         if (NearestTarget() != null && !lockedOn)
         {
             //dont update position if it didnt change

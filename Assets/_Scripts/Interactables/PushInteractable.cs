@@ -3,7 +3,6 @@ using UnityEngine.Events;
 
 public class PushInteractable : BaseInteractable
 {
-    [SerializeField] private BoxCollider trigger1, trigger2;
     public bool _isPushing { get; private set; }
     public UnityEvent OffInteract;
 
@@ -12,7 +11,6 @@ public class PushInteractable : BaseInteractable
         if (!_isPushing)
         {
             OnInteract?.Invoke();
-            PlayerMovement.pushAbleBlockObject = gameObject;
         }
         else
         {
