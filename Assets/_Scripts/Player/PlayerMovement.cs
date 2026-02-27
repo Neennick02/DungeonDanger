@@ -41,10 +41,9 @@ public class PlayerMovement : MonoBehaviour
     public static GameObject pushAbleBlockObject;
     [SerializeField] private float pushOffset = 2;
     [SerializeField] private float pushDuration = 1.5f;
-    private float pushTimer = 0f;
-    private bool pushing = false;
-    private Vector3 targetPos;
     [SerializeField] private LayerMask blockLayer;
+
+    [SerializeField] private PlayerAnimator animator;
 
     public enum PlayerState
     {
@@ -83,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (State == PlayerState.Pushing)
         {
-           // pushAbleBlockObject.GetComponent<>();
+           //not movement during pushing
            
         }
     }
@@ -131,440 +130,6 @@ public class PlayerMovement : MonoBehaviour
             _verticalVelocity += _gravity * Time.deltaTime;
         }
     }
-/*
-    [SerializeField] GameObject testcube;
-    private void HandlePushingInput(Vector2 input)
-    {
-        HandleGravity();
-
-       *//* //handle rotation 
-        Quaternion targetRotation = Quaternion.LookRotation(pushAbleBlockObject.transform.position);
-
-        transform.rotation = Quaternion.Slerp(
-        transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);*//*
-
-
-        //find the direction to push in
-
-        Vector3 currentPos = pushAbleBlockObject.transform.position;
-
-        // Direction from player to block
-        Vector3 pushDirection = currentPos - transform.position;
-
-        // Remove vertical influence
-        pushDirection.y = 0f;
-
-        // Decide dominant axis
-        if (Mathf.Abs(pushDirection.x) > Mathf.Abs(pushDirection.z))
-        {
-            pushDirection = new Vector3(Mathf.Sign(pushDirection.x), 0f, 0f);
-        }
-        else
-        {
-            pushDirection = new Vector3(0f, 0f, Mathf.Sign(pushDirection.z));
-        }
-
-        targetPos = currentPos + pushDirection * pushOffset;
-
-        if (!pushing)
-            StartCoroutine(PushBlockRoutine(targetPos, pushDirection));
-    }
-    IEnumerator PushBlockRoutine(Vector3 targetPos, Vector3 pushDir)
-    {
-        {
-            BoxCollider box = null;
-
-            foreach (BoxCollider col in pushAbleBlockObject.GetComponents<BoxCollider>())
-            {
-                if (!col.isTrigger)
-                {
-                    box = col;
-                    break;
-                }
-            }
-
-            if (box == null)
-                yield break;
-
-            pushing = true;
-            Vector3 startPos = pushAbleBlockObject.transform.position;
-
-            // Make sure direction is flat & normalized
-            Vector3 moveDir = pushDir;
-            moveDir.y = 0f;
-            moveDir = moveDir.normalized;
-
-            while (Vector3.Distance(pushAbleBlockObject.transform.position, targetPos) > 0.05f)
-            {
-                pushTimer += Time.deltaTime;
-
-                // Smooth movement
-                Vector3 nextPos = Vector3.Lerp(
-                    startPos,
-                    targetPos,
-                    pushTimer / pushDuration
-                );
-
-                // --- Collision Check Using BoxCast ---
-                Vector3 worldCenter =
-                    box.bounds.center;
-
-                Vector3 halfExtents =
-                    box.bounds.extents;
-
-                bool blocked = Physics.BoxCast(
-                    worldCenter,
-                    halfExtents,
-                    moveDir,
-                    out RaycastHit hit,
-                    Quaternion.identity,
-                    pushOffset * 0.5f, // small safety buffer
-                    blockLayer,
-                    QueryTriggerInteraction.Ignore
-                );
-
-                if (blocked)
-                {
-                    Debug.Log("Blocked by: " + hit.collider.name);
-
-                    pushTimer = 0f;
-                    pushing = false;
-                    yield break;
-                }
-
-                // Move if clear
-                pushAbleBlockObject.transform.position = nextPos;
-
-                yield return null;
-            }
-
-            // Snap to final position
-            pushAbleBlockObject.transform.position = targetPos;
-
-            pushTimer = 0f;
-            pushing = false;
-
-            pushAbleBlockObject.GetComponent<PushInteractable>()?.StopPushing();
-            StopPushBlock();
-            *//*        BoxCollider[] colliders = pushAbleBlockObject.GetComponents<BoxCollider>();
-
-                    BoxCollider box = null;
-
-                    Vector3 startPos = pushAbleBlockObject.transform.position;
-                    foreach (BoxCollider col in colliders)
-                    {
-                        if (!col.isTrigger)
-                        {
-                            box = col;
-                            break; // stop at the first non-trigger collider
-                        }
-                    }
-
-                    PushInteractable pushScript = pushAbleBlockObject.GetComponent<PushInteractable>();
-                    pushing = true;
-
-                    while (Vector3.Distance(pushAbleBlockObject.transform.position, targetPos) > 0.1f)
-                    {
-                        pushTimer += Time.deltaTime;
-
-                        Vector3 nextPos = Vector3.Lerp(
-                            startPos,
-                            targetPos,
-                            pushTimer / pushDuration
-                        );
-                        *//*
-                                    Vector3 halfExtents = box.size * 0.5f;
-                                    Vector3 center = nextPos + box.center;
-                                    Quaternion rotation = pushAbleBlockObject.transform.rotation;
-
-                                    box.enabled = false;
-                                    //Checks collision at NEXT position
-                                  *//*  bool blocked = Physics.CheckBox(
-                                        nextPos,                    
-                                        halfExtents,
-                                        rotation,
-                                        blockLayer,
-                                        QueryTriggerInteraction.Ignore
-                                    );*//*
-
-
-                                    Collider[] hits = Physics.OverlapBox(
-                                        center,
-                                        halfExtents,
-                                        Quaternion.identity,
-                                        ~0
-                                    );
-
-
-                                    Debug.Log("Hit count: " + hits.Length);
-                                    testcube.transform.position = nextPos;
-
-                                    box.enabled = true;*//*
-                        Vector3 moveDir = pushDir;
-
-                        box.enabled = false;
-
-                        bool blocked = Physics.BoxCast(
-                            box.bounds.center,
-                            box.bounds.extents,
-                            moveDir,
-                            out RaycastHit hit,
-                            Quaternion.identity,
-                            pushOffset,
-                            blockLayer,
-                            QueryTriggerInteraction.Ignore
-                        );
-
-                        box.enabled = true;
-                        if (blocked)
-                        {
-                            Debug.Log("Collision detected");
-
-                            pushTimer = 0f;
-                            transform.parent = null;
-
-                            pushAbleBlockObject.GetComponent<PushInteractable>().StopPushing();
-                            StopPushBlock();
-                            pushing = false;
-
-                            yield break;
-                        }
-
-                        // Only move if not blocked
-                        pushAbleBlockObject.transform.position = nextPos;
-
-                        yield return null;
-                    }
-                    //set position to target position
-                    pushAbleBlockObject.transform.position = targetPos;
-
-                    pushTimer = 0f;
-
-
-                    //set isPushing to false
-                    pushAbleBlockObject.GetComponent<PushInteractable>().StopPushing() ;
-                    StopPushBlock();
-                    pushing = false;*//*
-        }
-    }
-*/
-/*
-    [SerializeField] GameObject testcube;
-    private void HandlePushingInput(Vector2 input)
-    {
-        HandleGravity();
-
-       *//* //handle rotation 
-        Quaternion targetRotation = Quaternion.LookRotation(pushAbleBlockObject.transform.position);
-
-        transform.rotation = Quaternion.Slerp(
-        transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);*//*
-
-
-        //find the direction to push in
-
-        Vector3 currentPos = pushAbleBlockObject.transform.position;
-
-        // Direction from player to block
-        Vector3 pushDirection = currentPos - transform.position;
-
-        // Remove vertical influence
-        pushDirection.y = 0f;
-
-        // Decide dominant axis
-        if (Mathf.Abs(pushDirection.x) > Mathf.Abs(pushDirection.z))
-        {
-            pushDirection = new Vector3(Mathf.Sign(pushDirection.x), 0f, 0f);
-        }
-        else
-        {
-            pushDirection = new Vector3(0f, 0f, Mathf.Sign(pushDirection.z));
-        }
-
-        targetPos = currentPos + pushDirection * pushOffset;
-
-        if (!pushing)
-            StartCoroutine(PushBlockRoutine(targetPos, pushDirection));
-    }
-    IEnumerator PushBlockRoutine(Vector3 targetPos, Vector3 pushDir)
-    {
-        {
-            BoxCollider box = null;
-
-            foreach (BoxCollider col in pushAbleBlockObject.GetComponents<BoxCollider>())
-            {
-                if (!col.isTrigger)
-                {
-                    box = col;
-                    break;
-                }
-            }
-
-            if (box == null)
-                yield break;
-
-            pushing = true;
-            Vector3 startPos = pushAbleBlockObject.transform.position;
-
-            // Make sure direction is flat & normalized
-            Vector3 moveDir = pushDir;
-            moveDir.y = 0f;
-            moveDir = moveDir.normalized;
-
-            while (Vector3.Distance(pushAbleBlockObject.transform.position, targetPos) > 0.05f)
-            {
-                pushTimer += Time.deltaTime;
-
-                // Smooth movement
-                Vector3 nextPos = Vector3.Lerp(
-                    startPos,
-                    targetPos,
-                    pushTimer / pushDuration
-                );
-
-                // --- Collision Check Using BoxCast ---
-                Vector3 worldCenter =
-                    box.bounds.center;
-
-                Vector3 halfExtents =
-                    box.bounds.extents;
-
-                bool blocked = Physics.BoxCast(
-                    worldCenter,
-                    halfExtents,
-                    moveDir,
-                    out RaycastHit hit,
-                    Quaternion.identity,
-                    pushOffset * 0.5f, // small safety buffer
-                    blockLayer,
-                    QueryTriggerInteraction.Ignore
-                );
-
-                if (blocked)
-                {
-                    Debug.Log("Blocked by: " + hit.collider.name);
-
-                    pushTimer = 0f;
-                    pushing = false;
-                    yield break;
-                }
-
-                // Move if clear
-                pushAbleBlockObject.transform.position = nextPos;
-
-                yield return null;
-            }
-
-            // Snap to final position
-            pushAbleBlockObject.transform.position = targetPos;
-
-            pushTimer = 0f;
-            pushing = false;
-
-            pushAbleBlockObject.GetComponent<PushInteractable>()?.StopPushing();
-            StopPushBlock();
-            *//*        BoxCollider[] colliders = pushAbleBlockObject.GetComponents<BoxCollider>();
-
-                    BoxCollider box = null;
-
-                    Vector3 startPos = pushAbleBlockObject.transform.position;
-                    foreach (BoxCollider col in colliders)
-                    {
-                        if (!col.isTrigger)
-                        {
-                            box = col;
-                            break; // stop at the first non-trigger collider
-                        }
-                    }
-
-                    PushInteractable pushScript = pushAbleBlockObject.GetComponent<PushInteractable>();
-                    pushing = true;
-
-                    while (Vector3.Distance(pushAbleBlockObject.transform.position, targetPos) > 0.1f)
-                    {
-                        pushTimer += Time.deltaTime;
-
-                        Vector3 nextPos = Vector3.Lerp(
-                            startPos,
-                            targetPos,
-                            pushTimer / pushDuration
-                        );
-                        *//*
-                                    Vector3 halfExtents = box.size * 0.5f;
-                                    Vector3 center = nextPos + box.center;
-                                    Quaternion rotation = pushAbleBlockObject.transform.rotation;
-
-                                    box.enabled = false;
-                                    //Checks collision at NEXT position
-                                  *//*  bool blocked = Physics.CheckBox(
-                                        nextPos,                    
-                                        halfExtents,
-                                        rotation,
-                                        blockLayer,
-                                        QueryTriggerInteraction.Ignore
-                                    );*//*
-
-
-                                    Collider[] hits = Physics.OverlapBox(
-                                        center,
-                                        halfExtents,
-                                        Quaternion.identity,
-                                        ~0
-                                    );
-
-
-                                    Debug.Log("Hit count: " + hits.Length);
-                                    testcube.transform.position = nextPos;
-
-                                    box.enabled = true;*//*
-                        Vector3 moveDir = pushDir;
-
-                        box.enabled = false;
-
-                        bool blocked = Physics.BoxCast(
-                            box.bounds.center,
-                            box.bounds.extents,
-                            moveDir,
-                            out RaycastHit hit,
-                            Quaternion.identity,
-                            pushOffset,
-                            blockLayer,
-                            QueryTriggerInteraction.Ignore
-                        );
-
-                        box.enabled = true;
-                        if (blocked)
-                        {
-                            Debug.Log("Collision detected");
-
-                            pushTimer = 0f;
-                            transform.parent = null;
-
-                            pushAbleBlockObject.GetComponent<PushInteractable>().StopPushing();
-                            StopPushBlock();
-                            pushing = false;
-
-                            yield break;
-                        }
-
-                        // Only move if not blocked
-                        pushAbleBlockObject.transform.position = nextPos;
-
-                        yield return null;
-                    }
-                    //set position to target position
-                    pushAbleBlockObject.transform.position = targetPos;
-
-                    pushTimer = 0f;
-
-
-                    //set isPushing to false
-                    pushAbleBlockObject.GetComponent<PushInteractable>().StopPushing() ;
-                    StopPushBlock();
-                    pushing = false;*//*
-        }
-    }
-*/
     private void RotateCharacter(Vector3 move)
     {
         if (_isTargeting)
@@ -616,6 +181,8 @@ public class PlayerMovement : MonoBehaviour
         {
              _isTargeting= false;
         }
+
+        animator.SetSpeed(_velocity.magnitude);
     }
 
     private void CheckForLedges()
@@ -656,14 +223,18 @@ public class PlayerMovement : MonoBehaviour
     private void Dodge()
     {
         State = PlayerState.Dodging;
+
         if (_isDodging || _dodgeCooldownTimer > 0 || !_characterController.isGrounded) return;
 
         
             if (_velocity.sqrMagnitude > 0.01f)
             {
+            //start dodge action
                 _isDodging = true;
                 _dodgeTime = _dodgeDuration;
                 _dodgeCooldownTimer = _dodgeCooldown;
+
+
             }
     }
 
@@ -682,27 +253,28 @@ public class PlayerMovement : MonoBehaviour
                 {
                     Debug.Log("Backflip");
                     _dodgeDirection = -transform.forward;
-
-                   
+                    animator.Flip();
                 }
                 else if (input.x > 0.5f)
                 {
                     Debug.Log("Hop right");
                     _dodgeDirection = transform.right;
-
+                    animator.Roll();
                 }
                 else if (input.x < -0.5f)
                 {
                     Debug.Log("Hop left");
                     _dodgeDirection = -transform.right;
-
+                    animator.Roll();
                 }
                 else
                 {
                     Debug.Log("Jump forward");
                 }
-
-
+            }
+            else
+            {
+                animator.Roll();
             }
             if (_dodgeTime > 0)
                 {
@@ -712,12 +284,12 @@ public class PlayerMovement : MonoBehaviour
                 {
                     _isDodging = false;
                     State = PlayerState.Locomotion;
-
             }
 
         }
         else // normal movement
         {
+
             _velocity = Vector3.MoveTowards(
             _velocity, move, _movementAcceleration * Time.deltaTime);
         }
@@ -730,12 +302,5 @@ public class PlayerMovement : MonoBehaviour
     public void StopPushBlock()
     {
         State = PlayerState.Locomotion;
-    }
-
-
-
-    void OnDrawGizmos()
-    {
-
     }
 }
