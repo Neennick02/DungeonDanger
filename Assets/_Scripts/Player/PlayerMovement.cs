@@ -179,7 +179,6 @@ public class PlayerMovement : MonoBehaviour
         if (_verticalVelocity > 0.1)
         {
             animator.IsGrounded(false);
-            Debug.Log("dsnak");
         }
         else if(_characterController.isGrounded && !_wasGrounded)
         {

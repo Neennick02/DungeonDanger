@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
+using System;
 
 public class TargetFinder : MonoBehaviour
 {
@@ -32,12 +33,15 @@ public class TargetFinder : MonoBehaviour
         PlayerInput.OnTarget += TargetAndUntarget;
         PlayerInput.OnTargetRight += SelectTarget;
         PlayerInput.OnTargetLeft += SelectTarget;
+
+        BaseHealth.SwitchTarget += SelectNewTarget;
     }
     private void OnDisable()
     {
         PlayerInput.OnTarget -= TargetAndUntarget;
         PlayerInput.OnTargetRight -= SelectTarget;
         PlayerInput.OnTargetLeft -= SelectTarget;
+        BaseHealth.SwitchTarget -= SelectNewTarget;
     }
     #endregion
 
@@ -108,6 +112,11 @@ public class TargetFinder : MonoBehaviour
         {
             LockOff();
         }
+    }
+
+    private void SelectNewTarget()
+    {
+        SelectTarget(1);
     }
 
     private void SelectTarget(int next)

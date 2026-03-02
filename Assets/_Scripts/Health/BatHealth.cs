@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BatHealth : BaseHealth
@@ -22,6 +23,6 @@ public class BatHealth : BaseHealth
     }
     protected override void Die()
     {
-        Destroy(gameObject);
+        base.Die();
     }
 }

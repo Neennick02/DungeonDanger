@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class BaseHealth : MonoBehaviour
@@ -5,6 +6,8 @@ public abstract class BaseHealth : MonoBehaviour
     public static int MaxHealth = 20;
     protected int currentHealth;
     protected bool isDead = false;
+    public static event Action SwitchTarget;
+
     protected virtual void Start()
     {
         currentHealth = MaxHealth;
@@ -36,6 +39,11 @@ public abstract class BaseHealth : MonoBehaviour
     protected virtual void Die()
     {
         //add code to sub classes
+        if(!this.transform.CompareTag("Player")){
+            SwitchTarget?.Invoke();
+            TargetFinder.RemoveFromPool(transform);
+            Destroy(gameObject);
+        }
     }
 
 }
