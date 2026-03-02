@@ -4,7 +4,7 @@ public abstract class BaseHealth : MonoBehaviour
 {
     public static int MaxHealth = 20;
     protected int currentHealth;
-
+    protected bool isDead = false;
     protected virtual void Start()
     {
         currentHealth = MaxHealth;
@@ -26,6 +26,14 @@ public abstract class BaseHealth : MonoBehaviour
     }
 
     protected virtual void CheckHealth()
+    {
+        if(currentHealth <= 0 && !isDead)
+        {
+            Die();
+            isDead = true;
+        }
+    }
+    protected virtual void Die()
     {
         //add code to sub classes
     }

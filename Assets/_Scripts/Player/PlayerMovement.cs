@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _velocity;
     private float _verticalVelocity;
     private TargetFinder targetFinder;
+    private Vector3 move;
 
     [Header("Jump")]
     [SerializeField] private float _gravity = -9.81f;
@@ -41,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
     public static GameObject pushAbleBlockObject;
     [SerializeField] private float pushOffset = 2;
     [SerializeField] private float pushDuration = 1.5f;
-    [SerializeField] private LayerMask blockLayer;
 
     [SerializeField] private PlayerAnimator animator;
 
@@ -49,7 +49,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Locomotion,
         Pushing,
-        Dodging
+        Dodging,
+        Attacking
     }
 
     public PlayerState State;
@@ -75,15 +76,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(Vector2 input)
     {
-        if (State == PlayerState.Locomotion ||
-            State == PlayerState.Dodging)
+        switch (State) 
         {
-            HandleLocomotionMovement(input);
-        }
-        else if (State == PlayerState.Pushing)
-        {
-           //no movement during pushing
-           
+            case PlayerState.Locomotion:
+                HandleLocomotionMovement(input);
+                break;
+            case PlayerState.Dodging:
+                HandleDodge(move, input);
+                //only dash movement during dodging
+                break;
+            case PlayerState.Attacking:
+                HandleGravity();
+
+                break;
+            case PlayerState.Pushing:
+                //no movement during pushing
+                break;
         }
     }
 
@@ -100,14 +108,15 @@ public class PlayerMovement : MonoBehaviour
         camRight.Normalize();
 
         //convert to 3d space
-        Vector3 move = camForward * input.y + camRight * input.x;
+        move = camForward * input.y + camRight * input.x;
 
         //update dodge direction
         _dodgeDirection = move.normalized;
 
         RotateCharacter(move);
 
-        HandleDodge(move, input);
+        _velocity = Vector3.MoveTowards(
+        _velocity, move, _movementAcceleration * Time.deltaTime);
 
         HandleGravity();
 
@@ -115,6 +124,9 @@ public class PlayerMovement : MonoBehaviour
         finalMovement.y = _verticalVelocity;
 
         _characterController.Move(finalMovement * _movementSpeed * Time.deltaTime);
+
+        //set animation movement speed
+        animator.SetSpeed(input.magnitude);
     }
 
     private void HandleGravity()
@@ -163,14 +175,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_velocity.y > 0.1)
+        //update jump animation
+        if (_verticalVelocity > 0.1)
         {
             animator.IsGrounded(false);
+            Debug.Log("dsnak");
         }
         else if(_characterController.isGrounded && !_wasGrounded)
         {
             animator.IsGrounded(true);
         }
+
         CheckForLedges();
 
         if(_dodgeCooldownTimer > 0)
@@ -187,8 +202,6 @@ public class PlayerMovement : MonoBehaviour
         {
              _isTargeting= false;
         }
-
-        animator.SetSpeed(_velocity.magnitude);
     }
 
     private void CheckForLedges()
@@ -197,7 +210,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (_wasGrounded && !grounded)
         {
-            animator.IsGrounded(grounded);
             if (!_isJumping && _velocity.sqrMagnitude > 0.5f)
             {
                 Jump();
@@ -231,15 +243,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Dodge()
     {
-        State = PlayerState.Dodging;
-
         if (_isDodging || _dodgeCooldownTimer > 0 || !_characterController.isGrounded) return;
 
-        
-            if (_velocity.sqrMagnitude > 0.01f)
+        if (_velocity.sqrMagnitude > 0.01f)
             {
             //start dodge action
-                _isDodging = true;
+            State = PlayerState.Dodging;
+            _isDodging = true;
                 _dodgeTime = _dodgeDuration;
                 _dodgeCooldownTimer = _dodgeCooldown;
 
@@ -254,7 +264,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _dodgeTime -= Time.deltaTime;
 
-            if (_isTargeting)  //dodge during targeting              //assign animations later
+            if (_isTargeting)  //dodge during targeting           
             {
                 _verticalVelocity = _jumpForce / 2;
 
@@ -296,14 +306,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-        else // normal movement
-        {
-
-            _velocity = Vector3.MoveTowards(
-            _velocity, move, _movementAcceleration * Time.deltaTime);
-        }
     }
-
     public void PushBlock()
     {
         State = PlayerState.Pushing;

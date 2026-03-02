@@ -36,6 +36,12 @@ public void Flip()
         animator.SetBool("IsFlipping", true);
         StartCoroutine(ResetBool("IsFlipping"));
     }
+    public void Attack()
+    {
+        animator.speed = 1;
+        animator.SetBool("IsAttacking", true);
+        StartCoroutine(ResetBool("IsAttacking"));
+    }
 
     public void Roll()
     {

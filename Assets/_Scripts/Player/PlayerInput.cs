@@ -13,12 +13,14 @@ public class PlayerInput : MonoBehaviour
     private InputAction targetLeft;
 
     private InputAction ActionButtonAction;
+    private InputAction AttackAction;
 
     public static event Action OnTarget;
     public static event Action OnDodge;
     public static event Action<Vector2> OnMove;
     public static event Action OnAction;
-    
+    public static event Action OnAttack;
+
     private Vector2 moveInput;
 
 
@@ -44,6 +46,7 @@ public class PlayerInput : MonoBehaviour
         targetRight = InputActions.FindAction("TargetRight");
         targetLeft = InputActions.FindAction("TargetLeft");
         ActionButtonAction = InputActions.FindAction("ActionButton");
+        AttackAction = InputActions.FindAction("Attack");
 
         //subscribe to action performed callbacks
 
@@ -54,7 +57,9 @@ public class PlayerInput : MonoBehaviour
         //action button
         if (ActionButtonAction != null)
             ActionButtonAction.performed += ctx => OnAction?.Invoke();
-
+        //attack button
+        if (AttackAction != null)
+            AttackAction.performed += ctx => OnAttack?.Invoke();
         //target events
         if (targetAction != null)
             targetAction.performed += ctx => OnTarget?.Invoke();
