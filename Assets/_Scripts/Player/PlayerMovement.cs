@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (State == PlayerState.Pushing)
         {
-           //not movement during pushing
+           //no movement during pushing
            
         }
     }
@@ -163,9 +163,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (_velocity.y > 0.1)
+        {
+            animator.IsGrounded(false);
+        }
+        else if(_characterController.isGrounded && !_wasGrounded)
+        {
+            animator.IsGrounded(true);
+        }
         CheckForLedges();
-
-        _wasGrounded = _characterController.isGrounded;
 
         if(_dodgeCooldownTimer > 0)
         {
@@ -189,11 +195,13 @@ public class PlayerMovement : MonoBehaviour
     {
         bool grounded = _characterController.isGrounded;
 
-        if(_wasGrounded && !grounded)
+        if (_wasGrounded && !grounded)
         {
+            animator.IsGrounded(grounded);
             if (!_isJumping && _velocity.sqrMagnitude > 0.5f)
             {
                 Jump();
+                Debug.Log("Jump");
             }
             else
             {
@@ -202,6 +210,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (grounded) _isJumping = false;
+        _wasGrounded = grounded;
     }
 
     private void Jump()

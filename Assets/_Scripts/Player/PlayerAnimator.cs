@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     private Animator animator;
-    [SerializeField] private AnimationClip walkClip;
+  //  [SerializeField] private AnimationClip walkClip;
 
     private void Start()
     {
@@ -25,7 +25,12 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
-    public void Flip()
+    public void IsGrounded(bool isGrounded)
+    {
+        animator.SetBool("IsGrounded", isGrounded);
+    }
+
+public void Flip()
     {
         animator.speed = 1;
         animator.SetBool("IsFlipping", true);
