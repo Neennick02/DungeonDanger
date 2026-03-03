@@ -8,16 +8,18 @@ public class TargetAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInput.OnTarget += SelectAndUnselect;
+        PlayerInput.OnTarget += ToggleSelect;
+        TargetFinder.OnLockOff += UnSelect;
 
     }
 
     private void OnDisable()
     {
-        PlayerInput.OnTarget -= SelectAndUnselect;
+        PlayerInput.OnTarget -= ToggleSelect;
+        TargetFinder.OnLockOff += UnSelect;
     }
 
-    private void SelectAndUnselect()
+    private void ToggleSelect()
     {
         //only if targets are in pool
         if (TargetFinder.pool.Count > 0)
@@ -31,9 +33,14 @@ public class TargetAnimator : MonoBehaviour
             //if not targeting target
             else if (_isTargeting)
             {
-                _animator.SetBool("IsTargeting", false);
-                _isTargeting = false;
+                UnSelect();
             }
         }
+    }
+
+    private void UnSelect()
+    {
+        _animator.SetBool("IsTargeting", false);
+        _isTargeting = false;
     }
 }

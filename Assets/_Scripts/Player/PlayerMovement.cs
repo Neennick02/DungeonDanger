@@ -210,7 +210,6 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                Debug.Log("Hang");
             }
         }
 

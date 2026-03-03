@@ -27,6 +27,8 @@ public class TargetFinder : MonoBehaviour
     public float maxTargetingDistance = 10f;
     private bool lockedOn;
 
+    public static event Action OnLockOff;
+
     #region OnEnable/Disable
     private void OnEnable()
     {
@@ -116,8 +118,27 @@ public class TargetFinder : MonoBehaviour
 
     private void SelectNewTarget()
     {
-        SelectTarget(1);
-    }
+        if(pool.Count == 0)
+        {
+            LockOff();
+            OnLockOff?.Invoke();
+            return;
+        }
+
+        Transform newTarget = NearestTarget();
+
+        if(newTarget != null)
+        {
+            currentTarget = newTarget;
+            targetCamera.LookAt = currentTarget;
+            lockedOn = true;
+        }
+        else
+        {
+            LockOff();
+            OnLockOff?.Invoke();
+        }
+   }
 
     private void SelectTarget(int next)
     {

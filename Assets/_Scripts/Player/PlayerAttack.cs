@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -14,12 +15,17 @@ public class PlayerAttack : MonoBehaviour
     private PlayerMovement movement;
     private PlayerMovement.PlayerState previousState;
     private CharacterController controller;
+    private PlayerInventory inventory;
     private bool isAttacking;
+
+    public static event Action OnGrabSword;
     private void OnEnable()
     {
         PlayerInput.OnAttack += Attack;
+
         movement = GetComponent<PlayerMovement>();
         controller = GetComponent<CharacterController>();
+        inventory = GetComponent<PlayerInventory>();
     }
 
     private void OnDisable()
@@ -39,14 +45,21 @@ public class PlayerAttack : MonoBehaviour
 
     private void Attack()
     {
-        if (!isAttacking)
+        if (inventory.swordInHand)
         {
-            previousState = movement.State;
-            movement.State = PlayerMovement.PlayerState.Attacking;
-            isAttacking = true;
-            attackTimer = 0;
-            animator.Attack();
-            StartCoroutine(AttackRoutine());
+            if (!isAttacking)
+            {
+                previousState = movement.State;
+                movement.State = PlayerMovement.PlayerState.Attacking;
+                isAttacking = true;
+                attackTimer = 0;
+                animator.Attack();
+                StartCoroutine(AttackRoutine());
+            }
+        }
+        else
+        {
+            OnGrabSword?.Invoke(); 
         }
     }
 
@@ -55,7 +68,7 @@ public class PlayerAttack : MonoBehaviour
         while(attackTimer < attackDuration)
         {
             attackTimer += Time.deltaTime;
-            dashAmount = Mathf.Lerp(dashStartAmount, dashEndAmount, attackTimer / attackDuration);
+           // dashAmount = Mathf.Lerp(dashStartAmount, dashEndAmount, attackTimer / attackDuration);
 
             yield return null;
         }

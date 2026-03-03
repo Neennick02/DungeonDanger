@@ -10,7 +10,6 @@ public class BatHealth : BaseHealth
     protected override void Update()
     {
         base.Update();
-        Debug.Log(currentHealth);
     }
     public override void AddHealth(int amount)
     {

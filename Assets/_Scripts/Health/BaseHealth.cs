@@ -7,6 +7,7 @@ public abstract class BaseHealth : MonoBehaviour
     protected int currentHealth;
     protected bool isDead = false;
     public static event Action SwitchTarget;
+    public Transform targetTransform;
 
     protected virtual void Start()
     {
@@ -40,8 +41,8 @@ public abstract class BaseHealth : MonoBehaviour
     {
         //add code to sub classes
         if(!this.transform.CompareTag("Player")){
+            TargetFinder.RemoveFromPool(targetTransform);
             SwitchTarget?.Invoke();
-            TargetFinder.RemoveFromPool(transform);
             Destroy(gameObject);
         }
     }
