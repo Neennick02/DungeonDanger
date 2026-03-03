@@ -126,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
         _characterController.Move(finalMovement * _movementSpeed * Time.deltaTime);
 
         //set animation movement speed
-        animator.SetSpeed(input.magnitude);
+        animator.SetSpeed(input.magnitude, input.normalized.x, input.normalized.y);
     }
 
     private void HandleGravity()
@@ -192,15 +192,9 @@ public class PlayerMovement : MonoBehaviour
             _dodgeCooldownTimer-= Time.deltaTime;
         }
 
-
-        if(targetFinder.currentTargetName != null)
-        {
-            _isTargeting = true;
-        }
-        else
-        {
-             _isTargeting= false;
-        }
+        bool hasTarget = targetFinder.currentTarget != null;
+        _isTargeting = hasTarget;
+        animator.IsTargeting(hasTarget);
     }
 
     private void CheckForLedges()
@@ -269,26 +263,27 @@ public class PlayerMovement : MonoBehaviour
 
                 if (input.y < -0.5f)
                 {
-                    Debug.Log("Backflip");
-                    _dodgeDirection = -transform.forward;
-                    animator.Flip();
+                    StartCoroutine(BackFlip());
                 }
                 else if (input.x > 0.5f)
                 {
                     Debug.Log("Hop right");
                     _dodgeDirection = transform.right;
-                    animator.Roll();
+                    animator.Hop();
                 }
                 else if (input.x < -0.5f)
                 {
                     Debug.Log("Hop left");
                     _dodgeDirection = -transform.right;
-                    animator.Roll();
+                    animator.Hop();
                 }
                 else
                 {
-                    Debug.Log("Jump forward");
-                }
+                    //normal roll forward
+                    _verticalVelocity = 0;
+                    _dodgeDirection = transform.forward;
+                    animator.Roll();
+               }
             }
             else
             {
@@ -313,5 +308,13 @@ public class PlayerMovement : MonoBehaviour
     public void StopPushBlock()
     {
         State = PlayerState.Locomotion;
+    }
+
+    IEnumerator BackFlip()
+    {
+        animator.Flip();
+        yield return new WaitForSeconds(0.1f);
+        _dodgeDirection = -transform.forward;
+        
     }
 }
