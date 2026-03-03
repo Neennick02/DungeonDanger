@@ -12,7 +12,7 @@ public abstract class BaseHealth : MonoBehaviour
 
     public Transform targetTransform;
     public MeshRenderer MeshRenderer;
-    public Color DamageColor;
+    private Color DamageColor = Color.red;
     protected virtual void Start()
     {
         currentHealth = MaxHealth;

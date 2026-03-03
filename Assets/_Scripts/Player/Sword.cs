@@ -19,8 +19,7 @@ public class Sword : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy")){
-            Debug.Log("Hit object: " + other.name);
-            Debug.Log("Root object: " + other.transform.root.name);
+
             var enemyHealth = other.gameObject.GetComponent<BaseHealth>();
 
             if (enemyHealth != null)
@@ -30,8 +29,6 @@ public class Sword : MonoBehaviour
                     enemyHealth.DrainHealth(damage);
                 }
                 hit = true;
-
-                Debug.Log("Damaged " + other.name);
             }
         }
     }
