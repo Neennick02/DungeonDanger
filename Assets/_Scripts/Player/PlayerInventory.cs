@@ -32,7 +32,7 @@ public class PlayerInventory : MonoBehaviour
         OnCoinAmountChanged?.Invoke(coinAmount);
 
         PlayerAttack.OnGrabSword += GrabSword;
-        PlayerInput.OnPutAway += PutAway;
+        InteractionManager.OnPutAway += PutAway;
     }
 
     //keys
@@ -68,12 +68,10 @@ public class PlayerInventory : MonoBehaviour
     {
         if (targetFinder.currentTarget != null) return;
 
-        if (swordInHand)
-        {
+
             swordInHand = false;
             animator.PutAway();
             StartCoroutine(ActivateSword(false));
-        }
     }
 
     IEnumerator ActivateSword(bool isActive)

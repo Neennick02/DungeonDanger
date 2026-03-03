@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BatHealth : BaseHealth
 {
@@ -19,6 +20,7 @@ public class BatHealth : BaseHealth
     public override void DrainHealth(int amount)
     {
         currentHealth -= amount;
+        FlashRed();
     }
     protected override void Die()
     {

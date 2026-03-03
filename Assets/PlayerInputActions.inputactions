@@ -77,15 +77,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "PutAway",
-                    "type": "Button",
-                    "id": "4d1dee49-fa22-4012-a3c3-a14b36d8718b",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -180,7 +171,7 @@
                 {
                     "name": "",
                     "id": "5d9d1473-1929-43c6-8769-127286349a3a",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Controller",
@@ -306,28 +297,6 @@
                     "processors": "",
                     "groups": ";Controller",
                     "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "29f67079-5ab7-4fa0-a5bf-8417197e9e25",
-                    "path": "<Keyboard>/backspace",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";KeyBoard and Mouse",
-                    "action": "PutAway",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "260e8a35-a3ba-41c6-b961-13044a82206d",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Controller",
-                    "action": "PutAway",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

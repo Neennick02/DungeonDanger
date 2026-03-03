@@ -163,15 +163,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""PutAway"",
-                    ""type"": ""Button"",
-                    ""id"": ""4d1dee49-fa22-4012-a3c3-a14b36d8718b"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -266,7 +257,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5d9d1473-1929-43c6-8769-127286349a3a"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Controller"",
@@ -392,28 +383,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Controller"",
                     ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""29f67079-5ab7-4fa0-a5bf-8417197e9e25"",
-                    ""path"": ""<Keyboard>/backspace"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";KeyBoard and Mouse"",
-                    ""action"": ""PutAway"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""260e8a35-a3ba-41c6-b961-13044a82206d"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Controller"",
-                    ""action"": ""PutAway"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -976,7 +945,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_PlayerActions_TargetLeft = m_PlayerActions.FindAction("TargetLeft", throwIfNotFound: true);
         m_PlayerActions_TargetRight = m_PlayerActions.FindAction("TargetRight", throwIfNotFound: true);
         m_PlayerActions_Attack = m_PlayerActions.FindAction("Attack", throwIfNotFound: true);
-        m_PlayerActions_PutAway = m_PlayerActions.FindAction("PutAway", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1078,7 +1046,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_TargetLeft;
     private readonly InputAction m_PlayerActions_TargetRight;
     private readonly InputAction m_PlayerActions_Attack;
-    private readonly InputAction m_PlayerActions_PutAway;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerActions".
     /// </summary>
@@ -1122,10 +1089,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerActions/Attack".
         /// </summary>
         public InputAction @Attack => m_Wrapper.m_PlayerActions_Attack;
-        /// <summary>
-        /// Provides access to the underlying input action "PlayerActions/PutAway".
-        /// </summary>
-        public InputAction @PutAway => m_Wrapper.m_PlayerActions_PutAway;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1176,9 +1139,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
-            @PutAway.started += instance.OnPutAway;
-            @PutAway.performed += instance.OnPutAway;
-            @PutAway.canceled += instance.OnPutAway;
         }
 
         /// <summary>
@@ -1214,9 +1174,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
-            @PutAway.started -= instance.OnPutAway;
-            @PutAway.performed -= instance.OnPutAway;
-            @PutAway.canceled -= instance.OnPutAway;
         }
 
         /// <summary>
@@ -1534,13 +1491,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttack(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "PutAway" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPutAway(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

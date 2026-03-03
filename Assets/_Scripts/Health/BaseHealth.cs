@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public abstract class BaseHealth : MonoBehaviour
@@ -7,8 +9,10 @@ public abstract class BaseHealth : MonoBehaviour
     protected int currentHealth;
     protected bool isDead = false;
     public static event Action SwitchTarget;
-    public Transform targetTransform;
 
+    public Transform targetTransform;
+    public MeshRenderer MeshRenderer;
+    public Color DamageColor;
     protected virtual void Start()
     {
         currentHealth = MaxHealth;
@@ -45,6 +49,20 @@ public abstract class BaseHealth : MonoBehaviour
             SwitchTarget?.Invoke();
             Destroy(gameObject);
         }
+    }
+
+    public void FlashRed()
+    {
+        StopAllCoroutines();
+        StartCoroutine(Flash());
+    }
+
+    IEnumerator Flash()
+    {
+        Color standard = MeshRenderer.material.color;
+        MeshRenderer.material.color = DamageColor;
+        yield return new WaitForSeconds(0.1f);
+        MeshRenderer.material.color = standard;
     }
 
 }

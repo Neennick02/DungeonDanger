@@ -5,17 +5,21 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Transform model;
+    [SerializeField] private Collider sword;
     [SerializeField] private float dashStartAmount = 0f;
     [SerializeField] private float dashEndAmount = 5f;
     private float dashAmount;
 
     [SerializeField] private float attackDuration = 1.5f;
     private float attackTimer  = 0;
+
     [SerializeField] private PlayerAnimator animator;
+
     private PlayerMovement movement;
     private PlayerMovement.PlayerState previousState;
     private CharacterController controller;
     private PlayerInventory inventory;
+
     private bool isAttacking;
 
     public static event Action OnGrabSword;
@@ -38,9 +42,13 @@ public class PlayerAttack : MonoBehaviour
         if (isAttacking)
         {
             controller.Move(model.forward * dashAmount * Time.deltaTime);
+            sword.enabled = true;
+            Debug.Log("Attack");
         }
-        
-
+        else
+        {
+            sword.enabled = false;
+        }
     }
 
     private void Attack()
@@ -68,7 +76,11 @@ public class PlayerAttack : MonoBehaviour
         while(attackTimer < attackDuration)
         {
             attackTimer += Time.deltaTime;
-           // dashAmount = Mathf.Lerp(dashStartAmount, dashEndAmount, attackTimer / attackDuration);
+
+            if(attackTimer > attackDuration/2)
+            {
+                dashAmount = Mathf.Lerp(dashStartAmount, dashEndAmount, attackTimer / attackDuration/ 2); 
+            }
 
             yield return null;
         }

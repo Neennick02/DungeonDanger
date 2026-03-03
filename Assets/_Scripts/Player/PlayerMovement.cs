@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     
     
     //target
-    private bool _isTargeting = false;
+    public bool _isTargeting { get; private set; }
 
     [Header("Pushing Blocks Config")]
     public static GameObject pushAbleBlockObject;
