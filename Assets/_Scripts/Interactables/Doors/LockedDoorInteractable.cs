@@ -7,7 +7,6 @@ public class LockedDoorInteractable : DoorInteractable
     protected override void Start()
     {
         base.Start();
-        interactionPopup = "Press action to open.";
         _animator = GetComponent<Animator>();
     }
 

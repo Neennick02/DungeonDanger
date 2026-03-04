@@ -43,7 +43,6 @@ public class PlayerAttack : MonoBehaviour
         {
             controller.Move(model.forward * dashAmount * Time.deltaTime);
             sword.enabled = true;
-            Debug.Log("Attack");
         }
         else
         {
