@@ -2,20 +2,22 @@ using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class BaseHealth : MonoBehaviour
 {
     public static int MaxHealth = 20;
     protected int currentHealth;
     protected bool isDead = false;
-    public static event Action SwitchTarget;
+    public UnityEvent SwitchTarget;
 
-    public Transform targetTransform;
-    public MeshRenderer MeshRenderer;
+    protected MeshRenderer meshRenderer;
     private Color DamageColor = Color.red;
     protected virtual void Start()
     {
         currentHealth = MaxHealth;
+        meshRenderer = GetComponent<MeshRenderer>();
+        if(meshRenderer == null) meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
 
     protected virtual void Update()
@@ -45,8 +47,8 @@ public abstract class BaseHealth : MonoBehaviour
     {
         //add code to sub classes
         if(!this.transform.CompareTag("Player")){
-            TargetFinder.RemoveFromPool(targetTransform);
-            SwitchTarget?.Invoke();
+            TargetFinder.RemoveFromPool(transform);
+            //SwitchTarget?.Invoke();
             Destroy(gameObject);
         }
     }
@@ -59,10 +61,10 @@ public abstract class BaseHealth : MonoBehaviour
 
     IEnumerator Flash()
     {
-        Color standard = MeshRenderer.material.color;
-        MeshRenderer.material.color = DamageColor;
+        Color standard = meshRenderer.material.color;
+        meshRenderer.material.color = DamageColor;
         yield return new WaitForSeconds(0.1f);
-        MeshRenderer.material.color = standard;
+        meshRenderer.material.color = standard;
     }
 
 }

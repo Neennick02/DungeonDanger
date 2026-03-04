@@ -4,9 +4,11 @@ using UnityEngine.Events;
 
 public class BatHealth : BaseHealth
 {
+    private Target targetScript;
     protected override void Start()
     {
         base.Start();
+        targetScript = GetComponentInChildren<Target>();
     }
     protected override void Update()
     {
@@ -24,6 +26,12 @@ public class BatHealth : BaseHealth
     }
     protected override void Die()
     {
-        base.Die();
+        //add code to sub classes
+        if (!this.transform.CompareTag("Player"))
+        {
+            TargetFinder.RemoveFromPool(targetScript.transform);
+            SwitchTarget?.Invoke();
+            Destroy(gameObject);
+        }
     }
 }

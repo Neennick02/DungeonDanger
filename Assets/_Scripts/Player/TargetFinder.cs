@@ -36,14 +36,12 @@ public class TargetFinder : MonoBehaviour
         PlayerInput.OnTargetRight += SelectTarget;
         PlayerInput.OnTargetLeft += SelectTarget;
 
-        BaseHealth.SwitchTarget += SelectNewTarget;
     }
     private void OnDisable()
     {
         PlayerInput.OnTarget -= TargetAndUntarget;
         PlayerInput.OnTargetRight -= SelectTarget;
         PlayerInput.OnTargetLeft -= SelectTarget;
-        BaseHealth.SwitchTarget -= SelectNewTarget;
     }
     #endregion
 
@@ -116,7 +114,7 @@ public class TargetFinder : MonoBehaviour
         }
     }
 
-    private void SelectNewTarget()
+    public void SelectNewTarget()
     {
         if(pool.Count == 0)
         {

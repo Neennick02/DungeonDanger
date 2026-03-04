@@ -25,7 +25,7 @@ public class Target : MonoBehaviour
 
         visible = GeometryUtility.TestPlanesAABB(frustrum, m_collider.bounds);
 
-        if (visible)
+        if (visible && !inPool)
         {
             //check if target is in range
             float distanceToPlayer = Vector3.Distance(finder.transform.position, transform.position);
