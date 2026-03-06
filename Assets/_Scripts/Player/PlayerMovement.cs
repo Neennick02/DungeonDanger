@@ -1,10 +1,5 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Windows;
-using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
 
 public class PlayerMovement : MonoBehaviour
 {

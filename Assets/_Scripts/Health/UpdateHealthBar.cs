@@ -1,9 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.Splines.Interpolators;
 using UnityEngine.UI;
 
 public class UpdateHealthBar : MonoBehaviour
