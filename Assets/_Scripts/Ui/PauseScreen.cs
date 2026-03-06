@@ -15,7 +15,6 @@ public class PauseScreen : MonoBehaviour
     }
     public void TogglePause()
     {
-        Debug.Log("togle");
         isPaused = !isPaused;
 
         holder.SetActive(isPaused);

@@ -18,6 +18,7 @@ public abstract class BaseEnemy : MonoBehaviour
         if (CanSeePlayer())
         {
             agent.destination = playerTransform.position;
+            transform.LookAt(playerTransform.position);
         }
     }
 
