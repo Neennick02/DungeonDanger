@@ -39,6 +39,7 @@ public class GameOverScreen : MonoBehaviour
     public void Restart()
     {
         Debug.Log("Reload");
+        Time.timeScale = 1;
         SceneManager.LoadScene("TestScene");
     }
 
