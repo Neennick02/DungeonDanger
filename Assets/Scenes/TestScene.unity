@@ -29824,8 +29824,9 @@ GameObject:
   - component: {fileID: 2144879353}
   - component: {fileID: 2144879356}
   - component: {fileID: 2144879355}
-  - component: {fileID: 2144879349}
   - component: {fileID: 2144879354}
+  - component: {fileID: 2144879358}
+  - component: {fileID: 2144879357}
   m_Layer: 0
   m_Name: Bat
   m_TagString: Enemy
@@ -29833,27 +29834,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &2144879349
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2144879348}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &2144879353
 Transform:
   m_ObjectHideFlags: 0
@@ -29906,7 +29886,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SwitchTarget:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 601771036}
+        m_TargetAssemblyTypeName: TargetFinder, Assembly-CSharp
+        m_MethodName: SelectNewTarget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2144879356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29921,6 +29913,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyObject: {fileID: 11400000, guid: 32cc7f88ee9777c47a326935872dffe0, type: 2}
   playerTransform: {fileID: 601771033}
+--- !u!135 &2144879357
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144879348}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &2144879358
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144879348}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &321378526909597503 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3407871770885473571, guid: 0cdaeedf8c1c19e469f8ae390b054b20, type: 3}

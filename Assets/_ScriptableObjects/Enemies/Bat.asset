@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bat
   m_EditorClassIdentifier: 
   MaxHealth: 15
-  Damage: 5
+  Damage: 1
   Speed: 5
   SpottingRadius: 15

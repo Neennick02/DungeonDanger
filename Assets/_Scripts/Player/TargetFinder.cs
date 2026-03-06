@@ -116,6 +116,7 @@ public class TargetFinder : MonoBehaviour
 
     public void SelectNewTarget()
     {
+        //selects a new target when target dies
         if(pool.Count == 0)
         {
             LockOff();
@@ -123,6 +124,7 @@ public class TargetFinder : MonoBehaviour
             return;
         }
 
+        //disable lockon
         Transform newTarget = NearestTarget();
 
         if(newTarget != null)

@@ -206,7 +206,7 @@ public class PlayerMovement : MonoBehaviour
             if (!_isJumping && _velocity.sqrMagnitude > 0.5f)
             {
                 Jump();
-                Debug.Log("Jump");
+               // Debug.Log("Jump");
             }
             else
             {
