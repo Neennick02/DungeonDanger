@@ -4,6 +4,8 @@ using UnityEngine;
 public class PlayerHealth : BaseHealth
 {
     [SerializeField] private PlayerObject playerObject;
+    private PlayerAnimator animator;
+
     public static event Action<int> OnHealthAmountChanged;
     public static event Action OnDeath;
     protected override void Start()

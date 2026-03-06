@@ -12,8 +12,15 @@ public class PlayerAnimator : MonoBehaviour
 
         PlayerAttack.OnGrabSword += GrabSword;
     }
+    private void OnEnable()
+    {
+        PlayerHealth.OnDeath += IsDead;
+    }
 
-
+    private void OnDisable()
+    {
+        PlayerHealth.OnDeath -= IsDead;
+    }
     public void SetSpeed(float speed, float x, float y)
     {
         animator.SetFloat("Speed", speed);
@@ -27,6 +34,11 @@ public class PlayerAnimator : MonoBehaviour
     public void IsGrounded(bool isGrounded)
     {
         animator.SetBool("IsGrounded", isGrounded);
+    }
+
+    public void IsDead()
+    {
+        animator.SetTrigger("Die");
     }
 
     public void Flip()

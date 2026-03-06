@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class GameOverScreen : MonoBehaviour
 {
-    private float duration = 1;
+    private float duration = 2;
     private float time = 0;
     private Image panel;
     private float alpha = 0;
@@ -38,16 +38,19 @@ public class GameOverScreen : MonoBehaviour
 
     public void Restart()
     {
+        Debug.Log("Reload");
         SceneManager.LoadScene("TestScene");
     }
 
     public void Quit()
     {
+        Debug.Log("Quit");
         Application.Quit();
     }
 
     IEnumerator OpenScreen()
     {
+        yield return new WaitForSeconds(2.5f);
         alpha = 0;
         time = 0;
 
