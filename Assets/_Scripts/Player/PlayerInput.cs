@@ -15,11 +15,17 @@ public class PlayerInput : MonoBehaviour
     private InputAction ActionButtonAction;
     private InputAction AttackAction;
 
+    private InputAction PauseAction;
+
     public static event Action OnTarget;
     public static event Action OnDodge;
     public static event Action<Vector2> OnMove;
     public static event Action OnAction;
     public static event Action OnAttack;
+
+    public static event Action OnPause;
+
+
 
     private Vector2 moveInput;
 
@@ -47,6 +53,8 @@ public class PlayerInput : MonoBehaviour
         targetLeft = InputActions.FindAction("TargetLeft");
         ActionButtonAction = InputActions.FindAction("ActionButton");
         AttackAction = InputActions.FindAction("Attack");
+        PauseAction = InputActions.FindAction("Pause");
+
         //subscribe to action performed callbacks
 
         //movement events
@@ -69,6 +77,9 @@ public class PlayerInput : MonoBehaviour
 
         if (targetLeft != null)
             targetLeft.performed += ctx => OnTargetLeft?.Invoke(-1);
+
+        if (PauseAction != null)
+            PauseAction.performed += ctx => OnPause?.Invoke();
 
     }
 
