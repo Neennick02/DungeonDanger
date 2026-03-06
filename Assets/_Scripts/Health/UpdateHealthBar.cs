@@ -11,9 +11,11 @@ public class UpdateHealthBar : MonoBehaviour
     private Image healthBar;
     private float duration = 1f;
     private float time = 0f;
-
+    private PlayerObject playerObject;
+    private int startHealth;
     private void Start()
     {
+        startHealth = playerObject.StartHealth;
         healthBar = GetComponent<Image>();
         PlayerHealth.OnHealthAmountChanged += TriggerUpdate;
     }
@@ -26,7 +28,7 @@ public class UpdateHealthBar : MonoBehaviour
     public IEnumerator UpdateHealth(int currentHealth)
     {
         time = 0f;
-        float targetAmount = (float)currentHealth / PlayerHealth.MaxHealth;
+        float targetAmount = (float)currentHealth / startHealth;
 
         while(healthBar.fillAmount != targetAmount)
         {

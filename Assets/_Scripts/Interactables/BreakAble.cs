@@ -1,23 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakAble : MonoBehaviour
+public class BreakAble : BaseHealth
 {
-    [SerializeField] private GameObject[] itemArray;
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Sword"))
         {
-            Break();
+            DrainHealth(1);
         }
-    }
-    private void Break()
-    {
-        int randomInt = Random.Range(0, itemArray.Length);
-        GameObject dropObject = itemArray[randomInt];
-
-        Instantiate(dropObject, transform.position, Quaternion.identity);
-        Destroy(gameObject);
     }
 }

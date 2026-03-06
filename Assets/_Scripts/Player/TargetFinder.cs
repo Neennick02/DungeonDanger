@@ -116,15 +116,16 @@ public class TargetFinder : MonoBehaviour
 
     public void SelectNewTarget()
     {
-        //selects a new target when target dies
-        if(pool.Count == 0)
+        //disable lockon
+        if (pool.Count == 0)
         {
             LockOff();
             OnLockOff?.Invoke();
             return;
         }
 
-        //disable lockon
+        
+        //selects a new target when target dies
         Transform newTarget = NearestTarget();
 
         if(newTarget != null)
@@ -132,11 +133,6 @@ public class TargetFinder : MonoBehaviour
             currentTarget = newTarget;
             targetCamera.LookAt = currentTarget;
             lockedOn = true;
-        }
-        else
-        {
-            LockOff();
-            OnLockOff?.Invoke();
         }
    }
 
