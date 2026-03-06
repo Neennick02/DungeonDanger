@@ -10,14 +10,6 @@ public class BatHealth : BaseHealth
         base.Start();
         targetScript = GetComponentInChildren<Target>();
     }
-    protected override void Update()
-    {
-        base.Update();
-    }
-    public override void AddHealth(int amount)
-    {
-        currentHealth += amount;
-    }
 
     public override void DrainHealth(int amount)
     {

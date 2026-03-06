@@ -5,10 +5,11 @@ public class PlayerHealth : BaseHealth
 {
     [SerializeField] private PlayerObject playerObject;
     public static event Action<int> OnHealthAmountChanged;
+    public static event Action OnDeath;
     protected override void Start()
     {
-        base.Start();
         maxHealth = playerObject.StartHealth;
+        currentHealth = maxHealth;
         OnHealthAmountChanged?.Invoke(currentHealth);
     }
     public override void AddHealth(int amount)
@@ -24,6 +25,6 @@ public class PlayerHealth : BaseHealth
     }
     protected override void Die()
     {
-        
+        OnDeath?.Invoke();
     }
 }

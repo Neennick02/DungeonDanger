@@ -11,7 +11,7 @@ public class UpdateHealthBar : MonoBehaviour
     private Image healthBar;
     private float duration = 1f;
     private float time = 0f;
-    private PlayerObject playerObject;
+    [SerializeField] private PlayerObject playerObject;
     private int startHealth;
     private void Start()
     {

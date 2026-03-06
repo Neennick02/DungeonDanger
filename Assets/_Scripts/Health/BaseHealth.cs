@@ -22,7 +22,6 @@ public abstract class BaseHealth : MonoBehaviour
 
     protected virtual void Update()
     {
-        Debug.Log(currentHealth);
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         CheckHealth();
     }
