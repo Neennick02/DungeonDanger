@@ -56,7 +56,10 @@ public abstract class BaseHealth : MonoBehaviour
             int randomInt = Random.Range(0, itemArray.Length);
             GameObject dropObject = itemArray[randomInt];
 
+        if (dropObject != null)
+        {
             Instantiate(dropObject, transform.position, Quaternion.identity);
+        }
             Destroy(gameObject);
       }
     public void FlashRed()
