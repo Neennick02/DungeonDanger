@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpForce = 10;
     private bool _isJumping;
     private bool _wasGrounded;
+    private float _startJumpHeight;
 
     [Header("Dodge")]
     [SerializeField] private float _dodgeForce = 10;
@@ -198,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_wasGrounded && !grounded)
         {
-            if (!_isJumping && _velocity.sqrMagnitude > 0.5f)
+            if (!_isJumping && _velocity.sqrMagnitude > 0.5f && IsRealLedge())
             {
                 Jump();
                // Debug.Log("Jump");
@@ -208,12 +209,34 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (grounded) _isJumping = false;
+        if (grounded)
+        {
+            _isJumping = false;
+        }
+
         _wasGrounded = grounded;
+    }
+
+    private bool IsRealLedge()
+    {
+        RaycastHit hit;
+
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, 1))
+        {
+            //if ground is close
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     private void Jump()
     {
+        _startJumpHeight = transform.position.y;
+
+
         if (!_isJumping)
         {
             if (_isDodging)
