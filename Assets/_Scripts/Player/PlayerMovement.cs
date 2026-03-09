@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -13,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private float _verticalVelocity;
     private TargetFinder targetFinder;
     private Vector3 move;
+    public MovingPlatform currentPlatform = null;
 
     [Header("Jump")]
     [SerializeField] private float _gravity = -9.81f;
@@ -30,8 +32,6 @@ public class PlayerMovement : MonoBehaviour
     private float _dodgeCooldownTimer;
     private bool _isDodging;
     
-    
-    //target
     public bool _isTargeting { get; private set; }
 
     [Header("Pushing Blocks Config")]
@@ -117,12 +117,43 @@ public class PlayerMovement : MonoBehaviour
         HandleGravity();
 
         Vector3 finalMovement = _velocity * _movementSpeed;
+
+
         finalMovement.y = _verticalVelocity;
 
-        _characterController.Move(finalMovement * _movementSpeed * Time.deltaTime);
+        if (!currentPlatform)
+        {
+            _characterController.Move(finalMovement * _movementSpeed * Time.deltaTime);
+        }
+        if(currentPlatform)
+        {
+            //when standing on a platform move along with it
+            _characterController.Move(currentPlatform.Delta + finalMovement * _movementSpeed * Time.deltaTime);
+        }
 
         //set animation movement speed
         animator.SetSpeed(input.magnitude, input.normalized.x, input.normalized.y);
+
+
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.TryGetComponent(out MovingPlatform platform))
+        {
+            currentPlatform = platform;
+        }
+        else
+        {
+            currentPlatform = null;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.TryGetComponent(out MovingPlatform platform))
+        {
+            currentPlatform = null;
+        }
     }
 
     private void HandleGravity()

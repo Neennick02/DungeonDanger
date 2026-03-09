@@ -2,35 +2,19 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    private CharacterController cc;
-    private Vector3 offset;
+    private Vector3 _lastPosition;
+    private PlayerMovement movement;
 
-/*    private void OnTriggerEnter(Collider other)
+    public Vector3 Delta { get; private set; }
+
+    void Start()
     {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("test");
-
-            cc = other.GetComponent<CharacterController>();
-            offset = other.transform.position - transform.position;
-            //cc.enabled = false;
-            other.transform.SetParent(transform); 
-        }
+        _lastPosition = transform.position;
     }
 
-    private void OnTriggerExit(Collider other)
+    void LateUpdate()
     {
-
-        other.transform.parent = null;
-        cc = null;
+        Delta = transform.position - _lastPosition;
+        _lastPosition = transform.position;
     }
-
-    private void LateUpdate()
-    {
-        if (cc != null)
-        {
-            cc.Move(transform.position + offset);
-        }
-    }*/
-
 }
