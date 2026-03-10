@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class MoveStair : MonoBehaviour
     [SerializeField] private float targetHeight;
     private Vector3 target;
 
+    public static event Action OnDisableCamera;
     private void Start()
     {
         target = new Vector3(transform.position.x, targetHeight, transform.position.z); 
@@ -29,7 +31,7 @@ public class MoveStair : MonoBehaviour
 
             yield return null;  
         }
-
-
+        OnDisableCamera?.Invoke();
+        Debug.Log("dsa");
     }
 }
