@@ -46,7 +46,8 @@ public class PlayerMovement : MonoBehaviour
         Locomotion,
         Pushing,
         Dodging,
-        Attacking
+        Attacking,
+        Cutscene
     }
 
     public PlayerState State;

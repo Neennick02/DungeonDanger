@@ -40,7 +40,7 @@ public class GameOverScreen : MonoBehaviour
     {
         Debug.Log("Reload");
         Time.timeScale = 1;
-        SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene("LevelBuildingScene");
     }
 
     public void Quit()
