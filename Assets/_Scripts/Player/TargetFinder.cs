@@ -36,12 +36,16 @@ public class TargetFinder : MonoBehaviour
         PlayerInput.OnTargetRight += SelectTarget;
         PlayerInput.OnTargetLeft += SelectTarget;
 
+        PlayerHealth.OnDeath += EmptyList;
+
     }
     private void OnDisable()
     {
         PlayerInput.OnTarget -= TargetAndUntarget;
         PlayerInput.OnTargetRight -= SelectTarget;
         PlayerInput.OnTargetLeft -= SelectTarget;
+
+        PlayerHealth.OnDeath -= EmptyList;
     }
     #endregion
 
@@ -59,6 +63,7 @@ public class TargetFinder : MonoBehaviour
 
         lastTargetPosition = _targetPointer;
     }
+
     private void Update()
     {
         //makes pool visable in editor
@@ -235,6 +240,12 @@ public class TargetFinder : MonoBehaviour
             pool.Remove(target);
             pool.Sort(dc);
         }
+    }
+
+    private void EmptyList()
+    {
+        pool.Clear();
+        poolView.Clear();
     }
 }
 

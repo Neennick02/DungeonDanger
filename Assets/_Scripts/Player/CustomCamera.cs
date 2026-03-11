@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -6,7 +7,10 @@ using UnityEngine.ProBuilder.Shapes;
 public class CustomCamera : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera cam;
-    [SerializeField] private PlayerMovement movement;
+
+    public static event Action OnCutSceneStart;
+    public static event Action OnCutSceneEnd;
+
     private void OnEnable()
     {
         MoveStair.OnDisableCamera += DisableCam;
@@ -21,7 +25,8 @@ public class CustomCamera : MonoBehaviour
         cam.Follow = null;
         cam.LookAt = null;
         gameObject.SetActive(false);
-        movement.State = PlayerMovement.PlayerState.Locomotion;
+
+        OnCutSceneEnd?.Invoke();
     }
 
     public void DelayAfterSeconds(float seconds)
@@ -35,9 +40,15 @@ public class CustomCamera : MonoBehaviour
         DisableCam();
     }
 
+    public void StartCutScene()
+    {
+        OnCutSceneStart?.Invoke();
+    }
+
     public void SetTarget(Transform target)
     {
-        movement.State = PlayerMovement.PlayerState.Cutscene;
+        OnCutSceneStart?.Invoke();
+
         cam.Follow = target;
         cam.LookAt = target;
     }

@@ -5,6 +5,7 @@ public class PlayerAnimator : MonoBehaviour
 {
     private Animator animator;
     private PlayerInventory inventory;
+    public bool isAttacking;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -33,7 +34,14 @@ public class PlayerAnimator : MonoBehaviour
     }
     public void IsGrounded(bool isGrounded)
     {
-        animator.SetBool("IsGrounded", isGrounded);
+        if (!isAttacking)
+        {
+            animator.SetBool("IsGrounded", isGrounded);
+        }
+        else
+        {
+            animator.SetBool("IsGrounded", true);
+        }
     }
 
     public void IsDead()

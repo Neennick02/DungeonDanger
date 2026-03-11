@@ -56,16 +56,24 @@ public class PlayerAttack : MonoBehaviour
         {
             if (!isAttacking)
             {
+                animator.isAttacking = true;
+                movement.RotateCharacter(movement.move);
+
+                //save state
                 previousState = movement.State;
+                
+                //change state
                 movement.State = PlayerMovement.PlayerState.Attacking;
                 isAttacking = true;
                 attackTimer = 0;
                 animator.Attack();
+
                 StartCoroutine(AttackRoutine());
             }
         }
         else
         {
+            //if no sword grab one
             OnGrabSword?.Invoke(); 
         }
     }
@@ -86,6 +94,7 @@ public class PlayerAttack : MonoBehaviour
         movement.State = previousState;
         isAttacking = false;
         dashAmount = dashStartAmount;
+        animator.isAttacking = false;
     }
 
 

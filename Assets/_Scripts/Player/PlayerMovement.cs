@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _velocity;
     private float _verticalVelocity;
     private TargetFinder targetFinder;
-    private Vector3 move;
+    public Vector3 move{get; private set;}
     public MovingPlatform currentPlatform = null;
 
     [Header("Jump")]
@@ -57,6 +57,8 @@ public class PlayerMovement : MonoBehaviour
         PlayerInput.OnMove += Move;
         PlayerInput.OnDodge += Dodge;
 
+        CustomCamera.OnCutSceneStart += WatchCutScene;
+        CustomCamera.OnCutSceneEnd += EndCutScene;
     }
 
     private void OnDisable()
@@ -64,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
         PlayerInput.OnMove -= Move;
         PlayerInput.OnDodge -= Dodge;
 
+        CustomCamera.OnCutSceneStart -= WatchCutScene;
+        CustomCamera.OnCutSceneEnd -= EndCutScene;
     }
     private void Awake()
     {
@@ -170,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
             _verticalVelocity += _gravity * Time.deltaTime;
         }
     }
-    private void RotateCharacter(Vector3 move)
+    public void RotateCharacter(Vector3 move)
     {
         if (_isTargeting)
         {
@@ -365,5 +369,21 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         _dodgeDirection = -transform.forward;
         
+    }
+
+    private void ChangeState(PlayerState state)
+    {
+        State = state;
+    }
+
+    private PlayerState previousState;
+    private void WatchCutScene()
+    {
+        previousState = State;
+        ChangeState(PlayerState.Cutscene);
+    }
+    private void EndCutScene()
+    {
+        ChangeState(previousState);
     }
 }

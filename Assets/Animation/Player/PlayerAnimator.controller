@@ -199,7 +199,7 @@ AnimatorState:
   - {fileID: -8810912801384234107}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
   m_SpeedParameterActive: 0
@@ -208,10 +208,10 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -203655887218126122, guid: 2cd4a7f0966c052499ade25aa13855f9, type: 3}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: XSpeed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: XSpeed
 --- !u!1102 &-7107306743459594338
 AnimatorState:
   serializedVersion: 6
@@ -412,7 +412,7 @@ AnimatorState:
   - {fileID: 4163972999237365485}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
   m_SpeedParameterActive: 0
@@ -425,6 +425,31 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1101 &-4859380387610239709
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsGrounded
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 1060996272685274264}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25000012
+  m_TransitionOffset: 0
+  m_ExitTime: 0.12227001
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &-4114994827848436800
 AnimatorState:
   serializedVersion: 6
@@ -660,7 +685,7 @@ AnimatorState:
   - {fileID: -8946040562625405669}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
   m_SpeedParameterActive: 0
@@ -868,7 +893,7 @@ AnimatorStateMachine:
     m_Position: {x: 290, y: -40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4114994827848436800}
-    m_Position: {x: -300, y: 10, z: 0}
+    m_Position: {x: -250, y: -170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6218268072553985477}
     m_Position: {x: 10, y: -90, z: 0}
@@ -892,7 +917,7 @@ AnimatorStateMachine:
     m_Position: {x: 840, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1060996272685274264}
-    m_Position: {x: -10, y: 130, z: 0}
+    m_Position: {x: 40, y: -230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8220597195617959669}
     m_Position: {x: 1310, y: 340, z: 0}
@@ -948,6 +973,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: -3781475421493357770}
   - {fileID: 3782355997501855050}
+  - {fileID: -4859380387610239709}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -1393,14 +1419,14 @@ AnimatorState:
   m_PrefabAsset: {fileID: 0}
   m_Name: Sword And Shield Slash
   m_Speed: 1.5
-  m_CycleOffset: 0
+  m_CycleOffset: 0.62
   m_Transitions:
   - {fileID: 3866099566897856513}
   - {fileID: -1829017607215968008}
   - {fileID: 3495334395273748497}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
   m_SpeedParameterActive: 0
@@ -1412,7 +1438,7 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: Speed
 --- !u!1101 &6522623991809860486
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
