@@ -37,6 +37,7 @@ public class TargetFinder : MonoBehaviour
         PlayerInput.OnTargetLeft += SelectTarget;
 
         PlayerHealth.OnDeath += EmptyList;
+        BaseHealth.SwitchTarget += SelectNewTarget;
 
     }
     private void OnDisable()
@@ -46,6 +47,7 @@ public class TargetFinder : MonoBehaviour
         PlayerInput.OnTargetLeft -= SelectTarget;
 
         PlayerHealth.OnDeath -= EmptyList;
+        BaseHealth.SwitchTarget -= SelectNewTarget;
     }
     #endregion
 

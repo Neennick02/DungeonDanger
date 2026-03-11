@@ -24,6 +24,12 @@ public class PlayerHealth : BaseHealth
     {
         currentHealth -= amount;
         OnHealthAmountChanged?.Invoke(currentHealth);
+
+        if (currentHealth <= 0 && !isDead)
+        {
+            Die();
+            isDead = true;
+        }
     }
     protected override void Die()
     {

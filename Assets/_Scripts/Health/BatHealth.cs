@@ -15,15 +15,13 @@ public class BatHealth : BaseHealth
     {
         currentHealth -= amount;
         FlashRed();
-    }
-    protected override void Die()
-    {
-        //add code to sub classes
-        if (!this.transform.CompareTag("Player"))
+
+        if (currentHealth <= 0 && !isDead)
         {
+
             TargetFinder.RemoveFromPool(targetScript.transform);
-            SwitchTarget?.Invoke();
-            Destroy(gameObject);
+            Die();
+            isDead = true;
         }
     }
 }

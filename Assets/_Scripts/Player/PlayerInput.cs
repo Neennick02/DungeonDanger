@@ -82,11 +82,9 @@ public class PlayerInput : MonoBehaviour
             PauseAction.performed += ctx => OnPause?.Invoke();
 
     }
-
     private void Update()
     {
         Vector2 move = moveAction.ReadValue<Vector2>();
-
         OnMove?.Invoke(move);
     }
 }
