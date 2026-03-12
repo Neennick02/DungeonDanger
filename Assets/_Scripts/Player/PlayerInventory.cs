@@ -8,7 +8,6 @@ public class PlayerInventory : MonoBehaviour
     PlayerAnimator animator;
     public int keyAmount {get; private set;}
     public int potionAmount { get; private set;}
-
     public int coinAmount { get; private set; }
 
     public static event Action<int> OnKeyAmountChanged;

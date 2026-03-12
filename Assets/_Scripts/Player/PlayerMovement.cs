@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 5f;
     [SerializeField] private float _movementAcceleration = 10f;
     private Vector3 _velocity;
-    private float _verticalVelocity;
+    public float _verticalVelocity { get; private set; }
     private TargetFinder targetFinder;
     public Vector3 move{get; private set;}
     public MovingPlatform currentPlatform = null;

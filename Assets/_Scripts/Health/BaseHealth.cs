@@ -13,12 +13,20 @@ public abstract class BaseHealth : MonoBehaviour
     private Color DamageColor = Color.red;
     [SerializeField] protected GameObject[] itemArray;
 
+    [Header("Fall Damage config")]
+    protected Rigidbody rb;
+    protected bool isFalling;
+    protected float highestPoint;
+
+    public float minFallHeight = 5f;
+    public float FallDamageMultiplier = 2;
+
     protected virtual void Start()
     {
-
         currentHealth = maxHealth;
         meshRenderer = GetComponent<MeshRenderer>();
         if(meshRenderer == null) meshRenderer = GetComponentInChildren<MeshRenderer>();
+        rb = GetComponent<Rigidbody>();
     }
 
     public virtual void DrainHealth(int amount)
@@ -34,6 +42,33 @@ public abstract class BaseHealth : MonoBehaviour
     public virtual void AddHealth(int amount)
     {
         currentHealth += amount;
+    }
+    protected virtual void Update()
+    {
+        if (rb == null) return;
+
+        if (rb.linearVelocity.y < 0)
+        {
+            if (!isFalling)
+            {
+                isFalling = true;
+                highestPoint = transform.position.y;
+            }
+        }
+    }
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        if (isFalling)
+        {
+            float fallDist = highestPoint - transform.position.y;
+
+            if(fallDist > minFallHeight)
+            {
+                float damage = (fallDist * minFallHeight) * FallDamageMultiplier;
+                  
+            }
+            isFalling = false;
+        }
     }
 
     protected virtual void Die()
