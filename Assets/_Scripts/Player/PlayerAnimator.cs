@@ -21,7 +21,7 @@ public class PlayerAnimator : MonoBehaviour
     public void SetSpeed(float speed, float x, float y)
     {
         if (animator == null) return;
-        animator.SetFloat("Speed", speed);
+        animator.SetFloat("Speed", speed, 0.1f,  Time.deltaTime);
         animator.SetFloat("XSpeed", x, 0.1f, Time.deltaTime);
         animator.SetFloat("YSpeed", y, 0.1f, Time.deltaTime);
     }
@@ -61,10 +61,21 @@ public class PlayerAnimator : MonoBehaviour
     }
     public void Attack(int combo)
     {
+        Debug.Log(combo);
         if (animator == null) return;
 
-            animator.speed = 1;
-            animator.SetTrigger("IsAttacking");
+        animator.SetTrigger("IsAttacking");
+
+        /*        switch (combo) 
+                {
+                    case 0:
+                    animator.SetTrigger("IsAttacking");
+                    break;
+
+                    case 1:
+                        animator.SetTrigger("IsAttacking 0");
+                        break;
+                }*/
     }
 
     public void Roll()

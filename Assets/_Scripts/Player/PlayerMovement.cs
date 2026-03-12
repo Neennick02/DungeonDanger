@@ -138,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //set animation movement speed
+        
         animator.SetSpeed(input.magnitude, input.normalized.x, input.normalized.y);
 
 

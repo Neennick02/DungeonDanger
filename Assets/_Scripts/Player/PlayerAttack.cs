@@ -47,6 +47,11 @@ public class PlayerAttack : MonoBehaviour
         }
 
         attackCoolDown -= Time.deltaTime;
+
+        if(attackCoolDown < 0f)
+        {
+            comboCounter = 0;
+        }
     }
 
     private void Attack()
@@ -56,6 +61,13 @@ public class PlayerAttack : MonoBehaviour
         if (!isAttacking)
         {
             isAttacking = true;
+            
+            //reset combo
+            if (comboCounter > 1)
+            {
+                comboCounter = 0;
+            }
+
             animator.Attack(comboCounter);
 
             animator.isAttacking = false;
@@ -76,6 +88,8 @@ public class PlayerAttack : MonoBehaviour
 
             //increase combo
             comboCounter++;
+
+            attackCoolDown += 1;
         }
     }
 
