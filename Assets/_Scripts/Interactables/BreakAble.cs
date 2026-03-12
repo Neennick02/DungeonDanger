@@ -10,4 +10,24 @@ public class BreakAble : BaseHealth
             DrainHealth(1);
         }
     }
+
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        if (isFalling)
+        {
+            float fallDist = highestPoint - transform.position.y;
+
+            if (fallDist > minFallHeight)
+            {
+                DropItems();
+                Die();
+            }
+            isFalling = false;
+        }
+    }
+
+    protected override void Die()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -45,6 +45,7 @@ public abstract class BaseHealth : MonoBehaviour
     }
     protected virtual void Update()
     {
+        //handle fall detection
         if (rb == null) return;
 
         if (rb.linearVelocity.y < 0)
@@ -58,6 +59,7 @@ public abstract class BaseHealth : MonoBehaviour
     }
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        //handle landing + falldamage
         if (isFalling)
         {
             float fallDist = highestPoint - transform.position.y;
@@ -65,7 +67,6 @@ public abstract class BaseHealth : MonoBehaviour
             if(fallDist > minFallHeight)
             {
                 float damage = (fallDist * minFallHeight) * FallDamageMultiplier;
-                  
             }
             isFalling = false;
         }

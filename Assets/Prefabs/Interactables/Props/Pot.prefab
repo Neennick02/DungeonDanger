@@ -80,7 +80,7 @@ PrefabInstance:
       addedObject: {fileID: 1517396941838957175}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ae9b31dda7fa4be4292806e48831a04d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7444253672808121419}
+      addedObject: {fileID: 6078797292437394284}
   m_SourcePrefab: {fileID: 100100000, guid: ae9b31dda7fa4be4292806e48831a04d, type: 3}
 --- !u!1 &5219799378809650434 stripped
 GameObject:
@@ -105,7 +105,7 @@ MonoBehaviour:
   - {fileID: 6716425223748110332, guid: fd8403cbb1ae3114ab9723d68c9c255b, type: 3}
   - {fileID: 0}
   minFallHeight: 1
-  FallDamageMultiplier: 2
+  FallDamageMultiplier: 10
 --- !u!54 &1517396941838957175
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5219799378809650434}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.88
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -133,8 +133,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &7444253672808121419
-SphereCollider:
+--- !u!65 &6078797292437394284
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -152,5 +152,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.01192255
-  m_Center: {x: 0, y: -0.000000044703484, z: 0}
+  m_Size: {x: 0.015458127, y: 0.01545813, z: 0.015845101}
+  m_Center: {x: 0, y: -0.000000067055225, z: -0.0020773765}

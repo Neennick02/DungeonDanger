@@ -145,6 +145,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        //handle moving platforms
         if (hit.collider.TryGetComponent(out MovingPlatform platform))
         {
             currentPlatform = platform;
@@ -152,6 +153,16 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             currentPlatform = null;
+        }
+
+        //handle rigidbody collisions
+        Rigidbody rb = hit.collider.attachedRigidbody;
+
+        if (rb != null)
+        {
+            Vector3 dir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+            rb.angularVelocity = dir * 5f;
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -268,7 +279,6 @@ public class PlayerMovement : MonoBehaviour
             return true;
         }
     }
-
     private void Jump()
     {
         _startJumpHeight = transform.position.y;
