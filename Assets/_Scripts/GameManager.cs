@@ -1,0 +1,76 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance;
+    public enum GameStates
+    {
+        Tutorial,
+        Playing,
+        Paused,
+        GameOver,
+    }
+
+    public GameStates State {get; private set;}
+    public string CurrentStateName;
+
+    private bool paused = false;
+
+    private void Awake()
+    { 
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    private void OnEnable()
+    {
+        PlayerInputHandler.OnPause += Pause;
+        PlayerHealth.OnDeath += GameOver;
+    }
+
+    private void OnDisable()
+    {
+        PlayerInputHandler.OnPause -= Pause;
+        PlayerHealth.OnDeath -= GameOver;
+    }
+
+    private void Start()
+    {
+        State = GameStates.Playing;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+    }
+
+    private void Pause()
+    {
+        if (!paused)
+        {
+            State = GameStates.Paused;
+            Cursor.visible = true;
+        }
+        else
+        {
+            State = GameStates.Playing;
+            Cursor.visible = false;
+        }
+
+        paused = !paused;
+    }
+
+    private void GameOver()
+    {
+        State = GameStates.GameOver;
+        Cursor.visible = true;
+    }
+
+    private void Update()
+    {
+        CurrentStateName = State.ToString();
+    }
+}
