@@ -5,16 +5,12 @@ using UnityEngine.Events;
 public class InteractionManager : MonoBehaviour
 {
     private BaseInteractable interactableScript;
-    private PlayerInventory inventory;
-    private PlayerMovement movement;
     public static event Action OnPutAway;
 
 
     public UnityEvent<string> popupEvent;
     private void Start()
     {
-        inventory = GetComponent<PlayerInventory>();
-        movement = GetComponent<PlayerMovement>();
 
         PlayerInputHandler.OnAction += UseInteractable;
         popupEvent.Invoke("");
@@ -22,11 +18,7 @@ public class InteractionManager : MonoBehaviour
 
     private void Update()
     {
-        if(interactableScript == null && inventory.swordInHand&& !movement._isTargeting) 
-        {
-            popupEvent.Invoke("Put Away");
-        }
-        if(interactableScript == null && !inventory.swordInHand)
+        if(interactableScript == null)
         {
             popupEvent.Invoke(" ");
         }
@@ -50,12 +42,6 @@ public class InteractionManager : MonoBehaviour
             //interact with object
             interactableScript.Interact();
         }
-
-        if (inventory.swordInHand)
-        {
-            OnPutAway?.Invoke();  
-        }
-
     }
 
     public void EmptyInteractable()

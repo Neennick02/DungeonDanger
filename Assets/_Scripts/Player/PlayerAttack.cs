@@ -6,23 +6,19 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Transform model;
     [SerializeField] private Collider sword;
-    [SerializeField] private float dashStartAmount = 0f;
-    [SerializeField] private float dashEndAmount = 5f;
-    private float dashAmount;
+
 
     [SerializeField] private float attackDuration = 1.5f;
-    private float attackTimer  = 0;
-
     [SerializeField] private PlayerAnimator animator;
 
     private PlayerMovement movement;
     private PlayerMovement.PlayerState previousState;
-    private CharacterController controller;
-    private PlayerInventory inventory;
 
     private bool isAttacking;
+    private float attackTimer;
+    private int comboCounter = 0;
 
-    public static event Action OnGrabSword;
+    [SerializeField] private float attackCoolDown = 1f;
     private void OnEnable()
     {
         PlayerInputHandler.OnAttack += Attack;
@@ -37,55 +33,49 @@ public class PlayerAttack : MonoBehaviour
     private void Start()
     {
         movement = GetComponent<PlayerMovement>();
-        controller = GetComponent<CharacterController>();
-        inventory = GetComponent<PlayerInventory>();
     }
     private void Update()
     {
 
         if (isAttacking)
         {
-            controller.Move(model.forward * dashAmount * Time.deltaTime);
             sword.enabled = true;
         }
         else
         {
             sword.enabled = false;
         }
+
+        attackCoolDown -= Time.deltaTime;
     }
 
     private void Attack()
     {
         if (!movement._characterController.isGrounded) return;
 
-        if (inventory.swordInHand)
+        if (!isAttacking)
         {
-            if (!isAttacking)
-            {
-                isAttacking = true;
+            isAttacking = true;
+            animator.Attack(comboCounter);
 
-                animator.isAttacking = false;
-                StopAllCoroutines();
+            animator.isAttacking = false;
+            StopAllCoroutines();
 
-                animator.isAttacking = true;
-                movement.RotateCharacter(movement.move);
+            animator.isAttacking = true;
+            movement.RotateCharacter(movement.move);
 
-                //save state
-                previousState = movement.State;
-                
-                //change state
-                movement.State = PlayerMovement.PlayerState.Attacking;
-                attackTimer = 0;
-                animator.Attack();
+            //save state
+            previousState = movement.State;
 
-                //dash
-                StartCoroutine(AttackRoutine());
-            }
-        }
-        else
-        {
-            //if no sword grab one
-            OnGrabSword?.Invoke(); 
+            //change state
+            movement.State = PlayerMovement.PlayerState.Attacking;
+            attackTimer = 0;
+
+            //reset
+            StartCoroutine(AttackRoutine());
+
+            //increase combo
+            comboCounter++;
         }
     }
 
@@ -95,17 +85,14 @@ public class PlayerAttack : MonoBehaviour
         {
             attackTimer += Time.deltaTime;
 
-            if(attackTimer > attackDuration/2)
-            {
-                dashAmount = Mathf.Lerp(dashStartAmount, dashEndAmount, attackTimer / attackDuration/ 2); 
-            }
 
             yield return null;
         }
         movement.State = previousState;
         isAttacking = false;
-        dashAmount = dashStartAmount;
         animator.isAttacking = false;
+
+        attackCoolDown = 1f;
     }
 
 

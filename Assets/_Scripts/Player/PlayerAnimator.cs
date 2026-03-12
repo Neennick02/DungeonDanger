@@ -4,14 +4,10 @@ using UnityEngine;
 public class PlayerAnimator : MonoBehaviour
 {
     private Animator animator;
-    private PlayerInventory inventory;
     public bool isAttacking;
     private void Start()
     {
         animator = GetComponent<Animator>();
-        inventory = GetComponentInParent<PlayerInventory>();
-
-        PlayerAttack.OnGrabSword += GrabSword;
     }
     private void OnEnable()
     {
@@ -63,35 +59,12 @@ public class PlayerAnimator : MonoBehaviour
         animator.SetBool("IsFlipping", true);
         StartCoroutine(ResetBool("IsFlipping"));
     }
-    public void Attack()
+    public void Attack(int combo)
     {
         if (animator == null) return;
 
-        if (inventory.swordInHand)
-        {
             animator.speed = 1;
             animator.SetTrigger("IsAttacking");
-        }
-        else
-        {
-            GrabSword();
-        }
-    }
-
-    public void GrabSword()
-    {
-        if (animator == null) return;
-
-        animator.SetBool("GrabSword", true);
-        StartCoroutine(ResetBool("GrabSword"));
-    }
-
-    public void PutAway()
-    {
-        if (animator == null) return;
-
-        animator.SetBool("PutAway", true);
-        StartCoroutine(ResetBool("PutAway"));
     }
 
     public void Roll()
