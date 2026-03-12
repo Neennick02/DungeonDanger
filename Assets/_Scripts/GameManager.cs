@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,16 +19,20 @@ public class GameManager : MonoBehaviour
 
     private bool paused = false;
 
+    //save / load
+    public static event Action OnLoad;
+
     private void Awake()
     { 
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        OnLoad?.Invoke();
     }
     private void OnEnable()
     {
@@ -72,5 +78,10 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         CurrentStateName = State.ToString();
+    }
+
+    public void LoadPlayerData()
+    {
+        OnLoad?.Invoke();
     }
 }

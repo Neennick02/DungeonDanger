@@ -62,6 +62,9 @@ public class PlayerMovement : MonoBehaviour
 
         CustomCamera.OnCutSceneStart += WatchCutScene;
         CustomCamera.OnCutSceneEnd += EndCutScene;
+
+        SaveStatueInteractable.OnSavePlayerData += SavePositionData;
+        GameManager.OnLoad += LoadPositionData;
     }
 
     private void OnDisable()
@@ -73,6 +76,9 @@ public class PlayerMovement : MonoBehaviour
 
         CustomCamera.OnCutSceneStart -= WatchCutScene;
         CustomCamera.OnCutSceneEnd -= EndCutScene;
+
+        SaveStatueInteractable.OnSavePlayerData += SavePositionData;
+        GameManager.OnLoad -= LoadPositionData;
     }
     private void Awake()
     {
@@ -407,5 +413,27 @@ public class PlayerMovement : MonoBehaviour
     private void Die()
     {
         State = PlayerState.Dead;
+    }
+
+    private void SavePositionData()
+    {
+        PlayerPrefs.SetFloat("xPos", transform.position.x);
+        PlayerPrefs.SetFloat ("yPos", transform.position.y);
+        PlayerPrefs.SetFloat("zPos", transform.position.z);
+
+        PlayerPrefs.SetFloat("xRot", transform.rotation.x);
+        PlayerPrefs.SetFloat("yRot", transform.rotation.y);
+        PlayerPrefs.SetFloat("zRot", transform.rotation.z);
+    }
+    private void LoadPositionData()
+    {
+        
+        _characterController.enabled = false;
+
+        //update position while charactercontroller is off
+        transform.position = new Vector3(PlayerPrefs.GetFloat("xPos"), PlayerPrefs.GetFloat("yPos"), PlayerPrefs.GetFloat("zPos"));
+        transform.localEulerAngles = new Vector3(PlayerPrefs.GetFloat("xRot"), PlayerPrefs.GetFloat("yRot"), PlayerPrefs.GetFloat("zRot"));
+        
+        _characterController.enabled = true;
     }
 }

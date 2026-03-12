@@ -22,6 +22,8 @@ public class PlayerInventory : MonoBehaviour
         PotionPickup.OnPickup += UpdatePotionAmount;
         CoinPickup.OnPickup += UpdateCoinAmount;
 
+        SaveStatueInteractable.OnSavePlayerData += SaveData;
+        GameManager.OnLoad += LoadData;
     }
 
     private void OnDisable()
@@ -29,6 +31,9 @@ public class PlayerInventory : MonoBehaviour
         KeyPickup.OnPickup -= UpdateKeyAmount;
         PotionPickup.OnPickup -= UpdatePotionAmount;
         CoinPickup.OnPickup -= UpdateCoinAmount;
+
+        SaveStatueInteractable.OnSavePlayerData -= SaveData;
+        GameManager.OnLoad -= LoadData;
     }
 
     #endregion
@@ -39,12 +44,12 @@ public class PlayerInventory : MonoBehaviour
         OnPotionAmountChanged?.Invoke(potionAmount);
         OnCoinAmountChanged?.Invoke(coinAmount);
     }
-
     //keys
 
     public void UpdateKeyAmount(int amount)
     {
         keyAmount += amount;
+        if (keyAmount < 0) keyAmount = 0;
         OnKeyAmountChanged?.Invoke(keyAmount);
     }
 
@@ -52,6 +57,7 @@ public class PlayerInventory : MonoBehaviour
     public void UpdatePotionAmount(int amount)
     {
         potionAmount += amount;
+        if (potionAmount < 0) potionAmount = 0;
         OnPotionAmountChanged?.Invoke(potionAmount);
     }
 
@@ -59,6 +65,20 @@ public class PlayerInventory : MonoBehaviour
     public void UpdateCoinAmount(int amount)
     {
         coinAmount += amount;
+        if (coinAmount < 0) coinAmount = 0;
         OnCoinAmountChanged?.Invoke(coinAmount);
+    }
+
+    private void SaveData()
+    {
+        PlayerPrefs.SetInt("coinAmount", coinAmount);
+        PlayerPrefs.SetInt("keyAmount", keyAmount);
+        PlayerPrefs.SetInt("potionAmount", potionAmount);
+    }
+    private void LoadData()
+    {
+        coinAmount = PlayerPrefs.GetInt("coinAmount", coinAmount);
+        keyAmount = PlayerPrefs.GetInt("keyAmount", keyAmount);
+        potionAmount = PlayerPrefs.GetInt("potionAmount", potionAmount);
     }
 }

@@ -61,7 +61,6 @@ public class PlayerAnimator : MonoBehaviour
     }
     public void Attack(int combo)
     {
-        Debug.Log(combo);
         if (animator == null) return;
 
         animator.SetTrigger("IsAttacking");
