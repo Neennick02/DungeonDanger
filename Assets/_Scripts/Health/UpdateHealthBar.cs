@@ -9,11 +9,19 @@ public class UpdateHealthBar : MonoBehaviour
     private float time = 0f;
     [SerializeField] private PlayerObject playerObject;
     private int startHealth;
+    private void OnEnable()
+    {
+        PlayerHealth.OnHealthAmountChanged += TriggerUpdate;
+    }
+
+    private void OnDisable()
+    {
+        PlayerHealth.OnHealthAmountChanged -= TriggerUpdate;
+    }
     private void Start()
     {
         startHealth = playerObject.StartHealth;
         healthBar = GetComponent<Image>();
-        PlayerHealth.OnHealthAmountChanged += TriggerUpdate;
     }
 
     public void TriggerUpdate(int amount)

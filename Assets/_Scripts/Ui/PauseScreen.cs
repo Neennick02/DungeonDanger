@@ -10,11 +10,11 @@ public class PauseScreen : MonoBehaviour
     private bool isShowingControls;
     private void OnEnable()
     {
-        PlayerInput.OnPause += TogglePause;
+        PlayerInputHandler.OnPause += TogglePause;
     }
     private void OnDisable()
     {
-        PlayerInput.OnPause -= TogglePause;
+        PlayerInputHandler.OnPause -= TogglePause;
     }
     public void TogglePause()
     {

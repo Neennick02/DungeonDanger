@@ -8,14 +8,14 @@ public class TargetAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInput.OnTarget += ToggleSelect;
+        PlayerInputHandler.OnTarget += ToggleSelect;
         TargetFinder.OnLockOff += UnSelect;
 
     }
 
     private void OnDisable()
     {
-        PlayerInput.OnTarget -= ToggleSelect;
+        PlayerInputHandler.OnTarget -= ToggleSelect;
         TargetFinder.OnLockOff += UnSelect;
     }
 

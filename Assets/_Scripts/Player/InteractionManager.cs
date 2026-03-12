@@ -16,7 +16,7 @@ public class InteractionManager : MonoBehaviour
         inventory = GetComponent<PlayerInventory>();
         movement = GetComponent<PlayerMovement>();
 
-        PlayerInput.OnAction += UseInteractable;
+        PlayerInputHandler.OnAction += UseInteractable;
         popupEvent.Invoke("");
     }
 

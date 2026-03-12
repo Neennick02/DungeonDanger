@@ -25,17 +25,20 @@ public class PlayerAttack : MonoBehaviour
     public static event Action OnGrabSword;
     private void OnEnable()
     {
-        PlayerInput.OnAttack += Attack;
-
-        movement = GetComponent<PlayerMovement>();
-        controller = GetComponent<CharacterController>();
-        inventory = GetComponent<PlayerInventory>();
+        PlayerInputHandler.OnAttack += Attack;
     }
 
     private void OnDisable()
     {
-        PlayerInput.OnAttack -= Attack;
+        PlayerInputHandler.OnAttack -= Attack;
 
+    }
+
+    private void Start()
+    {
+        movement = GetComponent<PlayerMovement>();
+        controller = GetComponent<CharacterController>();
+        inventory = GetComponent<PlayerInventory>();
     }
     private void Update()
     {

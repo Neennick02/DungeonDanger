@@ -32,9 +32,9 @@ public class TargetFinder : MonoBehaviour
     #region OnEnable/Disable
     private void OnEnable()
     {
-        PlayerInput.OnTarget += TargetAndUntarget;
-        PlayerInput.OnTargetRight += SelectTarget;
-        PlayerInput.OnTargetLeft += SelectTarget;
+        PlayerInputHandler.OnTarget += TargetAndUntarget;
+        PlayerInputHandler.OnTargetRight += SelectTarget;
+        PlayerInputHandler.OnTargetLeft += SelectTarget;
 
         PlayerHealth.OnDeath += EmptyList;
         BaseHealth.SwitchTarget += SelectNewTarget;
@@ -42,9 +42,9 @@ public class TargetFinder : MonoBehaviour
     }
     private void OnDisable()
     {
-        PlayerInput.OnTarget -= TargetAndUntarget;
-        PlayerInput.OnTargetRight -= SelectTarget;
-        PlayerInput.OnTargetLeft -= SelectTarget;
+        PlayerInputHandler.OnTarget -= TargetAndUntarget;
+        PlayerInputHandler.OnTargetRight -= SelectTarget;
+        PlayerInputHandler.OnTargetLeft -= SelectTarget;
 
         PlayerHealth.OnDeath -= EmptyList;
         BaseHealth.SwitchTarget -= SelectNewTarget;

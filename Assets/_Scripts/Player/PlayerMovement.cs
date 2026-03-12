@@ -54,8 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInput.OnMove += Move;
-        PlayerInput.OnDodge += Dodge;
+        PlayerInputHandler.OnMove += Move;
+        PlayerInputHandler.OnDodge += Dodge;
 
         CustomCamera.OnCutSceneStart += WatchCutScene;
         CustomCamera.OnCutSceneEnd += EndCutScene;
@@ -63,8 +63,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDisable()
     {
-        PlayerInput.OnMove -= Move;
-        PlayerInput.OnDodge -= Dodge;
+        PlayerInputHandler.OnMove -= Move;
+        PlayerInputHandler.OnDodge -= Dodge;
 
         CustomCamera.OnCutSceneStart -= WatchCutScene;
         CustomCamera.OnCutSceneEnd -= EndCutScene;

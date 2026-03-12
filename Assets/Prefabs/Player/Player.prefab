@@ -489,6 +489,7 @@ GameObject:
   - component: {fileID: 3172132133699500967}
   - component: {fileID: 7990634692365503947}
   - component: {fileID: 2429106797958558673}
+  - component: {fileID: 6113125298867762535}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -550,10 +551,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d986c9baf348fd4c86926df1e75655d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterController: {fileID: 120777677957523520}
   _movementSpeed: 3
   _rotationSpeed: 5
   _movementAcceleration: 4.55
+  currentPlatform: {fileID: 0}
   _gravity: -9.81
   _jumpForce: 3
   _dodgeForce: 1.5
@@ -576,10 +577,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 0
-  SwitchTarget:
-    m_PersistentCalls:
-      m_Calls: []
   itemArray: []
+  minFallHeight: 5
+  FallDamageMultiplier: 2
   playerObject: {fileID: 11400000, guid: fb5000d17574ae14c86700e8cf7464ce, type: 2}
 --- !u!114 &4950744724874255242
 MonoBehaviour:
@@ -649,10 +649,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3414550302117587348}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 405405bd8434b614989b27a3451585b7, type: 3}
+  m_Script: {fileID: 11500000, guid: db471de1fe68cfb4c80ab587141f66c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputActions: {fileID: -944628639613478452, guid: 6f23c19fee6f8684d9d221f1f492a9a0, type: 3}
+  isAttacking: 0
 --- !u!114 &7990634692365503947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -694,6 +694,19 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6113125298867762535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3414550302117587348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337aa7bbb52c3f440988fbe36cd69831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputActions: {fileID: -944628639613478452, guid: 6f23c19fee6f8684d9d221f1f492a9a0, type: 3}
 --- !u!1001 &3805277832009073576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1436,6 +1449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db471de1fe68cfb4c80ab587141f66c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
 --- !u!1001 &5047622642374948403
 PrefabInstance:
   m_ObjectHideFlags: 0
