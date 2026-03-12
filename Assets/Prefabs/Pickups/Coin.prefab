@@ -65,7 +65,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8496429201884150704}
   - component: {fileID: 2594826100260752076}
-  - component: {fileID: 2966027983658540754}
+  - component: {fileID: 8619199805777820607}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -110,7 +110,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2966027983658540754
+--- !u!114 &8619199805777820607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,36 +119,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6716425223748110332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc4de31de7fd64643a3c723e19fda5da, type: 3}
+  m_Script: {fileID: 11500000, guid: bdc898b25d7537840aad3e08060c65b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Pickup:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerInventory, Assembly-CSharp
-        m_MethodName: UpdateCoinAmount
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2966027983658540754}
-        m_TargetAssemblyTypeName: KeyPickup, Assembly-CSharp
-        m_MethodName: DestroySelf
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &8723265368140754973
 GameObject:
   m_ObjectHideFlags: 0

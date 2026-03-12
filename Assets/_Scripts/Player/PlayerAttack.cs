@@ -39,6 +39,7 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Update()
     {
+
         if (isAttacking)
         {
             controller.Move(model.forward * dashAmount * Time.deltaTime);
@@ -52,10 +53,17 @@ public class PlayerAttack : MonoBehaviour
 
     private void Attack()
     {
+        if (!movement._characterController.isGrounded) return;
+
         if (inventory.swordInHand)
         {
             if (!isAttacking)
             {
+                isAttacking = true;
+
+                animator.isAttacking = false;
+                StopAllCoroutines();
+
                 animator.isAttacking = true;
                 movement.RotateCharacter(movement.move);
 
@@ -64,10 +72,10 @@ public class PlayerAttack : MonoBehaviour
                 
                 //change state
                 movement.State = PlayerMovement.PlayerState.Attacking;
-                isAttacking = true;
                 attackTimer = 0;
                 animator.Attack();
 
+                //dash
                 StartCoroutine(AttackRoutine());
             }
         }

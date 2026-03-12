@@ -1,9 +1,15 @@
+using System;
 using UnityEngine;
 
 public class KeyPickup : BasePickup
 {
+    public static event Action<int> OnPickup;
     protected override void OnTriggerEnter(Collider other)
     {
-        base.OnTriggerEnter(other);
+        if (other.CompareTag("Player"))
+        {
+            OnPickup?.Invoke(1);
+            DestroySelf();
+        }
     }
 }

@@ -3,14 +3,10 @@ using UnityEngine.Events;
 
 public abstract class BasePickup : MonoBehaviour
 {
-    public UnityEvent Pickup;
-
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            Pickup?.Invoke();
-        }
+
+        //add code in children
     }
 
     public void DestroySelf()

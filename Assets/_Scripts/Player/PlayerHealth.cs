@@ -8,6 +8,17 @@ public class PlayerHealth : BaseHealth
 
     public static event Action<int> OnHealthAmountChanged;
     public static event Action OnDeath;
+
+    private void OnEnable()
+    {
+        HeartPickup.OnPickup += AddHealth;
+
+    }
+
+    private void OnDisable()
+    {
+        HeartPickup.OnPickup -= AddHealth;
+    }
     protected override void Start()
     {
         maxHealth = playerObject.StartHealth;

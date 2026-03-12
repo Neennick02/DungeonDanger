@@ -100,13 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
-  SwitchTarget:
-    m_PersistentCalls:
-      m_Calls: []
   itemArray:
   - {fileID: 7050026253047293124, guid: 8d0315047a9d0bb48b67bba220b6a4e4, type: 3}
   - {fileID: 6716425223748110332, guid: fd8403cbb1ae3114ab9723d68c9c255b, type: 3}
-  - {fileID: 0}
   - {fileID: 0}
 --- !u!54 &1517396941838957175
 Rigidbody:

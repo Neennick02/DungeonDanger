@@ -19,8 +19,24 @@ public class PlayerInventory : MonoBehaviour
     private bool shieldInHand = false;
 
     [SerializeField] private GameObject sword, shield;
-    
 
+    #region OnEnable
+    private void OnEnable()
+    {
+        KeyPickup.OnPickup += UpdateKeyAmount;
+        PotionPickup.OnPickup += UpdatePotionAmount;
+        CoinPickup.OnPickup += UpdateCoinAmount;
+
+    }
+
+    private void OnDisable()
+    {
+        KeyPickup.OnPickup -= UpdateKeyAmount;
+        PotionPickup.OnPickup -= UpdatePotionAmount;
+        CoinPickup.OnPickup -= UpdateCoinAmount;
+    }
+
+    #endregion
 
     private void Start()
     {

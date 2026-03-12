@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6838371807949890798}
   - component: {fileID: 3738547866296340734}
-  - component: {fileID: 1187404657134685360}
+  - component: {fileID: 594680896515614522}
   m_Layer: 0
   m_Name: Heart
   m_TagString: Untagged
@@ -176,7 +176,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1187404657134685360
+--- !u!114 &594680896515614522
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,36 +185,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7050026253047293124}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc4de31de7fd64643a3c723e19fda5da, type: 3}
+  m_Script: {fileID: 11500000, guid: a0a100c3b0871794ab4c38cf42a02077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pickup:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
-        m_MethodName: AddHealth
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1187404657134685360}
-        m_TargetAssemblyTypeName: KeyPickup, Assembly-CSharp
-        m_MethodName: DestroySelf
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &8735126103084847994
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private CharacterController _characterController;
+    public CharacterController _characterController { get; set; }
 
     [Header("Movement")]
     [SerializeField] private float _movementSpeed = 5f;
@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     {
         targetFinder = GetComponent<TargetFinder>();
         State = PlayerState.Locomotion;
+        _characterController = GetComponent<CharacterController>();
     }
 
     private void Move(Vector2 input)

@@ -60,8 +60,7 @@ public class PlayerAnimator : MonoBehaviour
         if (inventory.swordInHand)
         {
             animator.speed = 1;
-            animator.SetBool("IsAttacking", true);
-            StartCoroutine(ResetBool("IsAttacking"));
+            animator.SetTrigger("IsAttacking");
         }
         else
         {
