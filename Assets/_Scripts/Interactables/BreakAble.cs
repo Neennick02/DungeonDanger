@@ -7,7 +7,8 @@ public class BreakAble : BaseHealth
     {
         if (other.gameObject.CompareTag("Sword"))
         {
-            DrainHealth(1);
+            DropItems();
+            Die();
         }
     }
 

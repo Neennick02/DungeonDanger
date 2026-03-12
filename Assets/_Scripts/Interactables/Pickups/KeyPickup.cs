@@ -12,4 +12,9 @@ public class KeyPickup : BasePickup
             DestroySelf();
         }
     }
+
+    protected override void Update()
+    {
+       //no despawn
+    }
 }
