@@ -47,7 +47,8 @@ public class PlayerMovement : MonoBehaviour
         Pushing,
         Dodging,
         Attacking,
-        Cutscene
+        Cutscene,
+        Dead
     }
 
     public PlayerState State;
@@ -56,6 +57,8 @@ public class PlayerMovement : MonoBehaviour
     {
         PlayerInputHandler.OnMove += Move;
         PlayerInputHandler.OnDodge += Dodge;
+        
+        PlayerHealth.OnDeath += Die;
 
         CustomCamera.OnCutSceneStart += WatchCutScene;
         CustomCamera.OnCutSceneEnd += EndCutScene;
@@ -65,6 +68,8 @@ public class PlayerMovement : MonoBehaviour
     {
         PlayerInputHandler.OnMove -= Move;
         PlayerInputHandler.OnDodge -= Dodge;
+
+        PlayerHealth.OnDeath -= Die;
 
         CustomCamera.OnCutSceneStart -= WatchCutScene;
         CustomCamera.OnCutSceneEnd -= EndCutScene;
@@ -397,5 +402,10 @@ public class PlayerMovement : MonoBehaviour
     private void EndCutScene()
     {
         ChangeState(previousState);
+    }
+
+    private void Die()
+    {
+        State = PlayerState.Dead;
     }
 }
