@@ -81,7 +81,6 @@ public class TargetFinder : MonoBehaviour
         }
 
 
-
         UpdatePointerPosition();
     }
 
@@ -104,7 +103,7 @@ public class TargetFinder : MonoBehaviour
         {
 
             //keep target under player when not in use
-            _targetPointer.position = transform.position + new Vector3(0, -10, 0);
+            _targetPointer.position = transform.position + new Vector3(0, -50, 0);
 
         }
     }
@@ -123,6 +122,8 @@ public class TargetFinder : MonoBehaviour
 
     public void SelectNewTarget()
     {
+        if (currentTargetName == null) return;
+
         //disable lockon
         if (pool.Count == 0)
         {

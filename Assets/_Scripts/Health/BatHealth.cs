@@ -18,7 +18,6 @@ public class BatHealth : BaseHealth
 
         if (currentHealth <= 0 && !isDead)
         {
-
             TargetFinder.RemoveFromPool(targetScript.transform);
             Die();
             isDead = true;

@@ -188,6 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a100c3b0871794ab4c38cf42a02077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  despawnTime: 5
+  healthAmount: 10
 --- !u!1 &8735126103084847994
 GameObject:
   m_ObjectHideFlags: 0
