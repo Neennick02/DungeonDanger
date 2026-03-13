@@ -5,7 +5,7 @@ public abstract class BaseEnemy : MonoBehaviour
 {
     public EnemyObject enemyObject;
     protected NavMeshAgent agent;
-    [SerializeField] private Transform playerTransform;
+    private Transform playerTransform;
 
     protected virtual void Start()
     {
@@ -37,5 +37,10 @@ public abstract class BaseEnemy : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void AssignPlayer(Transform transform)
+    {
+        playerTransform = transform;
     }
 }

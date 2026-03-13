@@ -9,8 +9,9 @@ public abstract class BaseHealth : MonoBehaviour
     protected bool isDead = false;
     public static event Action SwitchTarget;
 
-    protected MeshRenderer meshRenderer;
-    private Color DamageColor = Color.red;
+    protected SkinnedMeshRenderer meshRenderer;
+    protected Material standardMat;
+    [SerializeField] private Material DamageMat;
     [SerializeField] protected GameObject[] itemArray;
 
     [Header("Fall Damage config")]
@@ -24,9 +25,16 @@ public abstract class BaseHealth : MonoBehaviour
     protected virtual void Start()
     {
         currentHealth = maxHealth;
-        meshRenderer = GetComponent<MeshRenderer>();
-        if(meshRenderer == null) meshRenderer = GetComponentInChildren<MeshRenderer>();
+
+        meshRenderer = GetComponent<SkinnedMeshRenderer>();
+
+        if(meshRenderer == null) 
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
         rb = GetComponent<Rigidbody>();
+
+        if(meshRenderer  != null)
+             standardMat = meshRenderer.material;
     }
 
     public virtual void DrainHealth(int amount)
@@ -99,12 +107,14 @@ public abstract class BaseHealth : MonoBehaviour
 
     IEnumerator Flash()
     {
-        if (meshRenderer == null) yield break;
+        if (meshRenderer == null) Debug.Log("No mesh");
 
-        Color standard = meshRenderer.material.color;
-        meshRenderer.material.color = DamageColor;
+
+
+        meshRenderer.material = DamageMat;
+
         yield return new WaitForSeconds(0.1f);
-        meshRenderer.material.color = standard;
+        meshRenderer.material = standardMat;
     }
 
 }

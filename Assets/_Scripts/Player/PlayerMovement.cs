@@ -138,11 +138,11 @@ public class PlayerMovement : MonoBehaviour
 
         finalMovement.y = _verticalVelocity;
 
-        if (!currentPlatform)
+        if (currentPlatform == null)
         {
             _characterController.Move(finalMovement * _movementSpeed * Time.deltaTime);
         }
-        if(currentPlatform)
+        if(currentPlatform != null)
         {
             //when standing on a platform move along with it
             _characterController.Move(currentPlatform.Delta + finalMovement * _movementSpeed * Time.deltaTime);

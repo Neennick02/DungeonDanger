@@ -131,7 +131,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         OnPause?.Invoke();
     }
-    private void FixedUpdate()
+    private void Update()
     {
         Vector2 move = moveAction.ReadValue<Vector2>();
         if (move != null)

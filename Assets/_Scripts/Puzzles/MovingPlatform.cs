@@ -3,7 +3,6 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour
 {
     private Vector3 _lastPosition;
-    private PlayerMovement movement;
 
     public Vector3 Delta { get; private set; }
 
