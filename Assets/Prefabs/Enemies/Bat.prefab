@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8789529881071895626}
-  - component: {fileID: 2692761932016760922}
   - component: {fileID: 8839818564420377005}
   - component: {fileID: 6470729605853233070}
   m_Layer: 0
@@ -35,20 +34,6 @@ Transform:
   - {fileID: 3214428032478558769}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 200.017, z: 0}
---- !u!114 &2692761932016760922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 965722330852630596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb239bd7a894d8d4f8baaa9c9cdd2fc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyObject: {fileID: 11400000, guid: 32cc7f88ee9777c47a326935872dffe0, type: 2}
-  playerTransform: {fileID: 0}
 --- !u!114 &8839818564420377005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +83,8 @@ GameObject:
   - component: {fileID: 8722353684495408047}
   - component: {fileID: 2155692583353679159}
   - component: {fileID: 3070296612434403871}
+  - component: {fileID: 4159370503412305718}
+  - component: {fileID: 437920829456074353}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Enemy
@@ -136,7 +123,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -154,6 +141,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531d23c6bef27324f8e9c68c6983b3a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &4159370503412305718
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6257841501149518312}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &437920829456074353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6257841501149518312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb239bd7a894d8d4f8baaa9c9cdd2fc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyObject: {fileID: 11400000, guid: 32cc7f88ee9777c47a326935872dffe0, type: 2}
+  playerTransform: {fileID: 0}
+  attackDelay: 1
 --- !u!1 &6664257014083482621
 GameObject:
   m_ObjectHideFlags: 0

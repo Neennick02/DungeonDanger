@@ -10,6 +10,7 @@ public abstract class BaseEnemy : MonoBehaviour
     protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        if(agent == null) agent = GetComponentInParent<NavMeshAgent>();
         agent.speed = enemyObject.Speed;
     }
 
