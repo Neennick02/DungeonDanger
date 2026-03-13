@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class UpdateHealthBar : MonoBehaviour
 {
     private Image healthBar;
+
     private float duration = 1f;
     private float time = 0f;
     [SerializeField] private PlayerObject playerObject;
@@ -18,7 +19,7 @@ public class UpdateHealthBar : MonoBehaviour
     {
         PlayerHealth.OnHealthAmountChanged -= TriggerUpdate;
     }
-    private void Start()
+    private void Awake()
     {
         startHealth = playerObject.StartHealth;
         healthBar = GetComponent<Image>();

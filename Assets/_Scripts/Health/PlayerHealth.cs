@@ -22,8 +22,8 @@ public class PlayerHealth : BaseHealth
     private void OnDisable()
     {
         HeartPickup.OnPickup -= AddHealth;
-        SaveStatueInteractable.OnSavePlayerData += SaveData;
-        GameManager.OnLoad += LoadData;
+        SaveStatueInteractable.OnSavePlayerData -= SaveData;
+        GameManager.OnLoad -= LoadData;
     }
     protected override void Start()
     {
@@ -83,7 +83,6 @@ public class PlayerHealth : BaseHealth
 
                     if (damage > 0)
                         DrainHealth((int)damage);
-                    Debug.Log(damage);
                 }
                 isFalling = false;
             }

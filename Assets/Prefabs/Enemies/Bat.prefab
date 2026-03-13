@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8789529881071895626}
   - component: {fileID: 2692761932016760922}
   - component: {fileID: 8839818564420377005}
-  - component: {fileID: 8233866862206692147}
   - component: {fileID: 6470729605853233070}
   m_Layer: 0
   m_Name: Bat
@@ -63,43 +62,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  SwitchTarget:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TargetFinder, Assembly-CSharp
-        m_MethodName: SelectNewTarget
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   itemArray: []
---- !u!65 &8233866862206692147
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 965722330852630596}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  minFallHeight: 5
+  FallDamageMultiplier: 2
 --- !u!195 &6470729605853233070
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -135,7 +100,7 @@ GameObject:
   - component: {fileID: 3070296612434403871}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

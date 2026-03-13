@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] private Transform model;
-    [SerializeField] private Collider sword;
+    [SerializeField] private Collider swordModel;
 
 
     [SerializeField] private float attackDuration = 1.5f;
@@ -39,11 +38,11 @@ public class PlayerAttack : MonoBehaviour
 
         if (isAttacking)
         {
-            sword.enabled = true;
+            swordModel.enabled = true;
         }
         else
         {
-            sword.enabled = false;
+            swordModel.enabled = false;
         }
 
         attackCoolDown -= Time.deltaTime;

@@ -21,6 +21,7 @@ public class Sword : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy")){
 
             var enemyHealth = other.gameObject.GetComponent<BaseHealth>();
+            if (enemyHealth == null) enemyHealth = other.gameObject.GetComponentInParent<BaseHealth>();
 
             if (enemyHealth != null)
             {

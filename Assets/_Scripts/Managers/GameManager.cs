@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         OnLoad?.Invoke();
+
+        PlayerPrefs.DeleteAll();
     }
     private void OnEnable()
     {
