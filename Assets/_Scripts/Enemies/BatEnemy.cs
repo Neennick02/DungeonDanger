@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class BatEnemy : BaseEnemy
 {
-    [SerializeField] private float attackDelay = 1f;
-    private float timer = 0f;
-
     private PlayerHealth health;
     protected override void Update()
     {
@@ -12,7 +9,7 @@ public class BatEnemy : BaseEnemy
 
         timer += Time.deltaTime;
 
-        if(timer > attackDelay && health != null)
+        if(timer > enemyObject.AttackInterval && health != null)
         {  
             timer = 0f;
             health.DrainHealth(enemyObject.Damage);

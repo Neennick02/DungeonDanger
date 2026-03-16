@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 10
   Damage: 2
+  AttackInterval: 1
+  AttackDistance: 1
   Speed: 5
   SpottingRadius: 15

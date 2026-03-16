@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb5dd60e1a567747bb0b8d9ef1f725b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  enemySo: {fileID: 11400000, guid: 4db00f5a04a179c4780bc43e80029e2f, type: 2}
+  DamageMat: {fileID: 0}
   itemArray:
   - {fileID: 7050026253047293124, guid: 8d0315047a9d0bb48b67bba220b6a4e4, type: 3}
   - {fileID: 6716425223748110332, guid: fd8403cbb1ae3114ab9723d68c9c255b, type: 3}

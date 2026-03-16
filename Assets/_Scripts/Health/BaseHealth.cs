@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 public abstract class BaseHealth : MonoBehaviour
 {
-    [SerializeField] protected int maxHealth;
+    [SerializeField] private EnemyObject enemySo;
+    protected int maxHealth;
     protected int currentHealth;
     protected bool isDead = false;
     public static event Action SwitchTarget;
+    protected Transform targetTransform;
 
     protected SkinnedMeshRenderer meshRenderer;
     protected Material standardMat;
@@ -24,15 +26,16 @@ public abstract class BaseHealth : MonoBehaviour
 
     protected virtual void Start()
     {
+        maxHealth = enemySo.MaxHealth;
         currentHealth = maxHealth;
-
-        meshRenderer = GetComponent<SkinnedMeshRenderer>();
-
-        if(meshRenderer == null) 
-        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        targetTransform = transform;
 
         rb = GetComponent<Rigidbody>();
 
+
+        meshRenderer = GetComponent<SkinnedMeshRenderer>();
+        if(meshRenderer == null) 
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         if(meshRenderer  != null)
              standardMat = meshRenderer.material;
     }
@@ -82,11 +85,10 @@ public abstract class BaseHealth : MonoBehaviour
 
     protected virtual void Die()
     {
-            TargetFinder.RemoveFromPool(transform);
-            SwitchTarget?.Invoke();
-            DropItems();
-
-            Destroy(gameObject);
+        isDead = true;
+        TargetFinder.RemoveFromPool(targetTransform);
+        SwitchTarget?.Invoke();
+        DropItems();
     }
     protected void DropItems()
     {
@@ -97,7 +99,6 @@ public abstract class BaseHealth : MonoBehaviour
         {
             Instantiate(dropObject, transform.position, Quaternion.identity);
         }
-            Destroy(gameObject);
       }
     public void FlashRed()
     {
@@ -115,6 +116,12 @@ public abstract class BaseHealth : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
         meshRenderer.material = standardMat;
+    }
+
+    protected IEnumerator DestroyAfterSeconds(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(gameObject);
     }
 
 }

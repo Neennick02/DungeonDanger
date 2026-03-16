@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6bac18f99cd7941b36dc601ab0a119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  enemySo: {fileID: 11400000, guid: 32cc7f88ee9777c47a326935872dffe0, type: 2}
   DamageMat: {fileID: 2100000, guid: 5dcc0eb518b852b48937d3189db937a6, type: 2}
   itemArray: []
   minFallHeight: 5
@@ -59,7 +59,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 965722330852630596}
   m_Enabled: 1
-  m_AgentTypeID: -1372625422
+  m_AgentTypeID: 0
   m_Radius: 2
   m_Speed: 3.5
   m_Acceleration: 8
@@ -176,8 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyObject: {fileID: 11400000, guid: 32cc7f88ee9777c47a326935872dffe0, type: 2}
-  playerTransform: {fileID: 0}
-  attackDelay: 1
 --- !u!1 &6664257014083482621
 GameObject:
   m_ObjectHideFlags: 0

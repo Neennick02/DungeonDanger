@@ -5,13 +5,17 @@ public abstract class BaseEnemy : MonoBehaviour
 {
     public EnemyObject enemyObject;
     protected NavMeshAgent agent;
-    private Transform playerTransform;
+    protected Transform playerTransform;
 
+    protected bool isAttacking;
+    protected float timer = 0;
     protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         if(agent == null) agent = GetComponentInParent<NavMeshAgent>();
+
         agent.speed = enemyObject.Speed;
+        agent.stoppingDistance = enemyObject.AttackDistance;
     }
 
     protected virtual void Update()
@@ -37,6 +41,16 @@ public abstract class BaseEnemy : MonoBehaviour
         {
             return false;
         }
+    }
+
+    protected virtual void Attack()
+    {
+        //add code to sub classes
+    }
+
+    public virtual void Die()
+    {
+        //add code to sub classes
     }
 
     public void AssignPlayer(Transform transform)
