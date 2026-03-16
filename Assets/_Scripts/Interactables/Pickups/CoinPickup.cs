@@ -8,7 +8,7 @@ public class CoinPickup : BasePickup
     {
         if (other.CompareTag("Player"))
         {
-            OnPickup?.Invoke(3);
+            OnPickup?.Invoke(1);
             DestroySelf();
         }
     }
