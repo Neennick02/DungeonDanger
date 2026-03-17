@@ -14,6 +14,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private InputAction ActionButtonAction;
     private InputAction AttackAction;
+    private InputAction DefendAction;
 
     private InputAction PauseAction;
 
@@ -22,6 +23,9 @@ public class PlayerInputHandler : MonoBehaviour
     public static event Action<Vector2> OnMove;
     public static event Action OnAction;
     public static event Action OnAttack;
+
+    public static event Action OnDefendStart;
+    public static event Action OnDefendEnd;
 
     public static event Action OnPause;
 
@@ -42,6 +46,8 @@ public class PlayerInputHandler : MonoBehaviour
         targetLeft = InputActions.FindAction("TargetLeft");
         ActionButtonAction = InputActions.FindAction("ActionButton");
         AttackAction = InputActions.FindAction("Attack");
+        DefendAction = InputActions.FindAction("Defend");
+
         PauseAction = InputActions.FindAction("Pause");
     }
     private void OnEnable()
@@ -56,6 +62,11 @@ public class PlayerInputHandler : MonoBehaviour
 
         AttackAction.Enable();
         AttackAction.performed += OnAttackPerformed;
+
+        DefendAction.Enable();
+        DefendAction.started += OnDefendStarted;
+
+        DefendAction.canceled += OnDefendCancelled;
 
         targetAction.Enable();
         targetAction.performed += OnTargetPerformed;
@@ -83,6 +94,12 @@ public class PlayerInputHandler : MonoBehaviour
         AttackAction.Disable();
         AttackAction.performed -= OnAttackPerformed;
         OnAttack = null;
+
+        DefendAction.Disable();
+        DefendAction.started -= OnDefendStarted;
+        DefendAction.canceled -= OnDefendCancelled;
+        OnDefendStart = null;
+        OnDefendEnd = null;
 
         targetAction.Disable();
         targetAction.performed -= OnTargetPerformed;
@@ -114,6 +131,16 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnAttackPerformed(InputAction.CallbackContext ctx)
     {
         OnAttack?.Invoke();
+    }
+
+    private void OnDefendStarted(InputAction.CallbackContext ctx)
+    {
+        OnDefendStart?.Invoke();
+    }
+
+    private void OnDefendCancelled(InputAction.CallbackContext ctx)
+    {
+        OnDefendEnd?.Invoke();
     }
     private void OnTargetPerformed(InputAction.CallbackContext ctx)
     {

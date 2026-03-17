@@ -12,11 +12,17 @@ public class PlayerAnimator : MonoBehaviour
     private void OnEnable()
     {
         PlayerHealth.OnDeath += IsDead;
+        PlayerInputHandler.OnDefendStart += StartDefend;
+        PlayerInputHandler.OnDefendEnd += EndDefend;
+        PlayerInventory.OnForceEndShield += EndDefend;
     }
 
     private void OnDisable()
     {
         PlayerHealth.OnDeath -= IsDead;
+        PlayerInputHandler.OnDefendStart -= StartDefend;
+        PlayerInputHandler.OnDefendEnd -= EndDefend;
+        PlayerInventory.OnForceEndShield -= EndDefend;
     }
     public void SetSpeed(float speed, float x, float y)
     {
@@ -77,6 +83,25 @@ public class PlayerAnimator : MonoBehaviour
                 }*/
     }
 
+    public void StartDefend()
+    {
+        animator.SetBool("IsDefending", true);
+        animator.SetLayerWeight(0, 0);
+        animator.SetLayerWeight(1, 1);
+    }
+    public void EndDefend()
+    {
+        StartCoroutine(EndDefendRoutine());
+    }
+
+    IEnumerator EndDefendRoutine()
+    {
+        animator.SetBool("IsDefending", false);
+
+        yield return new WaitForSeconds(0.5f);
+        animator.SetLayerWeight(0, 1);
+        animator.SetLayerWeight(1, 0);
+    }
     public void Roll()
     {
         if (animator == null) return;

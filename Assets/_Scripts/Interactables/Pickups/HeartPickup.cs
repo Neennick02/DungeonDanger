@@ -9,7 +9,7 @@ public class HeartPickup : BasePickup
     {
         if (other.CompareTag("Player"))
         {
-            OnPickup?.Invoke(3);
+            OnPickup?.Invoke(healthAmount);
             DestroySelf();
         }
     }

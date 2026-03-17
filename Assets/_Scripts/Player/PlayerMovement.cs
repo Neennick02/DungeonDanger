@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private float _dodgeTime;
     private float _dodgeCooldownTimer;
     private bool _isDodging;
-    
+
     public bool _isTargeting { get; private set; }
 
     [Header("Pushing Blocks Config")]
@@ -47,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
         Pushing,
         Dodging,
         Attacking,
+        Defending,
         Cutscene,
         Dead
     }
@@ -57,7 +59,9 @@ public class PlayerMovement : MonoBehaviour
     {
         PlayerInputHandler.OnMove += Move;
         PlayerInputHandler.OnDodge += Dodge;
-        
+
+        PlayerInventory.OnForceEndShield += EndDefend;
+
         PlayerHealth.OnDeath += Die;
 
         CustomCamera.OnCutSceneStart += WatchCutScene;
@@ -72,12 +76,14 @@ public class PlayerMovement : MonoBehaviour
         PlayerInputHandler.OnMove -= Move;
         PlayerInputHandler.OnDodge -= Dodge;
 
+        PlayerInventory.OnForceEndShield -= EndDefend;
+
         PlayerHealth.OnDeath -= Die;
 
         CustomCamera.OnCutSceneStart -= WatchCutScene;
         CustomCamera.OnCutSceneEnd -= EndCutScene;
 
-        SaveStatueInteractable.OnSavePlayerData += SavePositionData;
+        SaveStatueInteractable.OnSavePlayerData -= SavePositionData;
         GameManager.OnLoad -= LoadPositionData;
     }
     private void Awake()
@@ -102,27 +108,16 @@ public class PlayerMovement : MonoBehaviour
                 HandleGravity();
 
                 break;
-            case PlayerState.Pushing:
-                //no movement during pushing
+            case PlayerState.Defending:
+                RotateCharacter(CalculateDirection(input));
+                HandleGravity();
                 break;
         }
     }
 
     private void HandleLocomotionMovement(Vector2 input)
     {
-        //get camera position
-        Vector3 camForward = Camera.main.transform.forward;
-        Vector3 camRight = Camera.main.transform.right;
-
-        camForward.y = 0;
-        camRight.y = 0;
-
-        camForward.Normalize();
-        camRight.Normalize();
-
-        //convert to 3d space
-        move = camForward * input.y + camRight * input.x;
-
+        move = CalculateDirection(input);
         //update dodge direction
         _dodgeDirection = move.normalized;
 
@@ -151,8 +146,24 @@ public class PlayerMovement : MonoBehaviour
         //set animation movement speed
         
         animator.SetSpeed(input.magnitude, input.normalized.x, input.normalized.y);
+    }
 
+    private Vector3 CalculateDirection(Vector2 input)
+    {
+        //get camera position
+        Vector3 camForward = Camera.main.transform.forward;
+        Vector3 camRight = Camera.main.transform.right;
 
+        camForward.y = 0;
+        camRight.y = 0;
+
+        camForward.Normalize();
+        camRight.Normalize();
+
+        //convert to 3d space
+        move = camForward * input.y + camRight * input.x;
+
+        return move;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -326,6 +337,16 @@ public class PlayerMovement : MonoBehaviour
             }
     }
 
+    private void StartDefend()
+    {
+       State = PlayerState.Defending;
+
+    }
+
+    private void EndDefend()
+    {
+        State = PlayerState.Locomotion;
+    }
     private void HandleDodge(Vector3 move, Vector2 input)
     {
 

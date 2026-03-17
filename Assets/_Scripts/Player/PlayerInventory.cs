@@ -15,6 +15,21 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] private GameObject sword, shield;
 
+    public static float maxShieldDuration = 5f;
+    private float timer = 0f;
+
+    private bool startRecharge;
+    public static float rechargeDuration = 5f;
+    private float rechargeTimer = 0f;
+    private bool isDefending;
+    private bool canDefend = true;
+
+
+
+    public static event Action OnStart;
+    public static event Action OnFinish;
+    public static event Action OnForceEndShield;
+
     #region OnEnable
     private void OnEnable()
     {
@@ -24,6 +39,9 @@ public class PlayerInventory : MonoBehaviour
 
         SaveStatueInteractable.OnSavePlayerData += SaveData;
         GameManager.OnLoad += LoadData;
+
+        PlayerInputHandler.OnDefendStart += GrabShield;
+        PlayerInputHandler.OnDefendEnd += PutAwayShield;
     }
 
     private void OnDisable()
@@ -34,6 +52,9 @@ public class PlayerInventory : MonoBehaviour
 
         SaveStatueInteractable.OnSavePlayerData -= SaveData;
         GameManager.OnLoad -= LoadData;
+
+        PlayerInputHandler.OnDefendStart -= GrabShield;
+        PlayerInputHandler.OnDefendEnd -= PutAwayShield;
     }
 
     #endregion
@@ -44,8 +65,46 @@ public class PlayerInventory : MonoBehaviour
         OnPotionAmountChanged?.Invoke(potionAmount);
         OnCoinAmountChanged?.Invoke(coinAmount);
     }
-    //keys
 
+    private void Update()
+    {
+        Debug.Log(timer + " " + rechargeTimer);
+
+        if (isDefending)
+        {
+            timer += Time.deltaTime;
+
+            if (timer > maxShieldDuration)
+            {
+                OnForceEndShield?.Invoke();
+                canDefend = false;
+            }
+        }
+
+        if (!canDefend)
+        {
+            rechargeTimer += Time.deltaTime;
+
+            if(rechargeTimer >= rechargeDuration)
+            {
+                canDefend = true;
+            }
+        }
+    }
+
+    private void GrabShield()
+    {
+        if (canDefend)
+        {
+            isDefending = true;
+            timer = 0;
+        }
+    }
+
+    private void PutAwayShield()
+    {
+        isDefending = false;
+    }
     public void UpdateKeyAmount(int amount)
     {
         keyAmount += amount;
