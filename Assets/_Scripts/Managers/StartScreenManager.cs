@@ -11,6 +11,8 @@ public class StartScreenManager : MonoBehaviour
         {
             continueButton.SetActive(true);
         }
+
+        Time.timeScale = 1.0f;
     }
 
     public void StartNewGame()

@@ -43,10 +43,9 @@ public class GameOverScreen : MonoBehaviour
         SceneManager.LoadScene("LevelBuildingScene");
     }
 
-    public void Quit()
+    public void ReturnToTitle()
     {
-        Debug.Log("Quit");
-        Application.Quit();
+        SceneManager.LoadScene("StartScene");
     }
 
     IEnumerator OpenScreen()

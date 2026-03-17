@@ -280,7 +280,7 @@ public class TargetFinder : MonoBehaviour
         }
     }
 
-    private void EmptyList()
+    public void EmptyList()
     {
         pool.Clear();
         poolView.Clear();
