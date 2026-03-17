@@ -77,10 +77,10 @@ PrefabInstance:
       addedObject: {fileID: 5258269620817238002}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ae9b31dda7fa4be4292806e48831a04d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1517396941838957175}
+      addedObject: {fileID: 6078797292437394284}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ae9b31dda7fa4be4292806e48831a04d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6078797292437394284}
+      addedObject: {fileID: 5715295344371082250}
   m_SourcePrefab: {fileID: 100100000, guid: ae9b31dda7fa4be4292806e48831a04d, type: 3}
 --- !u!1 &5219799378809650434 stripped
 GameObject:
@@ -108,33 +108,6 @@ MonoBehaviour:
   - {fileID: 0}
   minFallHeight: 1
   FallDamageMultiplier: 10
---- !u!54 &1517396941838957175
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5219799378809650434}
-  serializedVersion: 4
-  m_Mass: 0.88
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &6078797292437394284
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -156,3 +129,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.015458126, y: 0.015458131, z: 0.031559404}
   m_Center: {x: 0, y: -0.0000000672681, z: 0.0057797604}
+--- !u!54 &5715295344371082250
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219799378809650434}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
