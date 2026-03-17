@@ -39,6 +39,7 @@ public class WarriorEnemy : BaseEnemy
 
     public override void Die()
     {
+        transform.LookAt(null);
         agent.speed = 0f;
         agent.destination = transform.position;
         agent.angularSpeed = 0f;
@@ -46,9 +47,13 @@ public class WarriorEnemy : BaseEnemy
 
     IEnumerator AttackRoutine(float time)
     {
+        //wait before turning on sword
+        yield return new WaitForSeconds(time/4);
         swordCollider.enabled = true;
-        yield return new WaitForSeconds(time);
 
+        //wait for swing to end
+        yield return new WaitForSeconds(time/4 * 3);
+        //disable sword hitbox
         swordCollider.enabled = false;
         isAttacking = false;    
     }

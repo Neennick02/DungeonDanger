@@ -35,6 +35,10 @@ public class PlayerHealth : BaseHealth
 
         //update health bar
         OnHealthAmountChanged?.Invoke(currentHealth);
+
+        //choose first material
+        if (meshes.Count > 0)
+            standardMat = meshes[0].material;
     }
     public override void AddHealth(int amount)
     {
@@ -46,6 +50,8 @@ public class PlayerHealth : BaseHealth
     {
         currentHealth -= amount;
         OnHealthAmountChanged?.Invoke(currentHealth);
+
+        if (currentHealth > 0) FlashRed();
 
         if (currentHealth <= 0 && !isDead)
         {

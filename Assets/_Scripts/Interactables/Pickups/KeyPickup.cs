@@ -9,7 +9,7 @@ public class KeyPickup : BasePickup
         if (other.CompareTag("Player"))
         {
             OnPickup?.Invoke(1);
-            DestroySelf();
+            Destroy(gameObject);
         }
     }
 

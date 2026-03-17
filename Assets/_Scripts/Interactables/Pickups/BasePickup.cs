@@ -15,8 +15,9 @@ public abstract class BasePickup : MonoBehaviour
     {
         timer += Time.deltaTime;
         
-        if(timer > despawnTime ) 
-            DestroySelf();
+        if(timer > despawnTime )
+         Destroy(gameObject);
+
     }
 
     public void DestroySelf()

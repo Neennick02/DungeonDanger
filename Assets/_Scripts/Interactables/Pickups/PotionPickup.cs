@@ -8,8 +8,8 @@ public class PotionPickup : BasePickup
     {
         if (other.CompareTag("Player"))
         {
-            OnPickup?.Invoke(3);
-            DestroySelf();
+            OnPickup?.Invoke(1);
+            Destroy(gameObject);
         }
     }
 }

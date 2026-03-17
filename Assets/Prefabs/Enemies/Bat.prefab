@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySo: {fileID: 11400000, guid: 32cc7f88ee9777c47a326935872dffe0, type: 2}
+  meshes:
+  - {fileID: 6510123053395459051}
   DamageMat: {fileID: 2100000, guid: 5dcc0eb518b852b48937d3189db937a6, type: 2}
   itemArray: []
   minFallHeight: 5
@@ -481,5 +483,10 @@ Animator:
 --- !u!4 &5287060374333267939 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5ccbe5180c1bf794c88071695d105360, type: 3}
+  m_PrefabInstance: {fileID: 5680675308652525576}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &6510123053395459051 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1480921715778733027, guid: 5ccbe5180c1bf794c88071695d105360, type: 3}
   m_PrefabInstance: {fileID: 5680675308652525576}
   m_PrefabAsset: {fileID: 0}

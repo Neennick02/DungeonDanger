@@ -4,17 +4,16 @@ public class Sword : MonoBehaviour
 {
     [SerializeField] private int damage = 5;
     [SerializeField] private float delay = 1f;
+    private float timer;
     private bool hit = false;   
     private void Update()
     {
-        if (hit)
-        {
-            delay -= Time.deltaTime;
-            if (delay <= 0f){ 
+
+        timer += Time.deltaTime;
+
+            if (timer >= delay){ 
                 hit = false;
-                delay = 1f;
             }
-        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -23,12 +22,11 @@ public class Sword : MonoBehaviour
             var enemyHealth = other.gameObject.GetComponent<BaseHealth>();
             if (enemyHealth == null) enemyHealth = other.gameObject.GetComponentInParent<BaseHealth>();
 
-            if (enemyHealth != null)
+            if (enemyHealth != null && !hit)
             {
-                if (delay > 0f)
-                {
-                    enemyHealth.DrainHealth(damage);
-                }
+                
+                enemyHealth.DrainHealth(damage);
+                timer = 0f;
                 hit = true;
             }
         }

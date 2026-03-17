@@ -1,5 +1,8 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 public abstract class BaseHealth : MonoBehaviour
@@ -11,7 +14,7 @@ public abstract class BaseHealth : MonoBehaviour
     public static event Action SwitchTarget;
     protected Transform targetTransform;
 
-    protected SkinnedMeshRenderer meshRenderer;
+    [SerializeField] protected List<Renderer> meshes = new List<Renderer>();
     protected Material standardMat;
     [SerializeField] private Material DamageMat;
     [SerializeField] protected GameObject[] itemArray;
@@ -32,12 +35,10 @@ public abstract class BaseHealth : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
 
+        //choose first material
+        if(meshes.Count > 0)
+        standardMat = meshes[0].material;
 
-        meshRenderer = GetComponent<SkinnedMeshRenderer>();
-        if(meshRenderer == null) 
-        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        if(meshRenderer  != null)
-             standardMat = meshRenderer.material;
     }
 
     public virtual void DrainHealth(int amount)
@@ -108,14 +109,22 @@ public abstract class BaseHealth : MonoBehaviour
 
     IEnumerator Flash()
     {
-        if (meshRenderer == null) Debug.Log("No mesh");
+        if (meshes == null) Debug.Log("No mesh");
 
+        for (int i = 0; i < meshes.Count; i++)
+        {
 
-
-        meshRenderer.material = DamageMat;
+            meshes[i].material = DamageMat;
+        }
 
         yield return new WaitForSeconds(0.1f);
-        meshRenderer.material = standardMat;
+
+        for (int i = 0; i < meshes.Count; i++)
+        {
+
+            meshes[i].material = standardMat;
+        }
+
     }
 
     protected IEnumerator DestroyAfterSeconds(float time)

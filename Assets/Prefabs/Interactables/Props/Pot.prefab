@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySo: {fileID: 11400000, guid: 4db00f5a04a179c4780bc43e80029e2f, type: 2}
+  meshes: []
   DamageMat: {fileID: 0}
   itemArray:
   - {fileID: 7050026253047293124, guid: 8d0315047a9d0bb48b67bba220b6a4e4, type: 3}
@@ -153,5 +154,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.015458127, y: 0.01545813, z: 0.015845101}
-  m_Center: {x: 0, y: -0.000000067055225, z: -0.0020773765}
+  m_Size: {x: 0.015458126, y: 0.015458131, z: 0.031559404}
+  m_Center: {x: 0, y: -0.0000000672681, z: 0.0057797604}
