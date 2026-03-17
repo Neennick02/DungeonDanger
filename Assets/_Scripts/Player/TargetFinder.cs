@@ -71,6 +71,7 @@ public class TargetFinder : MonoBehaviour
         //makes pool visable in editor
         poolView = pool; 
         
+        //update target name in inspector
         if(currentTarget != null)
         {
             currentTargetName = currentTarget.name;
@@ -79,6 +80,27 @@ public class TargetFinder : MonoBehaviour
         {
             currentTargetName = null;
         }
+
+        //disable target if target is to far away
+        if(currentTarget != null)
+        {
+            float distance = Vector3.Distance(transform.position, currentTarget.position);
+            if (distance > maxTargetingDistance)
+            {
+                //if more than 1 other, select other
+                if(pool.Count > 1)
+                {
+                    SelectTarget(1);
+                }
+                else
+                //otherwise stop targeting
+                {
+                    LockOff();
+                    OnLockOff?.Invoke();
+                }
+            }
+        }
+
 
 
         UpdatePointerPosition();
@@ -153,13 +175,26 @@ public class TargetFinder : MonoBehaviour
 
             int nextIndex = currentIndex + next;
 
+            //loop over list if min/max is reached
             if (nextIndex > pool.Count -1) nextIndex = 0;
             if (nextIndex < 0) nextIndex = pool.Count - 1;
 
             if (nextIndex >= 0 && nextIndex < pool.Count)
             {
-                currentTarget = pool[nextIndex];
-                targetCamera.LookAt = currentTarget;
+                float distanceToTarget = Vector3.Distance(pool[nextIndex].position, transform.position);
+
+                //only lock on when next target is in range
+                if(distanceToTarget < maxTargetingDistance)
+                {
+                    currentTarget = pool[nextIndex];
+                    targetCamera.LookAt = currentTarget;
+                }
+                else
+                {
+                    //lockoff when not in range
+                    LockOff();
+                    OnLockOff?.Invoke();
+                }
             }
         }
     }
