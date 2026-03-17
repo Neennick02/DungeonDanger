@@ -7,12 +7,28 @@ public class SaveStatueInteractable : BaseInteractable
     public static event Action OnSavePlayerData;
 
     private PlayerInventory inventory;
+
+    private void OnEnable()
+    {
+        GameManager.OnSave += Save;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnSave -= Save;
+    }
+
+    private void Save()
+    {
+        OnSavePlayerData?.Invoke();
+
+    }
     public override void Interact()
     {
         if (inventory.coinAmount >= price && inventory != null)
         {
             inventory.UpdateCoinAmount(-price);
-            OnSavePlayerData?.Invoke();
+            Save(); 
         }
     }
 

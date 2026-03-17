@@ -21,9 +21,11 @@ public class GameManager : MonoBehaviour
 
     //save / load
     public static event Action OnLoad;
+    public static event Action OnSave;
 
     private void Awake()
     { 
+        //setup signleton instance
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -32,20 +34,19 @@ public class GameManager : MonoBehaviour
         
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        OnLoad?.Invoke();
-
-        PlayerPrefs.DeleteAll();
     }
     private void OnEnable()
     {
         PlayerInputHandler.OnPause += Pause;
         PlayerHealth.OnDeath += GameOver;
+        SceneStartManager.OnSceneLoad += LoadPlayerData;
     }
 
     private void OnDisable()
     {
         PlayerInputHandler.OnPause -= Pause;
         PlayerHealth.OnDeath -= GameOver;
+        SceneStartManager.OnSceneLoad -= LoadPlayerData;
     }
 
     private void Start()
@@ -84,6 +85,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadPlayerData()
     {
-        OnLoad?.Invoke();
+            OnLoad?.Invoke();        
     }
 }
