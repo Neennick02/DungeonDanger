@@ -14,7 +14,7 @@ public class UiPopup : MonoBehaviour
 
     private void OnDisable()
     {
-        SaveStatueInteractable.OnSavePlayerData += ShowSavePopup;
+        SaveStatueInteractable.OnSavePlayerData -= ShowSavePopup;
     }
 
     public void ShowSavePopup()

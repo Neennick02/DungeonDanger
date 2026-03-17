@@ -12,6 +12,7 @@ public class PlayerAnimator : MonoBehaviour
     private void OnEnable()
     {
         PlayerHealth.OnDeath += IsDead;
+
         PlayerInputHandler.OnDefendStart += StartDefend;
         PlayerInputHandler.OnDefendEnd += EndDefend;
         PlayerInventory.OnForceEndShield += EndDefend;
@@ -20,6 +21,7 @@ public class PlayerAnimator : MonoBehaviour
     private void OnDisable()
     {
         PlayerHealth.OnDeath -= IsDead;
+
         PlayerInputHandler.OnDefendStart -= StartDefend;
         PlayerInputHandler.OnDefendEnd -= EndDefend;
         PlayerInventory.OnForceEndShield -= EndDefend;

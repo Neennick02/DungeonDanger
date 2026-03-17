@@ -48,7 +48,6 @@ public class PlayerMovement : MonoBehaviour
         Pushing,
         Dodging,
         Attacking,
-        Defending,
         Cutscene,
         Dead
     }
@@ -60,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerInputHandler.OnMove += Move;
         PlayerInputHandler.OnDodge += Dodge;
 
-        PlayerInventory.OnForceEndShield += EndDefend;
+        //PlayerInventory.OnForceEndShield += EndDefend;
 
         PlayerHealth.OnDeath += Die;
 
@@ -76,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerInputHandler.OnMove -= Move;
         PlayerInputHandler.OnDodge -= Dodge;
 
-        PlayerInventory.OnForceEndShield -= EndDefend;
+       // PlayerInventory.OnForceEndShield -= EndDefend;
 
         PlayerHealth.OnDeath -= Die;
 
@@ -108,10 +107,10 @@ public class PlayerMovement : MonoBehaviour
                 HandleGravity();
 
                 break;
-            case PlayerState.Defending:
+            /*case PlayerState.Defending:
                 RotateCharacter(CalculateDirection(input));
                 HandleGravity();
-                break;
+                break;*/
         }
     }
 
@@ -337,7 +336,7 @@ public class PlayerMovement : MonoBehaviour
             }
     }
 
-    private void StartDefend()
+/*    private void StartDefend()
     {
        State = PlayerState.Defending;
 
@@ -346,7 +345,7 @@ public class PlayerMovement : MonoBehaviour
     private void EndDefend()
     {
         State = PlayerState.Locomotion;
-    }
+    }*/
     private void HandleDodge(Vector3 move, Vector2 input)
     {
 

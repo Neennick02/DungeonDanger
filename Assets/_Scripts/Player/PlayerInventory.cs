@@ -18,17 +18,20 @@ public class PlayerInventory : MonoBehaviour
     public static float maxShieldDuration = 5f;
     private float timer = 0f;
 
-    private bool startRecharge;
     public static float rechargeDuration = 5f;
     private float rechargeTimer = 0f;
     private bool isDefending;
     private bool canDefend = true;
 
 
+    private float chargeAmount = 1;
+    private float dischargeRate = 0.5f;
 
     public static event Action OnStart;
     public static event Action OnFinish;
     public static event Action OnForceEndShield;
+
+    public static event Action<float> UpdateBar;
 
     #region OnEnable
     private void OnEnable()
@@ -68,33 +71,27 @@ public class PlayerInventory : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(timer + " " + rechargeTimer);
+        chargeAmount = Mathf.Clamp(chargeAmount, 0, 1);
 
-        if (isDefending)
+        if (chargeAmount > 0 && isDefending)
         {
-            timer += Time.deltaTime;
+            chargeAmount -= Time.deltaTime * dischargeRate;
 
-            if (timer > maxShieldDuration)
-            {
-                OnForceEndShield?.Invoke();
-                canDefend = false;
-            }
+        }
+        //if charge is depleted
+        else
+        {
+            chargeAmount += Time.deltaTime * dischargeRate;
+            OnForceEndShield?.Invoke();
+            canDefend = false;
         }
 
-        if (!canDefend)
-        {
-            rechargeTimer += Time.deltaTime;
-
-            if(rechargeTimer >= rechargeDuration)
-            {
-                canDefend = true;
-            }
-        }
+        UpdateBar?.Invoke(chargeAmount);
     }
 
     private void GrabShield()
     {
-        if (canDefend)
+        if (chargeAmount > 0)
         {
             isDefending = true;
             timer = 0;
