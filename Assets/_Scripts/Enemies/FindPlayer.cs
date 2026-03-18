@@ -1,3 +1,4 @@
+using FirstGearGames.Utilities.Objects;
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;

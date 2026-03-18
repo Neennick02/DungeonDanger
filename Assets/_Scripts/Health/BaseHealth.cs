@@ -93,6 +93,8 @@ public abstract class BaseHealth : MonoBehaviour
     }
     protected void DropItems()
     {
+        if (itemArray.Length == 0) return;
+
             int randomInt = UnityEngine.Random.Range(0, itemArray.Length);
             GameObject dropObject = itemArray[randomInt];
 
