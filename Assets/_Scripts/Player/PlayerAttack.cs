@@ -35,16 +35,6 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Update()
     {
-
-        if (isAttacking)
-        {
-            swordModel.enabled = true;
-        }
-        else
-        {
-            swordModel.enabled = false;
-        }
-
         attackCoolDown -= Time.deltaTime;
 
         if(attackCoolDown < 0f)
@@ -55,8 +45,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void Attack()
     {
+        //ground check
         if (!movement._characterController.isGrounded) return;
 
+        //only attack once
         if (!isAttacking)
         {
             isAttacking = true;
@@ -67,10 +59,8 @@ public class PlayerAttack : MonoBehaviour
                 comboCounter = 0;
             }
 
+            //set animation
             animator.Attack(comboCounter);
-
-            animator.isAttacking = false;
-            StopAllCoroutines();
 
             animator.isAttacking = true;
             movement.RotateCharacter(movement.move);
@@ -83,6 +73,7 @@ public class PlayerAttack : MonoBehaviour
             attackTimer = 0;
 
             //reset
+            StopAllCoroutines();
             StartCoroutine(AttackRoutine());
 
             //increase combo
@@ -94,6 +85,8 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator AttackRoutine()
     {
+        swordModel.enabled = true;
+
         while(attackTimer < attackDuration)
         {
             attackTimer += Time.deltaTime;
@@ -104,6 +97,7 @@ public class PlayerAttack : MonoBehaviour
         movement.State = previousState;
         isAttacking = false;
         animator.isAttacking = false;
+        swordModel.enabled = false;
 
         attackCoolDown = 1f;
     }

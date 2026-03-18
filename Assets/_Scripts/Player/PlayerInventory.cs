@@ -15,24 +15,18 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] private GameObject sword, shield;
 
-    public static float maxShieldDuration = 5f;
-    private float timer = 0f;
 
-    public static float rechargeDuration = 5f;
-    private float rechargeTimer = 0f;
     private bool isDefending;
-    private bool canDefend = true;
-
+    private bool shieldEnded = true;
 
     private float chargeAmount = 1;
-    private float dischargeRate = 0.5f;
+    [SerializeField]  private float shieldChargeRate = 0.5f;
 
-    public static event Action OnStart;
-    public static event Action OnFinish;
-    public static event Action OnForceEndShield;
+    public static event Action OnStartDefend;
+    public static event Action OnFinishDefend;
 
     public static event Action<float> UpdateBar;
-
+    public static event Action<bool> OnDefendActive;
     #region OnEnable
     private void OnEnable()
     {
@@ -75,18 +69,25 @@ public class PlayerInventory : MonoBehaviour
 
         if (chargeAmount > 0 && isDefending)
         {
-            chargeAmount -= Time.deltaTime * dischargeRate;
+            chargeAmount -= Time.deltaTime * shieldChargeRate;
 
         }
         //if charge is depleted
         else
         {
-            chargeAmount += Time.deltaTime * dischargeRate;
-            OnForceEndShield?.Invoke();
-            canDefend = false;
-        }
+            chargeAmount += Time.deltaTime * shieldChargeRate;
 
+            if (!shieldEnded)
+            {
+                OnFinishDefend?.Invoke();
+                shieldEnded = true;
+            }
+        }
+        //updates bar fillamount
         UpdateBar?.Invoke(chargeAmount);
+        
+        //updates health script
+        OnDefendActive?.Invoke(isDefending);
     }
 
     private void GrabShield()
@@ -94,13 +95,15 @@ public class PlayerInventory : MonoBehaviour
         if (chargeAmount > 0)
         {
             isDefending = true;
-            timer = 0;
+            shieldEnded = false;
+            OnStartDefend?.Invoke();
         }
     }
 
     private void PutAwayShield()
     {
         isDefending = false;
+        OnFinishDefend?.Invoke();
     }
     public void UpdateKeyAmount(int amount)
     {

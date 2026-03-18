@@ -11,11 +11,16 @@ public class PlayerHealth : BaseHealth
     private PlayerMovement movement;
     private CharacterController controller;
 
+
+    private bool isDefending;
+
+    #region OnEnable
     private void OnEnable()
     {
         HeartPickup.OnPickup += AddHealth;
         SaveStatueInteractable.OnSavePlayerData += SaveData;
         GameManager.OnLoad += LoadData;
+        PlayerInventory.OnDefendActive += Defend;
     }
 
     private void OnDisable()
@@ -23,7 +28,9 @@ public class PlayerHealth : BaseHealth
         HeartPickup.OnPickup -= AddHealth;
         SaveStatueInteractable.OnSavePlayerData -= SaveData;
         GameManager.OnLoad -= LoadData;
+        PlayerInventory.OnDefendActive += Defend;
     }
+    #endregion
     protected override void Start()
     {
         movement = GetComponent<PlayerMovement>();
@@ -48,6 +55,8 @@ public class PlayerHealth : BaseHealth
 
     public override void DrainHealth(int amount)
     {
+        if (isDefending) return;
+
         currentHealth -= amount;
         OnHealthAmountChanged?.Invoke(currentHealth);
 
@@ -58,6 +67,11 @@ public class PlayerHealth : BaseHealth
             Die();
             isDead = true;
         }
+    }
+
+    private void Defend(bool active)
+    {
+        isDefending = active;
     }
     protected override void Update()
     {

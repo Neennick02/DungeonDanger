@@ -48,18 +48,27 @@ public class PlayerMovement : MonoBehaviour
         Pushing,
         Dodging,
         Attacking,
+        Defending,
         Cutscene,
         Dead
     }
 
     public PlayerState State;
 
+    private void Awake()
+    {
+        targetFinder = GetComponent<TargetFinder>();
+        State = PlayerState.Locomotion;
+        _characterController = GetComponent<CharacterController>();
+    }
+    #region OnEnable/Ondisable
     private void OnEnable()
     {
         PlayerInputHandler.OnMove += Move;
         PlayerInputHandler.OnDodge += Dodge;
 
-        //PlayerInventory.OnForceEndShield += EndDefend;
+        PlayerInventory.OnStartDefend += StartDefend;
+        PlayerInventory.OnFinishDefend += EndDefend;
 
         PlayerHealth.OnDeath += Die;
 
@@ -75,7 +84,8 @@ public class PlayerMovement : MonoBehaviour
         PlayerInputHandler.OnMove -= Move;
         PlayerInputHandler.OnDodge -= Dodge;
 
-       // PlayerInventory.OnForceEndShield -= EndDefend;
+        PlayerInventory.OnStartDefend -= StartDefend;
+        PlayerInventory.OnFinishDefend -= EndDefend;
 
         PlayerHealth.OnDeath -= Die;
 
@@ -85,12 +95,8 @@ public class PlayerMovement : MonoBehaviour
         SaveStatueInteractable.OnSavePlayerData -= SavePositionData;
         GameManager.OnLoad -= LoadPositionData;
     }
-    private void Awake()
-    {
-        targetFinder = GetComponent<TargetFinder>();
-        State = PlayerState.Locomotion;
-        _characterController = GetComponent<CharacterController>();
-    }
+    #endregion
+
 
     private void Move(Vector2 input)
     {
@@ -107,10 +113,10 @@ public class PlayerMovement : MonoBehaviour
                 HandleGravity();
 
                 break;
-            /*case PlayerState.Defending:
+            case PlayerState.Defending:
                 RotateCharacter(CalculateDirection(input));
                 HandleGravity();
-                break;*/
+                break;
         }
     }
 
@@ -336,7 +342,7 @@ public class PlayerMovement : MonoBehaviour
             }
     }
 
-/*    private void StartDefend()
+    private void StartDefend()
     {
        State = PlayerState.Defending;
 
@@ -345,7 +351,7 @@ public class PlayerMovement : MonoBehaviour
     private void EndDefend()
     {
         State = PlayerState.Locomotion;
-    }*/
+    }
     private void HandleDodge(Vector3 move, Vector2 input)
     {
 

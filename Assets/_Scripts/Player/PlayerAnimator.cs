@@ -13,18 +13,17 @@ public class PlayerAnimator : MonoBehaviour
     {
         PlayerHealth.OnDeath += IsDead;
 
-        PlayerInputHandler.OnDefendStart += StartDefend;
-        PlayerInputHandler.OnDefendEnd += EndDefend;
-        PlayerInventory.OnForceEndShield += EndDefend;
+        PlayerInventory.OnStartDefend += StartDefend;
+        PlayerInventory.OnFinishDefend += EndDefend;
     }
 
     private void OnDisable()
     {
         PlayerHealth.OnDeath -= IsDead;
 
-        PlayerInputHandler.OnDefendStart -= StartDefend;
-        PlayerInputHandler.OnDefendEnd -= EndDefend;
-        PlayerInventory.OnForceEndShield -= EndDefend;
+        PlayerInventory.OnStartDefend -= StartDefend;
+        PlayerInventory.OnFinishDefend -= EndDefend;
+
     }
     public void SetSpeed(float speed, float x, float y)
     {
