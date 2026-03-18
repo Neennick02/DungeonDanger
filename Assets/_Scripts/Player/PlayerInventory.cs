@@ -13,7 +13,7 @@ public class PlayerInventory : MonoBehaviour
     public static event Action<int> OnCoinAmountChanged;
 
 
-    [SerializeField] private GameObject sword, shield;
+    [SerializeField] private GameObject shield;
 
 
     private bool isDefending;
@@ -67,6 +67,7 @@ public class PlayerInventory : MonoBehaviour
     {
         chargeAmount = Mathf.Clamp(chargeAmount, 0, 1);
 
+        //discharge shield
         if (chargeAmount > 0 && isDefending)
         {
             chargeAmount -= Time.deltaTime * shieldChargeRate;
