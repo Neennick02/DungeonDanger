@@ -1,10 +1,15 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BatEnemy : BaseEnemy
 {
     private PlayerHealth health;
+    private bool isDead = false;
+    [SerializeField] private Animator flyAnimator, wingAnimator;
     protected override void Update()
     {
+        if (isDead) return;
+
         base.Update();
 
         timer += Time.deltaTime;
@@ -17,6 +22,8 @@ public class BatEnemy : BaseEnemy
     }
     private void OnTriggerEnter(Collider other)
     {
+        if(isDead) return;
+
         if (other.CompareTag("Player"))
         {
             health = other.GetComponent<PlayerHealth>();
@@ -30,5 +37,16 @@ public class BatEnemy : BaseEnemy
         {
             health = null;
         }
+    }
+
+    public override void Die()
+    {
+        isDead = true;
+        
+        flyAnimator.enabled = false;
+        wingAnimator.enabled = false;
+
+        Destroy(agent);
+        transform.AddComponent<Rigidbody>();
     }
 }

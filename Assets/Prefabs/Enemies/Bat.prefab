@@ -62,14 +62,14 @@ NavMeshAgent:
   m_GameObject: {fileID: 965722330852630596}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 2
+  m_Radius: 1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 3600
   m_StoppingDistance: 1.6
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1
   m_BaseOffset: 2
@@ -178,6 +178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyObject: {fileID: 11400000, guid: 32cc7f88ee9777c47a326935872dffe0, type: 2}
+  flyAnimator: {fileID: 8801000276371353021}
+  wingAnimator: {fileID: 8107363938970346503}
 --- !u!1 &6664257014083482621
 GameObject:
   m_ObjectHideFlags: 0
