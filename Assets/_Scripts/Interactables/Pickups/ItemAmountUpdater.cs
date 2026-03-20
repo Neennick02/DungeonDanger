@@ -17,46 +17,18 @@ public class ItemAmountUpdater : MonoBehaviour
 
     private void UpdateKeyAmount(int amount)
     {
-        //tes
-        if (amount == 0)
-        {
-            keyCounter.text = " ";
-            keyCounter.gameObject.SetActive(false);
-        }
 
-        else
-        {
-            keyCounter.gameObject.SetActive(true);
-            keyCounter.text = "Keys : " + amount.ToString();
-        }
+            keyCounter.text = amount.ToString();
+        
     }
     private void UpdatePotionAmount(int amount)
     {
-        if (amount == 0)
-        {
-            potionCounter.text = " ";
-            potionCounter.gameObject.SetActive(false);
-        }
-
-        else
-        {
-            potionCounter.gameObject.SetActive(true);
-            potionCounter.text = "Potions : " + amount.ToString();
-        }
+            potionCounter.text = amount.ToString();
     }
     private void UpdateCoinAmount(int amount)
     {
-        if (amount == 0)
-        {
-            coinCounter.text = " ";
-            coinCounter.gameObject.SetActive(false);
-        }
-
-        else
-        {
-            coinCounter.gameObject.SetActive(true);
-            coinCounter.text = "Coins : " + amount.ToString();
-        }
+            coinCounter.text = amount.ToString();
+        
     }
     private void OnDisable()
     {

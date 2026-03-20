@@ -109,6 +109,11 @@ public abstract class BaseHealth : MonoBehaviour
         StartCoroutine(Flash());
     }
 
+    protected void SwitchTargetEvent()
+    {
+        SwitchTarget?.Invoke();
+    }
+
     IEnumerator Flash()
     {
         if (meshes == null) Debug.Log("No mesh");
@@ -129,7 +134,7 @@ public abstract class BaseHealth : MonoBehaviour
 
     }
 
-    protected IEnumerator DestroyAfterSeconds(float time)
+    protected virtual IEnumerator DestroyAfterSeconds(float time)
     {
         yield return new WaitForSeconds(time);
         Destroy(gameObject);

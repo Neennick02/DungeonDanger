@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
@@ -30,12 +31,20 @@ public class BatHealth : BaseHealth
 
     protected override void Die()
     {
-        base.Die();
+        isDead = true;
+        TargetFinder.RemoveFromPool(targetTransform);
+        SwitchTargetEvent();
         //removes navmesh component
         Destroy(gameObject.GetComponent<NavMeshAgent>());
         enemyScript.Die();
         
-
         StartCoroutine(DestroyAfterSeconds(2f));
+    }
+
+    protected override IEnumerator DestroyAfterSeconds(float time)
+    {
+        yield return new WaitForSeconds(time);
+        DropItems();
+        Destroy(gameObject);
     }
 }
