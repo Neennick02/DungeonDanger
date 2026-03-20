@@ -18,7 +18,10 @@ public class TargetFinder : MonoBehaviour
     public Transform currentTarget { get; private set; }
     
     [SerializeField] private CinemachineCamera playerCamera;
-    [SerializeField] private CinemachineCamera targetCamera;
+
+    private bool useFirstCamera;
+    private CinemachineCamera currentCamera;
+    [SerializeField] private CinemachineCamera targetCamera0;
     [SerializeField] private CinemachineCamera targetCamera1;
 
     [SerializeField] private Transform _targetPointer;
@@ -65,6 +68,8 @@ public class TargetFinder : MonoBehaviour
         }
 
         lastTargetPosition = _targetPointer;
+
+        currentCamera = targetCamera0;
     }
 
     private void Update()
@@ -162,7 +167,7 @@ public class TargetFinder : MonoBehaviour
         if(newTarget != null)
         {
             currentTarget = newTarget;
-            targetCamera.LookAt = currentTarget;
+            targetCamera0.LookAt = currentTarget;
             lockedOn = true;
         }
    }
@@ -188,7 +193,7 @@ public class TargetFinder : MonoBehaviour
                 if(distanceToTarget < maxTargetingDistance)
                 {
                     currentTarget = pool[nextIndex];
-                    targetCamera.LookAt = currentTarget;
+                    SwitchTargetCamera();
                 }
                 else
                 {
@@ -214,8 +219,8 @@ public class TargetFinder : MonoBehaviour
         {
             lockedOn = true;
 
-            targetCamera.LookAt = currentTarget;
-            targetCamera.gameObject.SetActive(true);
+            currentCamera.LookAt = currentTarget;
+            currentCamera.gameObject.SetActive(true);
 
             playerCamera.gameObject.SetActive(false);
         }
@@ -224,13 +229,26 @@ public class TargetFinder : MonoBehaviour
     {
         currentTarget = null;
 
-        targetCamera.LookAt = null;
-        targetCamera.gameObject.SetActive(false);
+        currentCamera.LookAt = null;
+        currentCamera.gameObject.SetActive(false);
 
         playerCamera.gameObject.SetActive(true);
         lockedOn = false;
     }
+    private void SwitchTargetCamera()
+    {
+        currentCamera.gameObject.SetActive(false);
 
+        // toggle camera
+        useFirstCamera = !useFirstCamera;
+        currentCamera = useFirstCamera ? targetCamera0 : targetCamera1;
+
+        // assign target
+        currentCamera.LookAt = currentTarget;
+
+        // enable new camera
+        currentCamera.gameObject.SetActive(true);
+    }
     private Transform NearestTarget()
     {
         if(pool != null && pool.Count > 0)
