@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Sword
   - EnemySword
+  - Boss
+  - Terrain
   layers:
   - Default
   - TransparentFX
