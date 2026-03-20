@@ -19,6 +19,7 @@ public class TargetFinder : MonoBehaviour
     
     [SerializeField] private CinemachineCamera playerCamera;
     [SerializeField] private CinemachineCamera targetCamera;
+    [SerializeField] private CinemachineCamera targetCamera1;
 
     [SerializeField] private Transform _targetPointer;
     private Transform lastTargetPosition;
@@ -60,7 +61,7 @@ public class TargetFinder : MonoBehaviour
 
         if(dc == null)
         {
-            dc = new DistanceClass();
+            dc = new DistanceClass(transform);
         }
 
         lastTargetPosition = _targetPointer;
@@ -289,18 +290,22 @@ public class TargetFinder : MonoBehaviour
 
 public class DistanceClass : IComparer<Transform>
 {
+    private Transform player;
+
+    public DistanceClass(Transform playerTransform)
+    {
+        player = playerTransform;
+    }
     public int Compare(Transform x, Transform y)
     {
-        Camera camera = Camera.main;
+        float distance1 = Vector3.Distance(x.position, player.position);
+        float distance2 = Vector3.Distance(y.position, player.position);
 
-        Vector3 xViewport = camera.WorldToViewportPoint(x.position);
-        Vector3 yViewport = camera.WorldToViewportPoint(y.position);
-
-        if(xViewport.x < yViewport.x)
+        if(distance1 < distance2)
         {
             return -1;
         }
-        else if(xViewport.x == yViewport.x)
+        else if(distance1 == distance2)
         {
             return 0;
         }
