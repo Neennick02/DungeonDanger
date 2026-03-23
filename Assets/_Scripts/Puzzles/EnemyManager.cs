@@ -1,14 +1,29 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Xml;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class EnemyManager : MonoBehaviour
 {
-
+    private static bool locked = true;
     public UnityEvent OpenDoor;
     private List<BaseEnemy> enemies;
 
+    #region OnEnable
+    private void OnEnable()
+    {
+        SaveStatueInteractable.OnSavePlayerData += SaveState;
+        GameManager.OnLoad += LoadState;
+    }
+
+    private void OnDisable()
+    {
+        SaveStatueInteractable.OnSavePlayerData -= SaveState;
+        GameManager.OnLoad -= LoadState;
+    }
+    #endregion
     private void Start()
     {
         enemies = new List<BaseEnemy>(GetComponentsInChildren<BaseEnemy>(true));
@@ -24,6 +39,25 @@ public class EnemyManager : MonoBehaviour
             }
         }
         if(enemies.Count == 0)
+        {
+            OpenDoor?.Invoke();
+            locked = false;
+        }
+    }
+
+    private void SaveState()
+    {
+        int state = locked ? 1 : 0;
+        PlayerPrefs.SetInt(transform.name + "doorState", state);
+    }
+
+    private void LoadState()
+    {
+        int state = PlayerPrefs.GetInt(transform.name + "doorState", 1);
+
+        locked = state > 0 ? true : false;
+
+        if (!locked)
         {
             OpenDoor?.Invoke();
         }

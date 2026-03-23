@@ -9,7 +9,6 @@ public class SceneStartManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("xPos"))
         {
-            Debug.Log("Save data loaded");
             OnSceneLoad?.Invoke();
         }
     }

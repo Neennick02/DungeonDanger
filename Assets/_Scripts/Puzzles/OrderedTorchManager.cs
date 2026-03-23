@@ -1,18 +1,35 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Sockets;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using System.Linq;
-using System.Collections;
 
 public class OrderedTorchManager : MonoBehaviour
 {
+    [SerializeField] private GameObject cutSceneCamera;
     public List<int> CorrectOrder;
     private List<OrderedOnOffInteractable> torches;
     public UnityEvent OnPuzzleSolved;
 
     private List<int> currentOrder = new List<int>();
+    [SerializeField] private Animator _animator;
+    private static bool locked = true;
+    #region OnEnable
+    private void OnEnable()
+    {
+        SaveStatueInteractable.OnSavePlayerData += SaveState;
+        GameManager.OnLoad += LoadState;
+    }
 
+    private void OnDisable()
+    {
+        SaveStatueInteractable.OnSavePlayerData -= SaveState;
+        GameManager.OnLoad -= LoadState;
+    }
+    #endregion
     private void Start()
     {
         //fill list with child objects
@@ -34,6 +51,7 @@ public class OrderedTorchManager : MonoBehaviour
             if(currentOrder.SequenceEqual(CorrectOrder))
             {
                 PuzzleSolved();
+                locked = false;
             }
             else
             {
@@ -61,6 +79,34 @@ public class OrderedTorchManager : MonoBehaviour
         {
             torch.TurnOff();
             
+        }
+    }
+    public void EndAnimation()
+    {
+        StartCoroutine(ResetAnimator());
+    }
+    IEnumerator ResetAnimator()
+    {
+        yield return new WaitForSeconds(1.5f);
+        _animator.enabled = false;
+    }
+
+    private void SaveState()
+    {
+        int state = locked ? 1 : 0;
+        PlayerPrefs.SetInt(transform.name + "doorState", state);
+    }
+
+    private void LoadState()
+    {
+        int state = PlayerPrefs.GetInt(transform.name + "doorState", 1);
+
+        locked = state > 0 ? true : false;
+
+        if (!locked)
+        {
+            Destroy(cutSceneCamera);    
+            OnPuzzleSolved?.Invoke();
         }
     }
 }

@@ -1,9 +1,25 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LockedDoorInteractable : DoorInteractable
 {
     private PlayerInventory inventory;
     private bool isLocked = true;
+    [SerializeField] private float endPoint;
+    #region OnEnable
+    private void OnEnable()
+    {
+        SaveStatueInteractable.OnSavePlayerData += SaveState;
+        GameManager.OnLoad += LoadState;
+    }
+
+    private void OnDisable()
+    {
+        SaveStatueInteractable.OnSavePlayerData -= SaveState;
+        GameManager.OnLoad -= LoadState;
+    }
+    #endregion
     protected override void Start()
     {
         base.Start();
@@ -33,6 +49,22 @@ public class LockedDoorInteractable : DoorInteractable
             //if door is unlocked always open
             OnInteract?.Invoke();
         }
+    }
+
+    private void SaveState()
+    {
+        int locked = isLocked? 0 : 1;
+
+        PlayerPrefs.SetInt("Locked" + transform.name, locked);
+    }
+
+    private void LoadState()
+    {
+        int locked = PlayerPrefs.GetInt("Locked", 1);
+
+        isLocked = locked > 0 ? true : false;
+
+        transform.position = new Vector3(0, endPoint, 0);
     }
 
     protected override void OnTriggerEnter(Collider other)

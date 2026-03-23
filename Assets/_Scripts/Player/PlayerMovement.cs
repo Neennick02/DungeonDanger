@@ -116,10 +116,9 @@ public class PlayerMovement : MonoBehaviour
             case PlayerState.Defending:
                 RotateCharacter(CalculateDirection(input));
                 HandleGravity();
-
                 break;
-            case PlayerState.Dead:
 
+            case PlayerState.Dead:
 
                 break;
         }

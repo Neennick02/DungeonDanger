@@ -13,6 +13,20 @@ public class MoveStair : MonoBehaviour
     private Vector3 start;
     public static event Action OnDisableCamera;
     bool done = false;
+
+    #region OnEnable
+    private void OnEnable()
+    {
+        SaveStatueInteractable.OnSavePlayerData += SavePosition;
+        GameManager.OnLoad += LoadPosition;
+    }
+
+    private void OnDisable()
+    {
+        SaveStatueInteractable.OnSavePlayerData -= SavePosition;
+        GameManager.OnLoad -= LoadPosition;
+    }
+    #endregion
     private void Start()
     {
         start = transform.position;
@@ -25,7 +39,15 @@ public class MoveStair : MonoBehaviour
         if(!done)
         StartCoroutine(MoveRoutine());
     }
-
+    private void SavePosition()
+    {
+        PlayerPrefs.SetFloat(gameObject.name + "moveAble", transform.position.y);
+    }
+    private void LoadPosition()
+    {
+        float yPos = PlayerPrefs.GetFloat(gameObject.name + "moveAble", transform.position.y);
+        transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
+    }
     IEnumerator MoveRoutine()
     {
         time = 0;

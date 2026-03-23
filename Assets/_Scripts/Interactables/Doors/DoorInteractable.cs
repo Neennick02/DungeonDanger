@@ -1,9 +1,10 @@
+using System.Collections;
+using System.Xml;
 using UnityEngine;
 
 public class DoorInteractable : BaseInteractable
 {
     protected Animator _animator;
-
     protected override void Start()
     {
         base.Start();
@@ -13,10 +14,12 @@ public class DoorInteractable : BaseInteractable
     public override void Interact()
     {
         base.Interact();
+        StartCoroutine(ResetAnimator());
     }
-
-    public void ResetAnimator()
+    IEnumerator ResetAnimator()
     {
+        if (_animator == null) yield break;
+        yield return new WaitForSeconds(1.5f);
         _animator.enabled = false;
     }
 }

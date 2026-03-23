@@ -673,6 +673,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  _animator: {fileID: 2757163570945586261}
 --- !u!1 &7370593237238747512
 GameObject:
   m_ObjectHideFlags: 0
