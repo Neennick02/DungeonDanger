@@ -116,6 +116,8 @@ public class PlayerMovement : MonoBehaviour
             case PlayerState.Defending:
                 RotateCharacter(CalculateDirection(input));
                 HandleGravity();
+                Vector3 verticalMove = new Vector3(0, _verticalVelocity, 0);
+                _characterController.Move(verticalMove * Time.deltaTime);
                 break;
         }
     }
@@ -350,6 +352,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void EndDefend()
     {
+        StartCoroutine(EndShieldRoutine());
+    }
+
+    IEnumerator EndShieldRoutine()
+    {
+        //wait for animation to end
+        yield return new WaitForSeconds(0.25f);
         State = PlayerState.Locomotion;
     }
     private void HandleDodge(Vector3 move, Vector2 input)

@@ -4,7 +4,6 @@ using UnityEngine;
 public class BatEnemy : BaseEnemy
 {
     private PlayerHealth health;
-    private bool isDead = false;
     [SerializeField] private Animator flyAnimator, wingAnimator;
     protected override void Update()
     {

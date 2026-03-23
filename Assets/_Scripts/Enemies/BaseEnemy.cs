@@ -9,6 +9,8 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected bool isAttacking;
     protected float timer = 0;
+
+    protected bool isDead = false;
     protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -20,7 +22,7 @@ public abstract class BaseEnemy : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (CanSeePlayer())
+        if (CanSeePlayer() && !isDead)
         {
             agent.destination = playerTransform.position;
             transform.LookAt(playerTransform.position);

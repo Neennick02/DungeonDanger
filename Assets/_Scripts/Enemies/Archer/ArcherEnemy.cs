@@ -69,6 +69,7 @@ public class ArcherEnemy : BaseEnemy
 
     public override void Die()
     {
+        isDead = true;
         transform.LookAt(null);
         agent.speed = 0f;
         agent.destination = transform.position;
