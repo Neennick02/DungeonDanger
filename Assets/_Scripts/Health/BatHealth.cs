@@ -40,11 +40,4 @@ public class BatHealth : BaseHealth
         
         StartCoroutine(DestroyAfterSeconds(2f));
     }
-
-    protected override IEnumerator DestroyAfterSeconds(float time)
-    {
-        yield return new WaitForSeconds(time);
-        DropItems();
-        Destroy(gameObject);
-    }
 }

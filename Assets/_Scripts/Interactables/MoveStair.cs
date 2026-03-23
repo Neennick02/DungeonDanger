@@ -45,7 +45,6 @@ public class MoveStair : MonoBehaviour
     }
     private void LoadPosition()
     {
-        Debug.Log("load0");
         float yPos = PlayerPrefs.GetFloat(gameObject.name + "moveAble", transform.position.y);
         transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
     }

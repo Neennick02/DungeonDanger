@@ -15,7 +15,6 @@ public class WarriorHealth : BaseHealth
     }
     public override void DrainHealth(int amount)
     {
-        Debug.Log("WAAA");
         currentHealth -= amount;
         FlashRed();
         if(currentHealth > 0)

@@ -26,7 +26,7 @@ public abstract class BaseHealth : MonoBehaviour
 
     public float minFallHeight = 5f;
     public float FallDamageMultiplier = 2;
-
+    [SerializeField] protected GameObject deathEffect;
     protected virtual void Start()
     {
         maxHealth = enemySo.MaxHealth;
@@ -137,6 +137,13 @@ public abstract class BaseHealth : MonoBehaviour
     protected virtual IEnumerator DestroyAfterSeconds(float time)
     {
         yield return new WaitForSeconds(time);
+        if (deathEffect != null)
+        {
+            deathEffect.SetActive(true);
+            deathEffect.transform.eulerAngles = new Vector3(-90, 0, 0);
+            deathEffect.transform.parent = null;
+        }
+        DropItems();    
         Destroy(gameObject);
     }
 
