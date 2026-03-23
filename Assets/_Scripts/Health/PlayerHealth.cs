@@ -109,6 +109,8 @@ public class PlayerHealth : BaseHealth
     }
     protected override void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Void")) return;
+
         if (isFalling)
         {
             float fallDist = highestPoint - transform.position.y;
@@ -121,6 +123,10 @@ public class PlayerHealth : BaseHealth
             }
             isFalling = false;
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Void")) return;
     }
     protected override void Die()
     {

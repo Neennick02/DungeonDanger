@@ -9,6 +9,7 @@ TagManager:
   - EnemySword
   - Boss
   - Terrain
+  - Void
   layers:
   - Default
   - TransparentFX
