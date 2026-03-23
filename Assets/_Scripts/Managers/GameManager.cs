@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    #region OnEnable
     private void OnEnable()
     {
         PlayerInputHandler.OnPause += Pause;
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
         PlayerHealth.OnDeath -= GameOver;
         SceneStartManager.OnSceneLoad -= LoadPlayerData;
     }
-
+    #endregion
     private void Start()
     {
         State = GameStates.Playing;

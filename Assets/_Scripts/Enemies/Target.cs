@@ -36,15 +36,16 @@ public class Target : MonoBehaviour
                 inPool = true;
             }
         }
-        else
+        else if (!visible && inPool)
         {
-            //only remove if not visible
-            if (!visible)
-            {
-                //remove ourself from target pool
-                TargetFinder.RemoveFromPool(this.transform);
-                inPool = false;
-            }
+            //remove ourself from target pool
+            TargetFinder.RemoveFromPool(this.transform);
+            inPool = false;
         }
+    }
+
+    private void OnDestroy()
+    {
+        TargetFinder.RemoveFromPool(transform);
     }
 }

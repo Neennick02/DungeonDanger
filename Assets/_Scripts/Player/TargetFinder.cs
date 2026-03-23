@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using System;
+using UnityEngine.Analytics;
 
 public class TargetFinder : MonoBehaviour
 {
@@ -35,7 +36,13 @@ public class TargetFinder : MonoBehaviour
 
     #region OnEnable/Disable
     private void OnEnable()
-    {
+      { 
+            dc = new DistanceClass(transform);
+        
+            pool = new List<Transform>();
+            poolView = new List<Transform>();
+
+
         PlayerInputHandler.OnTarget += TargetAndUntarget;
         PlayerInputHandler.OnTargetRight += SelectTarget;
         PlayerInputHandler.OnTargetLeft += SelectTarget;
@@ -57,16 +64,6 @@ public class TargetFinder : MonoBehaviour
 
     private void Start()
     {
-        if (pool == null)
-        {
-            pool = new List<Transform>();
-        }
-
-        if(dc == null)
-        {
-            dc = new DistanceClass(transform);
-        }
-
         lastTargetPosition = _targetPointer;
 
         currentCamera = targetCamera0;
@@ -262,6 +259,8 @@ public class TargetFinder : MonoBehaviour
 
             for (int i = 0; i < pool.Count; i++)
             {
+                if (pool[i] != null) continue;
+
                 Vector3 targetViewport = cam.WorldToViewportPoint(pool[i].position);
 
                 //remove z component
@@ -284,7 +283,11 @@ public class TargetFinder : MonoBehaviour
 
     public static void AddToPool(Transform target)
     {
-        if(pool != null && !pool.Contains(target))
+        if (pool == null) return;
+
+        pool.RemoveAll(t => t == null);
+
+        if (!pool.Contains(target))
         {
             pool.Add(target);
             pool.Sort(dc);
@@ -316,20 +319,20 @@ public class DistanceClass : IComparer<Transform>
     }
     public int Compare(Transform x, Transform y)
     {
-        float distance1 = Vector3.Distance(x.position, player.position);
-        float distance2 = Vector3.Distance(y.position, player.position);
+        if (x == null && y == null) return 0;
+        if (x == null) return 1;
+        if (y == null) return -1;
 
-        if(distance1 < distance2)
+        try
         {
-            return -1;
+            float distance1 = Vector3.Distance(x.position, player.position);
+            float distance2 = Vector3.Distance(y.position, player.position);
+
+            return distance1.CompareTo(distance2);
         }
-        else if(distance1 == distance2)
+        catch (MissingReferenceException)
         {
             return 0;
-        }
-        else
-        {
-            return 1;
         }
     }
 } 
