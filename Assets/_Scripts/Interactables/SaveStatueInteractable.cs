@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class SaveStatueInteractable : BaseInteractable
@@ -6,6 +7,7 @@ public class SaveStatueInteractable : BaseInteractable
     [SerializeField] private int price = 1;
     public static event Action OnSavePlayerData;
 
+    [SerializeField] private GameObject effect;
     private PlayerInventory inventory;
 
     private void OnEnable()
@@ -27,7 +29,9 @@ public class SaveStatueInteractable : BaseInteractable
     {
         if (inventory.coinAmount >= price && inventory != null)
         {
+            OnInteract?.Invoke();
             inventory.UpdateCoinAmount(-price);
+            price = 0;
             Save(); 
         }
     }
@@ -52,6 +56,16 @@ public class SaveStatueInteractable : BaseInteractable
             inventory = null;
         }
     }
+    public void ResetEffect()
+    {
+        StartCoroutine(TurnOffParticles());
+    }
+    IEnumerator TurnOffParticles()
+    {
+        yield return new WaitForSeconds(2);
+        effect.GetComponent<ParticleSystem>().Stop();
+        yield return new WaitForSeconds(1);
 
-
+        effect.SetActive(false);
+    }
 }
