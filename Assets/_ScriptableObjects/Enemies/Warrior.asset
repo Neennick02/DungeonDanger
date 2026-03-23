@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26ff7d49a804d148835c905e6f42e86, type: 3}
   m_Name: Warrior
   m_EditorClassIdentifier: 
-  MaxHealth: 15
-  Damage: 1
-  AttackInterval: 1
+  MaxHealth: 30
+  Damage: 4
+  AttackInterval: 2.5
   AttackDistance: 4
   Speed: 10
   SpottingRadius: 15

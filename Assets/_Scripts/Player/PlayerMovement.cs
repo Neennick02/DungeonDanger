@@ -116,8 +116,11 @@ public class PlayerMovement : MonoBehaviour
             case PlayerState.Defending:
                 RotateCharacter(CalculateDirection(input));
                 HandleGravity();
-                Vector3 verticalMove = new Vector3(0, _verticalVelocity, 0);
-                _characterController.Move(verticalMove * Time.deltaTime);
+
+                break;
+            case PlayerState.Dead:
+
+
                 break;
         }
     }
@@ -215,6 +218,9 @@ public class PlayerMovement : MonoBehaviour
             //normal amount
             _verticalVelocity += _gravity * Time.deltaTime;
         }
+
+        Vector3 verticalMove = new Vector3(0, _verticalVelocity, 0);
+        _characterController.Move(verticalMove * Time.deltaTime);
     }
     public void RotateCharacter(Vector3 move)
     {
