@@ -17,25 +17,21 @@ public class Segment : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 targetPos = parent.position;
-        float distance = Vector3.Distance(transform.position, targetPos);
+        Vector3 dir = transform.position - parent.position;
+        float distance = dir.magnitude;
 
-        // Only move if too far
         if (distance > offSet)
         {
-            // Move at constant speed
-            Vector3 direction = (targetPos - transform.position).normalized;
-            Vector3 newPos = transform.position + direction * speed * Time.fixedDeltaTime;
 
+            Vector3 newPos = parent.position + -dir.normalized * offSet;
             rb.MovePosition(newPos);
         }
 
-        // Smooth rotation instead of instant LookAt
-        Vector3 dir = (parent.position - transform.position);
+        // Rotation
         if (dir != Vector3.zero)
         {
-            Quaternion targetRot = Quaternion.LookRotation(dir);
-            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRot, 10f * Time.fixedDeltaTime));
+            Quaternion targetRot = Quaternion.LookRotation(-dir);
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRot, speed * Time.fixedDeltaTime));
         }
     }
 }
