@@ -2,48 +2,26 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Splines;
 
 public class BossBehaviour : MonoBehaviour
 {
-    public Transform head;
-    public List<Transform> segments = new List<Transform>();
-    public float segmentSpacing = 0.5f;
-    public float smoothSpeed = 10f;
+    [SerializeField] private float speed = 1f;
+    public SplineContainer container;
+    private Rigidbody rb;
+    private float progress;
 
-    private List<Vector3> positions = new List<Vector3>();
-
-    void Start()
+    private void Start()
     {
-        positions.Add(head.position);
+        rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    private void Update()
     {
-        // Store head position
-        if (Vector3.Distance(positions[0], head.position) > segmentSpacing)
-        {
-            positions.Insert(0, head.position);
-        }
+        progress += speed * Time.deltaTime;
+        if (progress > 1) progress = 0;
 
-        // Move segments
-        for (int i = 0; i < segments.Count; i++)
-        {
-            Vector3 targetPos = positions[Mathf.Min(i + 1, positions.Count - 1)];
-
-            segments[i].position = Vector3.Lerp(
-                segments[i].position,
-                targetPos,
-                smoothSpeed * Time.deltaTime
-            );
-
-            // Optional: rotate toward movement direction
-            Vector3 dir = targetPos - segments[i].position;
-            if (dir != Vector3.zero)
-                segments[i].rotation = Quaternion.LookRotation(dir);
-        }
-
-        // Trim stored positions
-        if (positions.Count > segments.Count + 1)
-            positions.RemoveAt(positions.Count - 1);
+        Vector3 position = container.EvaluatePosition(progress);
+        rb.MovePosition(position);
     }
 }
