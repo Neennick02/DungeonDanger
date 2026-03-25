@@ -15,7 +15,7 @@ public class Segment : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Vector3 dir = transform.position - parent.position;
         float distance = dir.magnitude;
@@ -31,7 +31,7 @@ public class Segment : MonoBehaviour
         if (dir != Vector3.zero)
         {
             Quaternion targetRot = Quaternion.LookRotation(-dir);
-            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRot, speed * Time.fixedDeltaTime));
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRot, speed * Time.deltaTime));
         }
     }
 }
