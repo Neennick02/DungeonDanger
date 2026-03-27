@@ -23,5 +23,10 @@ public class BossBehaviour : MonoBehaviour
 
         Vector3 position = container.EvaluatePosition(progress);
         rb.MovePosition(position);
+
+
+        Vector3 targetPos = container.EvaluatePosition(progress + 0.1f);
+        Vector3 rotationDirection = targetPos - rb.position;
+        rb.rotation = Quaternion.LookRotation(rotationDirection);
     }
 }
