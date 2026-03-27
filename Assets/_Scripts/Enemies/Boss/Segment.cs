@@ -4,34 +4,22 @@ using UnityEngine;
 
 public class Segment : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float offSet = 1.5f;
-    [SerializeField] private Transform parent;
-
     private Rigidbody rb;
-
+    private float startHeight;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        startHeight = rb.position.y;
     }
-
-    private void Update()
+    public void UpdatePosition(Vector3 pos, Vector3 parentPos)
     {
-        Vector3 dir = transform.position - parent.position;
-        float distance = dir.magnitude;
+        Vector3 newPos = new Vector3(pos.x, startHeight, pos.z);
+        rb.MovePosition(newPos);
 
-        if (distance > offSet)
+        Vector3 dir = parentPos - newPos;
+        if (dir.sqrMagnitude > 0.0001f)
         {
-
-            Vector3 newPos = parent.position + -dir.normalized * offSet;
-            rb.MovePosition(newPos);
-        }
-
-        // Rotation
-        if (dir != Vector3.zero)
-        {
-            Quaternion targetRot = Quaternion.LookRotation(-dir);
-            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRot, speed * Time.deltaTime));
+            rb.MoveRotation(Quaternion.LookRotation(dir));
         }
     }
 }
