@@ -66,6 +66,7 @@ public class SaveStatueInteractable : BaseInteractable
         effect.GetComponent<ParticleSystem>().Stop();
         yield return new WaitForSeconds(1);
 
+        if(effect != null)
         effect.SetActive(false);
     }
 }

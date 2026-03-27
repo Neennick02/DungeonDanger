@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee76f0359c3a8f4a87cb28f828c0df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionPopup: 
+  interactionPopup: Open
   OnInteract:
     m_PersistentCalls:
       m_Calls:

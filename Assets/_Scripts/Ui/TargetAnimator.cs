@@ -40,7 +40,10 @@ public class TargetAnimator : MonoBehaviour
 
     private void UnSelect()
     {
-        _animator.SetBool("IsTargeting", false);
-        _isTargeting = false;
+        if(_animator != null)
+        {
+            _animator.SetBool("IsTargeting", false);
+            _isTargeting = false;
+        }
     }
 }
