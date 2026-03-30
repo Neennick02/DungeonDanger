@@ -7,6 +7,7 @@ using UnityEngine.Splines;
 
 public class BossBehaviour : MonoBehaviour
 {
+    [SerializeField] private BossObject bossObject;
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float spacing = 0.5f;
     [SerializeField] private List<Segment> Segments = new List<Segment>();
@@ -57,5 +58,14 @@ public class BossBehaviour : MonoBehaviour
         Vector3 finalRotationPos = new Vector3(targetPos.x, startHeight, targetPos.z);
         Vector3 rotationDirection = finalRotationPos - rb.position;
         rb.rotation = Quaternion.LookRotation(rotationDirection);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHealth health = collision.gameObject.GetComponent<PlayerHealth>();
+            health.DrainHealth(bossObject.Damage);
+        }
     }
 }
