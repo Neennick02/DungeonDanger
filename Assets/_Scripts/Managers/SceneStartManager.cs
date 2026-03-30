@@ -11,5 +11,8 @@ public class SceneStartManager : MonoBehaviour
         {
             OnSceneLoad?.Invoke();
         }
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

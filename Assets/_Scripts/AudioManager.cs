@@ -49,7 +49,7 @@ public class AudioManager : MonoBehaviour
 
         source.volume = volume;
         source.Play();
-
+        StartCoroutine(ReleaseWhenDone(source));
     }
 
     private AudioSource GetAwailableSource()

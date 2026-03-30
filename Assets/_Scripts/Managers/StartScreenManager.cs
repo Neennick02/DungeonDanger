@@ -36,8 +36,8 @@ public class StartScreenManager : MonoBehaviour
 
     private IEnumerator ClickRoutine(List<AudioClip> clips, string sceneName = default)
     {
-        AudioManager.Instance.PlayClip(clips);
-        yield return new WaitForSeconds(0.3f);
+        AudioManager.Instance.PlayClip(clips, 1f);
+        yield return new WaitForSeconds(.3f);
 
         
         if(sceneName != null)

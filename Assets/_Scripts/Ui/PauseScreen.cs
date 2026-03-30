@@ -21,8 +21,18 @@ public class PauseScreen : MonoBehaviour
         isPaused = !isPaused;
 
         holder.SetActive(isPaused);
-        if (isPaused) Time.timeScale = 0;
-        else Time.timeScale = 1;
+        if (isPaused)
+        {
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false; 
+        }
     }
 
     public void ShowControls()

@@ -38,14 +38,14 @@ public class GameManager : MonoBehaviour
     #region OnEnable
     private void OnEnable()
     {
-        PlayerInputHandler.OnPause += Pause;
+        PlayerInputHandler.OnPause += TogglePause;
         PlayerHealth.OnDeath += GameOver;
         SceneStartManager.OnSceneLoad += LoadPlayerData;
     }
 
     private void OnDisable()
     {
-        PlayerInputHandler.OnPause -= Pause;
+        PlayerInputHandler.OnPause -= TogglePause;
         PlayerHealth.OnDeath -= GameOver;
         SceneStartManager.OnSceneLoad -= LoadPlayerData;
     }
@@ -53,25 +53,38 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         State = GameStates.Playing;
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
     }
 
-    private void Pause()
+    private void TogglePause()
     {
         if (!paused)
         {
             State = GameStates.Paused;
+
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {
             State = GameStates.Playing;
+
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         paused = !paused;
     }
+
+    public void UnPause()
+    {
+        State = GameStates.Playing;
+        paused = false;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;        
+    }
+
 
     private void GameOver()
     {
