@@ -62,11 +62,14 @@ public class SaveStatueInteractable : BaseInteractable
     }
     IEnumerator TurnOffParticles()
     {
-        yield return new WaitForSeconds(2);
-        effect.GetComponent<ParticleSystem>().Stop();
-        yield return new WaitForSeconds(1);
+        if (effect != null)
+        {
+            yield return new WaitForSeconds(2);
+            effect.GetComponent<ParticleSystem>().Stop();
+            yield return new WaitForSeconds(1);
 
-        if(effect != null)
-        effect.SetActive(false);
+            effect.SetActive(false);
+        }
+
     }
 }
