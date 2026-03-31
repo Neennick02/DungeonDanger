@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        Cursor.lockState = CursorLockMode.None;
         State = GameStates.GameOver;
         Cursor.visible = true;
     }

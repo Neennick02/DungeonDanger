@@ -7,9 +7,10 @@ using UnityEngine.Events;
 
 public class EnemyManager : MonoBehaviour
 {
-    private static bool locked = true;
+    private bool locked = true;
     public UnityEvent OpenDoor;
     private List<BaseEnemy> enemies;
+    [SerializeField] private GameObject key;
 
     #region OnEnable
     private void OnEnable()
@@ -60,6 +61,11 @@ public class EnemyManager : MonoBehaviour
         if (!locked)
         {
             OpenDoor?.Invoke();
+
+            if(key != null)
+            {
+                key.SetActive(false);
+            }
         }
     }
 }
