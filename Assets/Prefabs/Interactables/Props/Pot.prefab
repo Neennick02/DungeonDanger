@@ -103,11 +103,15 @@ MonoBehaviour:
   meshes: []
   DamageMat: {fileID: 0}
   itemArray:
+  - {fileID: 6716425223748110332, guid: be30cf79d690f3048ac10ad6bbbbc7ce, type: 3}
+  - {fileID: 6716425223748110332, guid: be30cf79d690f3048ac10ad6bbbbc7ce, type: 3}
+  - {fileID: 7050026253047293124, guid: 8d0315047a9d0bb48b67bba220b6a4e4, type: 3}
   - {fileID: 7050026253047293124, guid: 8d0315047a9d0bb48b67bba220b6a4e4, type: 3}
   - {fileID: 6716425223748110332, guid: fd8403cbb1ae3114ab9723d68c9c255b, type: 3}
   - {fileID: 0}
   minFallHeight: 1
   FallDamageMultiplier: 10
+  deathEffect: {fileID: 0}
 --- !u!65 &6078797292437394284
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class StartScreenManager : MonoBehaviour
     public void StartNewGame()
     {
         PlayerPrefs.DeleteAll();
-        LoadMainScene();
+        StartCoroutine(ClickRoutine(UI_Accept, "StoryScene"));
     }
 
     public void LoadMainScene()

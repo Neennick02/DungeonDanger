@@ -13,6 +13,7 @@ public class SaveStatueInteractable : BaseInteractable
     private void OnEnable()
     {
         GameManager.OnSave += Save;
+        interactionPopup = "Save : " + price + " coins";
     }
 
     private void OnDisable()
@@ -32,6 +33,7 @@ public class SaveStatueInteractable : BaseInteractable
             OnInteract?.Invoke();
             inventory.UpdateCoinAmount(-price);
             price = 0;
+            interactionPopup = "Save : " + price + " coins";
             Save(); 
         }
     }
@@ -62,10 +64,11 @@ public class SaveStatueInteractable : BaseInteractable
     }
     IEnumerator TurnOffParticles()
     {
-        if (effect != null)
+        ParticleSystem system = effect.GetComponent<ParticleSystem>();
+        if (effect != null && system != null) ;
         {
             yield return new WaitForSeconds(2);
-            effect.GetComponent<ParticleSystem>().Stop();
+            system.Stop();
             yield return new WaitForSeconds(1);
 
             effect.SetActive(false);

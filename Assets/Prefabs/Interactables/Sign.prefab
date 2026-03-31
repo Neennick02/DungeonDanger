@@ -482,7 +482,6 @@ GameObject:
   - component: {fileID: 8712305964002986551}
   - component: {fileID: 8221575775838890974}
   - component: {fileID: 479502405050880500}
-  - component: {fileID: 1595131015417690523}
   m_Layer: 0
   m_Name: Sign
   m_TagString: Untagged
@@ -545,15 +544,3 @@ MonoBehaviour:
       m_Calls: []
   Message: Message
   worldMessage: {fileID: 8639627689389011462}
---- !u!114 &1595131015417690523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7915694936690501911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 531d23c6bef27324f8e9c68c6983b3a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
