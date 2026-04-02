@@ -85,15 +85,12 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator AttackRoutine()
     {
+        float quaterDuration = attackDuration / 4;
+        yield return new WaitForSeconds(quaterDuration);
         swordModel.enabled = true;
-
-        while(attackTimer < attackDuration)
-        {
-            attackTimer += Time.deltaTime;
+        yield return new WaitForSeconds(quaterDuration * 3);
 
 
-            yield return null;
-        }
         movement.State = previousState;
         isAttacking = false;
         animator.isAttacking = false;

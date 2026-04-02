@@ -17,7 +17,11 @@ public class Sword : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy")){
+        if (other.gameObject.CompareTag("Boss"))
+        {
+            Debug.Log("Hit boss");
+        }
+            if (other.gameObject.CompareTag("Enemy")){
 
             var enemyHealth = other.gameObject.GetComponent<BaseHealth>();
             if (enemyHealth == null) enemyHealth = other.gameObject.GetComponentInParent<BaseHealth>();

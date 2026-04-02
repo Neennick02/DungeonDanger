@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -11,7 +12,10 @@ public class BossBehaviour : MonoBehaviour
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float spacing = 0.5f;
     [SerializeField] private List<Segment> Segments = new List<Segment>();
-    
+    private int destroyedSegmentsCount = 0;
+    public int currentSegment;
+    private bool isDead;
+
     public SplineContainer container;
 
     private Rigidbody rb;
@@ -24,10 +28,16 @@ public class BossBehaviour : MonoBehaviour
         
         //save default height
         startHeight = rb.position.y;
+
+        //enable last segments trigger
+        Segments[Segments.Count -1].EnableTrigger();
+        currentSegment = Segments.Count - 1;
     }
 
     private void FixedUpdate()
     {
+        if (isDead) return;
+
         progress += speed * Time.fixedDeltaTime;
 
         if (progress >= 1)
@@ -62,10 +72,47 @@ public class BossBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (isDead) return;
+
         if (collision.gameObject.CompareTag("Player"))
-        {
+        {   
             PlayerHealth health = collision.gameObject.GetComponent<PlayerHealth>();
             health.DrainHealth(bossObject.Damage);
         }
     }
+
+    public void AssignNewSegment()
+    {
+        Segments.RemoveAt(Segments.Count - 1);
+        speed = speed + speed / 3;
+        destroyedSegmentsCount++;
+        currentSegment = Segments.Count -1 ;
+
+        if(destroyedSegmentsCount > 3)
+        {
+            StartCoroutine(KillBoss());
+        }
+        else
+        {
+            Segments[Segments.Count - 1].EnableTrigger();
+        }
+    }
+
+    private IEnumerator KillBoss()
+    {
+        isDead = true;
+
+        while(Segments.Count > 0)
+        {
+            GameObject tailSegment = Segments[Segments.Count -1].gameObject;
+            Segments.RemoveAt(Segments.Count - 1);
+
+            Destroy(tailSegment);
+
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        Destroy(gameObject);
+    } 
 }

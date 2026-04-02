@@ -1,19 +1,41 @@
-
-
+using System.Collections;
 using UnityEngine;
 
 public class Segment : MonoBehaviour
 {
     [SerializeField] private BossObject bossObject;
+    [SerializeField] private Collider trigger;
+    [SerializeField] private BossBehaviour bossBehaviour;
+
+    private static bool isHit;
+    private float regenTime = 1f;
+    private float timer;
     private Rigidbody rb;
     private float startHeight;
+    public bool isTail;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         startHeight = rb.position.y;
     }
+
+    private void Update()
+    {
+        if (isHit)
+        {
+            timer += Time.deltaTime;
+
+            if(timer > regenTime)
+            {
+                isHit = false;
+                timer = 0;
+            }
+        }
+    }
     public void UpdatePosition(Vector3 pos, Vector3 parentPos)
     {
+        if (rb == null) return; 
+
         Vector3 newPos = new Vector3(pos.x, startHeight, pos.z);
         rb.MovePosition(newPos);
 
@@ -30,5 +52,31 @@ public class Segment : MonoBehaviour
             PlayerHealth health = collision.gameObject.GetComponent<PlayerHealth>();
             health.DrainHealth(bossObject.Damage);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (isHit) return;
+
+        if (other.CompareTag("Sword") && isTail)
+        {
+            Debug.Log("damage boss :)");
+            StartCoroutine(TakeDamageRoutine());
+        }
+    }
+
+    public void EnableTrigger()
+    {
+        trigger.enabled = true;
+        isTail = true;
+    }
+
+    IEnumerator TakeDamageRoutine()
+    {
+        isHit = true;
+        bossBehaviour.AssignNewSegment();
+        yield return new WaitForSeconds(0.5f);
+        
+        Destroy(gameObject);
     }
 }
