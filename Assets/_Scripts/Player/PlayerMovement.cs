@@ -467,7 +467,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void LoadPositionData()
     {
-        
+        State = PlayerState.Locomotion;
         _characterController.enabled = false;
 
         //update position while charactercontroller is off
