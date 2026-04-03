@@ -1,58 +1,65 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TypeWriter : MonoBehaviour
 {
-    [SerializeField] private float delay = 0.05f;
+    [SerializeField] private float characterDelay = 0.05f;
+    [SerializeField] private float alineaDelay = 1f;
+    [SerializeField] private float fadeOutDuration = 1f;
+    private float fadeOutTimer;
+    [SerializeField] private List<string> textList;
+    [SerializeField] private Image blackScreen;
 
-    [SerializeField] private string StartText, MiddleText, EndText;
-
-    private TextMeshProUGUI text;
+    private TextMeshProUGUI textObject;
     private void Start()
     {
-        text = GetComponent<TextMeshProUGUI>();
+        textObject = GetComponent<TextMeshProUGUI>();
         
-
-        text.text = StartText;
-        text.maxVisibleCharacters = 0;
         StartCoroutine(TypeRoutine());
+    }
+
+    private void Update()
+    {
+        if (Input.anyKey || (Gamepad.current != null && Gamepad.current.allControls.Any(c => c.IsPressed())))
+        {
+            characterDelay = 0.01f;
+        }
+        else characterDelay = 0.05f;
     }
 
     IEnumerator TypeRoutine()
     {
         yield return new WaitForSeconds(1f);
 
-        while (text.maxVisibleCharacters < text.text.Length)
+        for(int i = 0; i < textList.Count; i++)
         {
-            text.maxVisibleCharacters++;
-            yield return new WaitForSeconds(delay);
+            textObject.text = textList[i];
+            textObject.maxVisibleCharacters = 0;
 
+
+            while (textObject.maxVisibleCharacters < textObject.text.Length)
+            {
+                textObject.maxVisibleCharacters++;
+                yield return new WaitForSeconds(characterDelay);
+            }
+
+            yield return new WaitForSeconds(alineaDelay);
         }
-        yield return new WaitForSeconds(1f);
-
-        text.text = MiddleText;
-        text.maxVisibleCharacters = 0;
-        while (text.maxVisibleCharacters < text.text.Length)
+        //fade out
+        while(fadeOutTimer < fadeOutDuration)
         {
-            text.maxVisibleCharacters++;
-            yield return new WaitForSeconds(delay);
-
+            fadeOutTimer += Time.deltaTime;
+            blackScreen.color = Color.Lerp(Color.clear, Color.black, fadeOutTimer / fadeOutDuration);
+            yield return null;
         }
-        yield return new WaitForSeconds(1f);
-        text.text = EndText;
-        text.maxVisibleCharacters = 0;
-        while (text.maxVisibleCharacters < text.text.Length)
-        {
-            text.maxVisibleCharacters++;
-            yield return new WaitForSeconds(delay);
-
-        }
-        yield return new WaitForSeconds(3);
+        
         SceneManager.LoadScene("LevelBuildingScene");
-
     }
 }
