@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -89,13 +90,14 @@ public class BossBehaviour : MonoBehaviour
         destroyedSegmentsCount++;
         currentSegment = Segments.Count -1 ;
 
-        if(destroyedSegmentsCount > 3)
+        if(destroyedSegmentsCount > 4)
         {
             StartCoroutine(KillBoss());
         }
         else
         {
             Segments[Segments.Count - 1].EnableTrigger();
+            Segments[Segments.Count - 1].AddComponent<Target>();
             Segments[Segments.Count - 1].gameObject.GetComponent<Renderer>().material = tailMaterial;
         }
     }

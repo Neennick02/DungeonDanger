@@ -227,7 +227,6 @@ MonoBehaviour:
   DamageMat: {fileID: 2100000, guid: baffbce6a8211754faaeb6be98c3962d, type: 2}
   itemArray:
   - {fileID: 7050026253047293124, guid: 8d0315047a9d0bb48b67bba220b6a4e4, type: 3}
-  - {fileID: 5864228652520589776}
   minFallHeight: 5
   FallDamageMultiplier: 2
   deathEffect: {fileID: 5864228652520589776}
