@@ -46,6 +46,7 @@ public class TargetFinder : MonoBehaviour
         PlayerInputHandler.OnTarget += TargetAndUntarget;
         PlayerInputHandler.OnTargetRight += SelectTarget;
         PlayerInputHandler.OnTargetLeft += SelectTarget;
+        PlayerInputHandler.OnChangeTarget += ChangeTarget;
 
         PlayerHealth.OnDeath += EmptyList;
         BaseHealth.SwitchTarget += SelectNewTarget;
@@ -56,6 +57,7 @@ public class TargetFinder : MonoBehaviour
         PlayerInputHandler.OnTarget -= TargetAndUntarget;
         PlayerInputHandler.OnTargetRight -= SelectTarget;
         PlayerInputHandler.OnTargetLeft -= SelectTarget;
+        PlayerInputHandler.OnChangeTarget -= ChangeTarget;
 
         PlayerHealth.OnDeath -= EmptyList;
         BaseHealth.SwitchTarget -= SelectNewTarget;
@@ -169,6 +171,17 @@ public class TargetFinder : MonoBehaviour
         }
    }
 
+    private void ChangeTarget(Vector2 input)
+    {
+        if(input.y > 0)
+        {
+            SelectTarget(1);
+        }
+        else if(input.y < 0)
+        {
+            SelectTarget(-1);
+        }
+    }
     private void SelectTarget(int next)
     {
         if(pool != null && pool.Count > 1)
