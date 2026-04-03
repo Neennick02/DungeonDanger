@@ -12,6 +12,7 @@ public class BossBehaviour : MonoBehaviour
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float spacing = 0.5f;
     [SerializeField] private List<Segment> Segments = new List<Segment>();
+    [SerializeField] private Material tailMaterial;
     private int destroyedSegmentsCount = 0;
     public int currentSegment;
     private bool isDead;
@@ -95,6 +96,7 @@ public class BossBehaviour : MonoBehaviour
         else
         {
             Segments[Segments.Count - 1].EnableTrigger();
+            Segments[Segments.Count - 1].gameObject.GetComponent<Renderer>().material = tailMaterial;
         }
     }
 

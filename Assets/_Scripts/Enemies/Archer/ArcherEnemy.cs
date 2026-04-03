@@ -16,6 +16,8 @@ public class ArcherEnemy : BaseEnemy
     }
     protected override void Update()
     {
+        if (isDead) return;
+       
         base.Update();
         timer += Time.deltaTime;
 

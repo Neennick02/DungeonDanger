@@ -53,18 +53,19 @@ public class LockedDoorInteractable : DoorInteractable
 
     private void SaveState()
     {
-        int locked = isLocked? 0 : 1;
-
-        PlayerPrefs.SetInt("Locked" + transform.name, locked);
+        PlayerPrefs.SetInt("Locked" + transform.name, isLocked ? 1 : 0);
     }
 
     private void LoadState()
     {
-        int locked = PlayerPrefs.GetInt("Locked", 1);
+        int locked = PlayerPrefs.GetInt("Locked" + transform.name, 1);
 
-        isLocked = locked > 0 ? true : false;
+        isLocked = locked == 1;
 
-        transform.position = new Vector3(0, endPoint, 0);
+        if (!isLocked)
+        {
+            transform.position = new Vector3(0, endPoint, 0);
+        }
     }
 
     protected override void OnTriggerEnter(Collider other)
