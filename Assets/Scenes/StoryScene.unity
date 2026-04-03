@@ -382,7 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e930ef6ab4997c04691359e8ee236855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.08
+  delay: 0.06
   StartText: "Long ago, the village of Stonehov lived in peace beneath the shadow
     of the sacred temple. For generations, it was a place of prayer, light, and protection.
     But after a terrible storm, a bolt of lightning struck the temple\u2019s highest
@@ -501,7 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
