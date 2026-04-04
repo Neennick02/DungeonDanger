@@ -17,4 +17,4 @@ MonoBehaviour:
   AttackInterval: 1.5
   AttackDistance: 4
   Speed: 10
-  SpottingRadius: 15
+  SpottingRadius: 25

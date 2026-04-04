@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Archer
   m_EditorClassIdentifier: 
   MaxHealth: 15
-  Damage: 3
+  Damage: 5
   AttackInterval: 4
   AttackDistance: 10
   Speed: 3
-  SpottingRadius: 20
+  SpottingRadius: 40
