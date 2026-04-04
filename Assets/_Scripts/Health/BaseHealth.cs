@@ -43,6 +43,8 @@ public abstract class BaseHealth : MonoBehaviour
 
     public virtual void DrainHealth(int amount)
     {
+        if(isDead) return;
+
         currentHealth -= amount;
 
         if (currentHealth <= 0 && !isDead)
@@ -53,6 +55,8 @@ public abstract class BaseHealth : MonoBehaviour
     }
     public virtual void AddHealth(int amount)
     {
+        if (isDead) return;
+
         currentHealth += amount;
     }
     protected virtual void Update()
