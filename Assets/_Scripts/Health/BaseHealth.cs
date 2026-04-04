@@ -105,7 +105,6 @@ public abstract class BaseHealth : MonoBehaviour
       }
     public void FlashRed()
     {
-        StopAllCoroutines();
         StartCoroutine(Flash());
     }
 
