@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -16,6 +17,8 @@ public class PlayerAttack : MonoBehaviour
     private bool isAttacking;
     private float attackTimer;
     private int comboCounter = 0;
+
+    [SerializeField] private List<AudioClip> swordSwingSounds;
 
     [SerializeField] private float attackCoolDown = 1f;
     private void OnEnable()
@@ -51,6 +54,7 @@ public class PlayerAttack : MonoBehaviour
         //only attack once
         if (!isAttacking)
         {
+            AudioManager.Instance.PlayClip(swordSwingSounds);
             isAttacking = true;
             
             //reset combo

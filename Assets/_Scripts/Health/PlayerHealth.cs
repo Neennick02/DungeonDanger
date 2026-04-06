@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerHealth : BaseHealth
 {
     [SerializeField] private PlayerObject playerObject;
+    [SerializeField] private MusicManager musicManager;
 
     public static event Action<int> OnHealthAmountChanged;
     public static event Action OnDeath;
@@ -51,6 +52,12 @@ public class PlayerHealth : BaseHealth
     {
         currentHealth += amount;
         OnHealthAmountChanged?.Invoke(currentHealth);
+
+        //stop heart sound effect
+        if (currentHealth <= maxHealth / 3)
+        {
+            musicManager.ToggleHeartBeat(false);
+        }
     }
 
     public override void DrainHealth(int amount)
@@ -66,6 +73,12 @@ public class PlayerHealth : BaseHealth
         {
             Die();
             isDead = true;
+        }
+
+        //play heart sound effect
+        if(currentHealth <= maxHealth / 3)
+        {
+            musicManager.ToggleHeartBeat(true);
         }
     }
 

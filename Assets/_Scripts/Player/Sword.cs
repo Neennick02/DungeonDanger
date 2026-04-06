@@ -1,11 +1,16 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
     [SerializeField] private int damage = 5;
     [SerializeField] private float delay = 1f;
+
     private float timer;
-    private bool hit = false;   
+    private bool hit = false;
+
+    [SerializeField] private List<AudioClip> swordHitSounds; 
     private void Update()
     {
 
@@ -17,22 +22,33 @@ public class Sword : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.gameObject.CompareTag("Boss"))
         {
             Debug.Log("Hit boss");
         }
-            if (other.gameObject.CompareTag("Enemy")){
+        else if (other.gameObject.CompareTag("Enemy"))
+        {
 
             var enemyHealth = other.gameObject.GetComponent<BaseHealth>();
             if (enemyHealth == null) enemyHealth = other.gameObject.GetComponentInParent<BaseHealth>();
 
             if (enemyHealth != null && !hit)
             {
-                
+
                 enemyHealth.DrainHealth(damage);
-                timer = 0f;
-                hit = true;
             }
         }
+        else
+        {
+            if (!hit)
+            {
+                //hit  sound
+                AudioManager.Instance.PlayClip(swordHitSounds);
+            }
+        }
+
+        timer = 0f;
+        hit = true;
     }
 }
