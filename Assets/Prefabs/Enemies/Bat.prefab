@@ -54,8 +54,7 @@ MonoBehaviour:
   minFallHeight: 5
   FallDamageMultiplier: 2
   deathEffect: {fileID: 6685405625110189311}
-  hurtSounds:
-  - {fileID: 8300000, guid: b5d4c3e40098ee64c9ff576403bd27c0, type: 3}
+  fleshSounds: []
   deathSounds:
   - {fileID: 8300000, guid: 00ce071cd75670e4cbac28b3551a230e, type: 3}
 --- !u!195 &6470729605853233070
@@ -256,8 +255,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.65
+  m_Center: {x: 0, y: 0.27, z: 0}
 --- !u!114 &3070296612434403871
 MonoBehaviour:
   m_ObjectHideFlags: 0
