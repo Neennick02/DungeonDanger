@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Windows;
@@ -32,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private float _dodgeTime;
     private float _dodgeCooldownTimer;
     private bool _isDodging;
+    [SerializeField] private List<AudioClip> rollSounds;
 
     public bool _isTargeting { get; private set; }
 
@@ -340,11 +342,11 @@ public class PlayerMovement : MonoBehaviour
         if (_velocity.sqrMagnitude > 0.01f)
             {
             //start dodge action
-            State = PlayerState.Dodging;
-            _isDodging = true;
+                State = PlayerState.Dodging;
+                _isDodging = true;
                 _dodgeTime = _dodgeDuration;
                 _dodgeCooldownTimer = _dodgeCooldown;
-
+            AudioManager.Instance.PlayClip(rollSounds);
 
             }
     }

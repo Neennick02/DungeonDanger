@@ -1,10 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ArcherHealth : BaseHealth
 {
     private WarriorAnimator animator;
     private ArcherEnemy enemyScript;
-
+    [SerializeField] private List<AudioClip> boneSounds;
+    [SerializeField] private List<AudioClip> deathSounds;
     protected override void Start()
     {
         base.Start();
@@ -15,6 +17,8 @@ public class ArcherHealth : BaseHealth
     }
     public override void DrainHealth(int amount)
     {
+        AudioManager.Instance.PlayClip(boneSounds);
+
         currentHealth -= amount;
         FlashRed();
         if (currentHealth > 0)
@@ -29,6 +33,8 @@ public class ArcherHealth : BaseHealth
 
     protected override void Die()
     {
+        AudioManager.Instance.PlayClip(deathSounds);
+
         base.Die();
         animator.EnableTrigger("Die");
         enemyScript.Die();

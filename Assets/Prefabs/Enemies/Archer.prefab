@@ -75,6 +75,12 @@ MonoBehaviour:
   minFallHeight: 5
   FallDamageMultiplier: 2
   deathEffect: {fileID: 4166545339671001675}
+  boneSounds:
+  - {fileID: 8300000, guid: f4ae8a5c88b902343b844f864bd9004b, type: 3}
+  - {fileID: 8300000, guid: ffb5aab7ee4ff6d4aa2dbca18ac1d221, type: 3}
+  - {fileID: 8300000, guid: f5c01ebe89fd8c0439ed2f8f63cabed9, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 543084fea294182478c9f6e3a0ae26e7, type: 3}
 --- !u!195 &4459976672969431000
 NavMeshAgent:
   m_ObjectHideFlags: 0

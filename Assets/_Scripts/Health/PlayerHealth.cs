@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealth : BaseHealth
@@ -11,7 +12,13 @@ public class PlayerHealth : BaseHealth
 
     private PlayerMovement movement;
     private CharacterController controller;
+    [SerializeField] private List<AudioClip> healSounds;
 
+    [SerializeField] private List<AudioClip> hurtSounds;
+    [SerializeField] private List<AudioClip> deathSounds;
+
+    [SerializeField] private List<AudioClip> shieldSounds;
+    [SerializeField] private List<AudioClip> fallDamageSounds;
 
     private bool isDefending;
 
@@ -50,11 +57,12 @@ public class PlayerHealth : BaseHealth
     }
     public override void AddHealth(int amount)
     {
+        AudioManager.Instance.PlayClip(healSounds);
         currentHealth += amount;
         OnHealthAmountChanged?.Invoke(currentHealth);
 
         //stop heart sound effect
-        if (currentHealth <= maxHealth / 3)
+        if (currentHealth >= maxHealth / 3)
         {
             musicManager.ToggleHeartBeat(false);
         }
@@ -62,7 +70,13 @@ public class PlayerHealth : BaseHealth
 
     public override void DrainHealth(int amount)
     {
-        if (isDefending) return;
+        if (isDefending)
+        {
+            AudioManager.Instance.PlayClip(shieldSounds);
+            return;
+        }
+
+        AudioManager.Instance.PlayClip(hurtSounds);
 
         currentHealth -= amount;
         OnHealthAmountChanged?.Invoke(currentHealth);
@@ -113,8 +127,11 @@ public class PlayerHealth : BaseHealth
                     //calculate damage
                     float damage = (fallDist * minFallHeight) * FallDamageMultiplier;
 
-                    if (damage > 0)
+                    if ((int)damage > 0)
+                    { 
                         DrainHealth((int)damage);
+                        AudioManager.Instance.PlayClip(fallDamageSounds);
+                    }
                 }
                 isFalling = false;
             }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SaveStatueInteractable : BaseInteractable
@@ -9,6 +10,7 @@ public class SaveStatueInteractable : BaseInteractable
 
     [SerializeField] private GameObject effect;
     private PlayerInventory inventory;
+    [SerializeField] private List<AudioClip> saveSound;
 
     private void OnEnable()
     {
@@ -24,7 +26,7 @@ public class SaveStatueInteractable : BaseInteractable
     private void Save()
     {
         OnSavePlayerData?.Invoke();
-
+        AudioManager.Instance.PlayClip(saveSound);
     }
     public override void Interact()
     {

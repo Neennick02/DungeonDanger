@@ -98,6 +98,8 @@ MonoBehaviour:
         m_CallState: 2
   price: 1
   effect: {fileID: 7245883116433626898}
+  saveSound:
+  - {fileID: 8300000, guid: 4b7d84f6a7fd23c47bd2e03c75bdea21, type: 3}
 --- !u!1 &1820223153613337223
 GameObject:
   m_ObjectHideFlags: 0
