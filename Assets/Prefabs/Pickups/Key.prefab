@@ -77,6 +77,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawnTime: 0
+  pickupSound:
+  - {fileID: 8300000, guid: ead6d86b26951154e8346cc0ea9eeb28, type: 3}
 --- !u!1 &6901851141971398709
 GameObject:
   m_ObjectHideFlags: 0

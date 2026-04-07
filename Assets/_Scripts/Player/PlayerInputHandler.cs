@@ -188,7 +188,6 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnDrinkPotionPerformed(InputAction.CallbackContext ctx)
     {
         OnDrinkPotion?.Invoke();
-        Debug.Log("drink potion");
     }
     private void OnChangeTargetPerformed(InputAction.CallbackContext ctx)
     {

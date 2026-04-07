@@ -6,6 +6,7 @@ public class PlayerInventory : MonoBehaviour
 {
     public int keyAmount {get; private set;}
     public int potionAmount { get; private set;}
+    public int potionHealAmount = 5;
     public int coinAmount { get; private set; }
 
     public static event Action<int> OnKeyAmountChanged;
@@ -39,6 +40,8 @@ public class PlayerInventory : MonoBehaviour
 
         PlayerInputHandler.OnDefendStart += GrabShield;
         PlayerInputHandler.OnDefendEnd += PutAwayShield;
+
+        PlayerInputHandler.OnDrinkPotion += UsePotion;
     }
 
     private void OnDisable()
@@ -52,6 +55,8 @@ public class PlayerInventory : MonoBehaviour
 
         PlayerInputHandler.OnDefendStart -= GrabShield;
         PlayerInputHandler.OnDefendEnd -= PutAwayShield;
+        PlayerInputHandler.OnDrinkPotion -= UsePotion;
+
     }
 
     #endregion
@@ -119,6 +124,12 @@ public class PlayerInventory : MonoBehaviour
         potionAmount += amount;
         if (potionAmount < 0) potionAmount = 0;
         OnPotionAmountChanged?.Invoke(potionAmount);
+    }
+
+    private void UsePotion()
+    {
+        if(potionAmount > 0)
+        UpdatePotionAmount(-1);
     }
 
     //coins

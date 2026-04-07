@@ -8,6 +8,7 @@ public class PotionPickup : BasePickup
     {
         if (other.CompareTag("Player"))
         {
+            AudioManager.Instance.PlayClip(pickupSound);
             OnPickup?.Invoke(1);
             Destroy(gameObject);
         }

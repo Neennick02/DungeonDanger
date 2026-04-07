@@ -123,7 +123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawnTime: 5
+  pickupSound:
+  - {fileID: 8300000, guid: 8d1e9aa4982fd0744a75ae4589e3deba, type: 3}
   amount: 10
+  model: {fileID: 8316694601699469789}
 --- !u!1 &8723265368140754973
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +332,11 @@ PrefabInstance:
       addedObject: {fileID: 8879815899545161250}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a25e2c7c1e2039a4a91d4e3b3b01438e, type: 3}
+--- !u!1 &8316694601699469789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a25e2c7c1e2039a4a91d4e3b3b01438e, type: 3}
+  m_PrefabInstance: {fileID: 9199653908014273676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8656205463672910695 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a25e2c7c1e2039a4a91d4e3b3b01438e, type: 3}

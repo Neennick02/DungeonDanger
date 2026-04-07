@@ -6,6 +6,7 @@ public class PlayerHealth : BaseHealth
 {
     [SerializeField] private PlayerObject playerObject;
     [SerializeField] private MusicManager musicManager;
+    private PlayerInventory inventory;
 
     public static event Action<int> OnHealthAmountChanged;
     public static event Action OnDeath;
@@ -13,6 +14,7 @@ public class PlayerHealth : BaseHealth
     private PlayerMovement movement;
     private CharacterController controller;
     [SerializeField] private List<AudioClip> healSounds;
+    [SerializeField] private List<AudioClip> potionSounds;
 
     [SerializeField] private List<AudioClip> hurtSounds;
     [SerializeField] private List<AudioClip> deathSounds;
@@ -29,6 +31,8 @@ public class PlayerHealth : BaseHealth
         SaveStatueInteractable.OnSavePlayerData += SaveData;
         GameManager.OnLoad += LoadData;
         PlayerInventory.OnDefendActive += Defend;
+        PlayerInputHandler.OnDrinkPotion += UsePotion;
+
     }
 
     private void OnDisable()
@@ -36,13 +40,16 @@ public class PlayerHealth : BaseHealth
         HeartPickup.OnPickup -= AddHealth;
         SaveStatueInteractable.OnSavePlayerData -= SaveData;
         GameManager.OnLoad -= LoadData;
-        PlayerInventory.OnDefendActive += Defend;
+        PlayerInventory.OnDefendActive -= Defend;
+        PlayerInputHandler.OnDrinkPotion -= UsePotion;
+
     }
     #endregion
     protected override void Start()
     {
         movement = GetComponent<PlayerMovement>();
         controller = GetComponent<CharacterController>();
+        inventory = GetComponent<PlayerInventory>();
 
         //set health
         maxHealth = playerObject.StartHealth;
@@ -95,7 +102,14 @@ public class PlayerHealth : BaseHealth
             musicManager.ToggleHeartBeat(true);
         }
     }
-
+    private void UsePotion()
+    {
+        if (inventory.potionAmount >= 1)
+        {
+            AddHealth(inventory.potionHealAmount);
+            AudioManager.Instance.PlayClip(potionSounds);
+        }
+    }
     private void Defend(bool active)
     {
         isDefending = active;

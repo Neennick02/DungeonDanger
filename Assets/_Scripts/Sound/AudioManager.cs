@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour
             pool.Add(source);
         }
     }
-    public void PlayClip(List<AudioClip> clips, float volume = 1f)
+    public void PlayClip(List<AudioClip> clips, float volume = 1f, float pitch = 1)
     {
         var source = GetAwailableSource();
         if(source == null) return;
@@ -48,6 +48,7 @@ public class AudioManager : MonoBehaviour
         }
 
         source.volume = volume;
+        source.pitch = pitch;
         source.Play();
         StartCoroutine(ReleaseWhenDone(source));
     }

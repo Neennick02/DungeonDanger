@@ -1,9 +1,12 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class BasePickup : MonoBehaviour
+public abstract class  BasePickup : MonoBehaviour
 {
     [SerializeField] protected float despawnTime = 5;
+    [SerializeField] protected List<AudioClip> pickupSound;
     protected float timer;
     protected virtual void OnTriggerEnter(Collider other)
     {
