@@ -385,13 +385,11 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else if (input.x > 0.5f)
                 {
-                    Debug.Log("Hop right");
                     _dodgeDirection = transform.right;
                     animator.Hop();
                 }
                 else if (input.x < -0.5f)
                 {
-                    Debug.Log("Hop left");
                     _dodgeDirection = -transform.right;
                     animator.Hop();
                 }

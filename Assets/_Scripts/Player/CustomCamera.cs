@@ -37,7 +37,7 @@ public class CustomCamera : MonoBehaviour
     public IEnumerator DisableAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
-        DisableCam();
+        gameObject.SetActive(false);
     }
 
     public void StartCutScene()

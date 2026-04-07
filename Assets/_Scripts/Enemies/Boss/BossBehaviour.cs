@@ -1,10 +1,12 @@
 using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.Splines;
 
 public class BossBehaviour : MonoBehaviour
@@ -23,6 +25,7 @@ public class BossBehaviour : MonoBehaviour
     private Rigidbody rb;
     private float progress;
     private float startHeight;
+    public  UnityEvent OnBossDefeated;
 
     private void Start()
     {
@@ -116,7 +119,7 @@ public class BossBehaviour : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
         }
-
+        OnBossDefeated?.Invoke();
         Destroy(gameObject);
     } 
 }

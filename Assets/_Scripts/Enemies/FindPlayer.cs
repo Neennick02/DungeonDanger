@@ -2,6 +2,7 @@ using FirstGearGames.Utilities.Objects;
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FindPlayer : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class FindPlayer : MonoBehaviour
     private MusicManager musicManager;
     private bool asssigned = false;
     private bool listEmpty;
-
+    public UnityEvent OnEnemiesDefeated;
     private void Awake()
     {
         musicManager = FindFirstObjectByType<MusicManager>(); 
@@ -23,6 +24,7 @@ public class FindPlayer : MonoBehaviour
         {
             listEmpty = true;
             musicManager.ToggleCombatMusic(false);
+            OnEnemiesDefeated?.Invoke();
         }
     }
 
@@ -43,8 +45,11 @@ public class FindPlayer : MonoBehaviour
                 if (script == null) script = enemies[i].GetComponentInChildren<BaseEnemy>();
 
                 //assign all enemy objects
-                script.AssignPlayer(other.transform);
-                asssigned = true;
+                if(script != null)
+                {
+                    script.AssignPlayer(other.transform);
+                    asssigned = true;
+                }
             }
         }
     }
