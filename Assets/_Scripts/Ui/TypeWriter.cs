@@ -16,7 +16,7 @@ public class TypeWriter : MonoBehaviour
     private float fadeOutTimer;
     [SerializeField] private List<string> textList;
     [SerializeField] private Image blackScreen;
-
+    [SerializeField] private TextMeshProUGUI skipButton;
     private TextMeshProUGUI textObject;
     private void Start()
     {
@@ -30,6 +30,8 @@ public class TypeWriter : MonoBehaviour
         if (Input.anyKey || (Gamepad.current != null && Gamepad.current.allControls.Any(c => c.IsPressed())))
         {
             characterDelay = 0.01f;
+            StopCoroutine(EnableSkipButton());
+            StartCoroutine(EnableSkipButton());
         }
         else characterDelay = 0.05f;
     }
@@ -60,6 +62,26 @@ public class TypeWriter : MonoBehaviour
             yield return null;
         }
         
+        SceneManager.LoadScene("LevelBuildingScene");
+    }
+
+    private IEnumerator EnableSkipButton()
+    {
+        yield return new WaitForSeconds(1f);
+        TextMeshProUGUI skipText = skipButton.GetComponentInChildren<TextMeshProUGUI>();
+
+        float duration = 1f;
+        float time = 0;
+
+        while (skipText.color.a < 1)
+        {
+            time += Time.deltaTime;
+            skipText.color = Color.Lerp(Color.clear, Color.white, time / duration);
+        }
+    }
+
+    public void Skip()
+    {
         SceneManager.LoadScene("LevelBuildingScene");
     }
 }
