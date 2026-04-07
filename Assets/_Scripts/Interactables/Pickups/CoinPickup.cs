@@ -8,6 +8,7 @@ public class CoinPickup : BasePickup
     [SerializeField] private int amount;
     [SerializeField] private GameObject model;
     private bool pickedUp;
+    private float interval = 0.1f;
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !pickedUp)
@@ -29,8 +30,8 @@ public class CoinPickup : BasePickup
             OnPickup?.Invoke(1);
             AudioManager.Instance.PlayClip(pickupSound, 1, pitch);
             pitch += 0.2f;
-            yield return new WaitForSeconds(0.1f);
-            
+            yield return new WaitForSeconds(interval);
+            interval -= interval / 10;
         }
         DestroySelf();
     }

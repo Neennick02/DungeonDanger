@@ -6,9 +6,19 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private AudioSource heartBeatSource;
     [SerializeField] private AudioSource defaultMusicSource;
     [SerializeField] private AudioSource combatMusicSource;
+
     private float fadeOutDuration = 1f;
     private float timer;
 
+    private float defaultVolume = 1f;
+    private float combatVolume = 1f;
+
+
+    private void Start()
+    {
+        defaultVolume = defaultMusicSource.volume;
+        combatVolume = combatMusicSource.volume;
+    }
     public void ToggleHeartBeat(bool active)
     {
         heartBeatSource.enabled = active;
@@ -31,14 +41,23 @@ public class MusicManager : MonoBehaviour
     private IEnumerator FadeMusic(AudioSource oldAudio, AudioSource newAudio)
     {
         timer = 0;
+        float targetVolume;
 
+        if(newAudio == defaultMusicSource)
+        {
+            targetVolume = defaultVolume;
+        }
+        else
+        {
+            targetVolume = combatVolume;
+        }
 
         while(timer < fadeOutDuration)
         {
             timer += Time.deltaTime;
 
-            oldAudio.volume = Mathf.Lerp(1, 0, timer / fadeOutDuration);
-            newAudio.volume = Mathf.Lerp(0, 1, timer / fadeOutDuration);
+            oldAudio.volume = Mathf.Lerp(oldAudio.volume, 0, timer / fadeOutDuration);
+            newAudio.volume = Mathf.Lerp(0, targetVolume, timer / fadeOutDuration);
 
             yield return null;
         }
