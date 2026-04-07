@@ -8,6 +8,7 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private AudioSource combatMusicSource;
     private float fadeOutDuration = 1f;
     private float timer;
+
     public void ToggleHeartBeat(bool active)
     {
         heartBeatSource.enabled = active;
@@ -29,7 +30,8 @@ public class MusicManager : MonoBehaviour
 
     private IEnumerator FadeMusic(AudioSource oldAudio, AudioSource newAudio)
     {
-        timer = 0; 
+        timer = 0;
+
 
         while(timer < fadeOutDuration)
         {

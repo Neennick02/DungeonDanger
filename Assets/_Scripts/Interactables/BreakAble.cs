@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class BreakAble : BaseHealth
 {
+    [SerializeField] private List<AudioClip> breakSounds;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Sword"))
         {
+            AudioManager.Instance.PlayClip(breakSounds);
             DropItems();
             Die();
         }

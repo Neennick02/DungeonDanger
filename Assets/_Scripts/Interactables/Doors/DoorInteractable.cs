@@ -1,10 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 
 public class DoorInteractable : BaseInteractable
 {
     protected Animator _animator;
+    [SerializeField] private List<AudioClip> doorSounds;
     protected override void Start()
     {
         base.Start();
@@ -14,6 +16,7 @@ public class DoorInteractable : BaseInteractable
     public override void Interact()
     {
         base.Interact();
+        AudioManager.Instance.PlayClip(doorSounds);
         StartCoroutine(ResetAnimator());
     }
     IEnumerator ResetAnimator()

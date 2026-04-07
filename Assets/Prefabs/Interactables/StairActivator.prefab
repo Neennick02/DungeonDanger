@@ -13598,6 +13598,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  doorSounds:
+  - {fileID: 8300000, guid: afcd262be68809f42a49736e9c9a3fe8, type: 3}
 --- !u!114 &3229321120587556785
 MonoBehaviour:
   m_ObjectHideFlags: 0

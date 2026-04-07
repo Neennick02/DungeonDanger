@@ -7,7 +7,8 @@ public class TorchManager : MonoBehaviour
 {
     public List<OnOffInteractable> Torches;
     public UnityEvent OnAllTorchesLit;
-
+    [SerializeField] private List<AudioClip> doorSounds;
+    private bool opened;
     private void Update()
     {
         //loop over all objects
@@ -23,5 +24,11 @@ public class TorchManager : MonoBehaviour
 
         //invoke event
         OnAllTorchesLit?.Invoke();
+
+        if (!opened)
+        {
+            AudioManager.Instance.PlayClip(doorSounds);
+            opened = true;
+        }
     }
 }

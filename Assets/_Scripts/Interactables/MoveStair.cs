@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveStair : MonoBehaviour
@@ -13,6 +14,7 @@ public class MoveStair : MonoBehaviour
     private Vector3 start;
     public static event Action OnDisableCamera;
     bool done = false;
+    [SerializeField] private List<AudioClip> stairSounds;
 
     #region OnEnable
     private void OnEnable()
@@ -51,6 +53,7 @@ public class MoveStair : MonoBehaviour
     IEnumerator MoveRoutine()
     {
         time = 0;
+        AudioManager.Instance.PlayClip(stairSounds, 0.5f);
         while (time < duration)
         {
             time += Time.deltaTime;

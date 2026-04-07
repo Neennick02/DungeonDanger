@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
     public UnityEvent OpenDoor;
     private List<BaseEnemy> enemies;
     [SerializeField] private GameObject key;
+    [SerializeField] private List<AudioClip> doorSounds;
 
     #region OnEnable
     private void OnEnable()
@@ -39,8 +40,9 @@ public class EnemyManager : MonoBehaviour
                 enemies.RemoveAt(i);
             }
         }
-        if(enemies.Count == 0)
+        if(enemies.Count == 0 && locked)
         {
+            AudioManager.Instance.PlayClip(doorSounds);
             OpenDoor?.Invoke();
             locked = false;
         }
