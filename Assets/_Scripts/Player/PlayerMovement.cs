@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float pushDuration = 1.5f;
 
     [SerializeField] private PlayerAnimator animator;
-
+    private bool isDead;
     public enum PlayerState
     {
         Locomotion,
@@ -121,13 +121,15 @@ public class PlayerMovement : MonoBehaviour
                 break;
 
             case PlayerState.Dead:
-
+                isDead = true;
                 break;
         }
     }
 
     private void HandleLocomotionMovement(Vector2 input)
     {
+        if (isDead) return;
+
         move = CalculateDirection(input);
         //update dodge direction
         _dodgeDirection = move.normalized;

@@ -23,7 +23,10 @@ public class Sword : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Instantiate(hitParticle, transform.position, Quaternion.identity);
+        if (!other.CompareTag("Player") && !hit)
+        {
+            Instantiate(hitParticle, transform.position, Quaternion.identity);
+        }
 
         if (other.gameObject.CompareTag("Boss"))
         {

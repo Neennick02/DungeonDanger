@@ -64,7 +64,7 @@ public class LockedDoorInteractable : DoorInteractable
 
         if (!isLocked)
         {
-            transform.position = new Vector3(0, endPoint, 0);
+            interactionPopup = "Open";
         }
     }
 
