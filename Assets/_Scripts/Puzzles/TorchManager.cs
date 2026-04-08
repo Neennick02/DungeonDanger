@@ -9,6 +9,7 @@ public class TorchManager : MonoBehaviour
     public UnityEvent OnAllTorchesLit;
     [SerializeField] private List<AudioClip> doorSounds;
     [SerializeField] private List<AudioClip> clickSounds;
+    [SerializeField] private List<AudioClip> solvedSounds;
     private bool opened;
     private void Update()
     {
@@ -30,6 +31,7 @@ public class TorchManager : MonoBehaviour
         {
             AudioManager.Instance.PlayClip(doorSounds);
             AudioManager.Instance.PlayClip(clickSounds);
+            AudioManager.Instance.PlayClip(solvedSounds);
 
             opened = true;
         }

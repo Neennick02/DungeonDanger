@@ -140,3 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySO: {fileID: 11400000, guid: 54f479bce4ef6654d88cf2c5ee043486, type: 2}
+  impactSounds:
+  - {fileID: 8300000, guid: 53b2b66bd5cedef418fc45819fd44864, type: 3}
+  playerImpactSounds:
+  - {fileID: 8300000, guid: 53b2b66bd5cedef418fc45819fd44864, type: 3}

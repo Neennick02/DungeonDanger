@@ -102,6 +102,9 @@ MonoBehaviour:
   - {fileID: 5913160958026256284}
   - {fileID: 7866809537079000626}
   - {fileID: 8960670061184814834}
+  OnEnemiesDefeated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7236272712328692719
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,6 +172,8 @@ MonoBehaviour:
   key: {fileID: 0}
   doorSounds:
   - {fileID: 8300000, guid: eefa9699a2215f64ba86e7260f1f94a4, type: 3}
+  solvedSounds:
+  - {fileID: 8300000, guid: e40d5b498f1b0d243b342e40be106ef9, type: 3}
 --- !u!1 &7979974398560559206
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +315,7 @@ MonoBehaviour:
         m_CallState: 2
   doorSounds:
   - {fileID: 8300000, guid: eefa9699a2215f64ba86e7260f1f94a4, type: 3}
+  solvedSounds: []
 --- !u!135 &3952142285479167612
 SphereCollider:
   m_ObjectHideFlags: 0

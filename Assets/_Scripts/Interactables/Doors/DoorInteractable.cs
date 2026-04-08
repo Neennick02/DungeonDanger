@@ -7,6 +7,8 @@ public class DoorInteractable : BaseInteractable
 {
     protected Animator _animator;
     [SerializeField] private List<AudioClip> doorSounds;
+    [SerializeField] private List<AudioClip> solvedSounds;
+
     protected override void Start()
     {
         base.Start();
@@ -17,6 +19,8 @@ public class DoorInteractable : BaseInteractable
     {
         base.Interact();
         AudioManager.Instance.PlayClip(doorSounds);
+        AudioManager.Instance.PlayClip(solvedSounds);
+
         StartCoroutine(ResetAnimator());
     }
     IEnumerator ResetAnimator()

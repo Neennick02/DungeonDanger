@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour
     private List<BaseEnemy> enemies;
     [SerializeField] private GameObject key;
     [SerializeField] private List<AudioClip> doorSounds;
+    [SerializeField] private List<AudioClip> solvedSounds;
 
     #region OnEnable
     private void OnEnable()
@@ -43,6 +44,7 @@ public class EnemyManager : MonoBehaviour
         if(enemies.Count == 0 && locked)
         {
             AudioManager.Instance.PlayClip(doorSounds);
+            AudioManager.Instance.PlayClip(solvedSounds);
             OpenDoor?.Invoke();
             locked = false;
         }

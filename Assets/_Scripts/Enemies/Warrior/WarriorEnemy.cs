@@ -1,10 +1,13 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WarriorEnemy : BaseEnemy
 {
     WarriorAnimator animator;
     [SerializeField] private Collider swordCollider;
+    [SerializeField] private List<AudioClip> swordAudioClips;
     protected override void Start()
     {
         base.Start();
@@ -27,6 +30,7 @@ public class WarriorEnemy : BaseEnemy
         {
             if (!isAttacking && timer > enemyObject.AttackInterval)
             {
+                AudioManager.Instance.PlayClip(swordAudioClips);
                 animator.EnableTrigger("Attack");
                 Attack();
                 isAttacking = true;

@@ -20,6 +20,7 @@ public class OrderedTorchManager : MonoBehaviour
 
     [SerializeField] private List<AudioClip> doorSounds;
     [SerializeField] private List<AudioClip> clickSounds;
+    [SerializeField] private List<AudioClip> solvedSounds;
     #region OnEnable
     private void OnEnable()
     {
@@ -70,6 +71,7 @@ public class OrderedTorchManager : MonoBehaviour
         {
             AudioManager.Instance.PlayClip(clickSounds);
             AudioManager.Instance.PlayClip(doorSounds);
+            AudioManager.Instance.PlayClip(solvedSounds);
 
             torch.KeepOn();
 

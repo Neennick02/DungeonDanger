@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ArcherEnemy : BaseEnemy
@@ -8,6 +9,7 @@ public class ArcherEnemy : BaseEnemy
     [SerializeField] private Transform firePoint;
     WarriorAnimator animator;
     private float targetDistanceToPlayer = 5f;
+    [SerializeField] private List<AudioClip> bowFireSounds;
 
     protected override void Start()
     {
@@ -56,6 +58,9 @@ public class ArcherEnemy : BaseEnemy
     {
         //wait for draw arrow animation
         yield return new WaitForSeconds(0.5f);
+
+        //play sound
+        AudioManager.Instance.PlayClip(bowFireSounds);
 
         GameObject arrowGo = Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
         Rigidbody rb = arrowGo.GetComponent<Rigidbody>();
