@@ -33,6 +33,7 @@ public class TargetFinder : MonoBehaviour
     private bool lockedOn;
 
     public static event Action OnLockOff;
+    [SerializeField] private List<AudioClip> targetAudio;
 
     #region OnEnable/Disable
     private void OnEnable()
@@ -95,6 +96,7 @@ public class TargetFinder : MonoBehaviour
                 //if more than 1 other, select other
                 if(pool.Count > 1)
                 {
+                    AudioManager.Instance.PlayClip(targetAudio);
                     SelectTarget(1);
                 }
                 else

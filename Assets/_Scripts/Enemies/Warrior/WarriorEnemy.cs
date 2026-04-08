@@ -31,6 +31,7 @@ public class WarriorEnemy : BaseEnemy
             if (!isAttacking && timer > enemyObject.AttackInterval)
             {
                 AudioManager.Instance.PlayClip(swordAudioClips);
+             
                 animator.EnableTrigger("Attack");
                 Attack();
                 isAttacking = true;
