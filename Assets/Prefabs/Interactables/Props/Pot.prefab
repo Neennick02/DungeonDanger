@@ -111,7 +111,10 @@ MonoBehaviour:
   - {fileID: 0}
   minFallHeight: 1
   FallDamageMultiplier: 10
-  deathEffect: {fileID: 0}
+  deathEffect: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
+  breakSounds:
+  - {fileID: 8300000, guid: 07b5b2df52d5cd54194daab9d2e5fb9e, type: 3}
+  dustParticles: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
 --- !u!65 &6078797292437394284
 BoxCollider:
   m_ObjectHideFlags: 0

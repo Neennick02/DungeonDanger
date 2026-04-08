@@ -10,7 +10,8 @@ public class Sword : MonoBehaviour
     private float timer;
     private bool hit = false;
 
-    [SerializeField] private List<AudioClip> swordHitSounds; 
+    [SerializeField] private List<AudioClip> swordHitSounds;
+    [SerializeField] private GameObject hitParticle;
     private void Update()
     {
 
@@ -22,6 +23,7 @@ public class Sword : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        Instantiate(hitParticle, transform.position, Quaternion.identity);
 
         if (other.gameObject.CompareTag("Boss"))
         {

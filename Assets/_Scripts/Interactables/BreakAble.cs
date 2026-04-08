@@ -4,7 +4,6 @@ using UnityEngine;
 public class BreakAble : BaseHealth
 {
     [SerializeField] private List<AudioClip> breakSounds;
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Sword"))
@@ -32,6 +31,7 @@ public class BreakAble : BaseHealth
 
     protected override void Die()
     {
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
