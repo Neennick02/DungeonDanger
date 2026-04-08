@@ -189,7 +189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawnTime: 5
-  healthAmount: 10
+  pickupSound: []
+  healthAmount: 3
 --- !u!1 &8735126103084847994
 GameObject:
   m_ObjectHideFlags: 0

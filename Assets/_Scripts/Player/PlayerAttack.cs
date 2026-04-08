@@ -8,7 +8,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Collider swordModel;
 
 
-    [SerializeField] private float attackDuration = 1.5f;
+    [SerializeField] private float attackDuration;
+    [SerializeField] private float attackCoolDown;
+
     [SerializeField] private PlayerAnimator animator;
 
     private PlayerMovement movement;
@@ -19,8 +21,6 @@ public class PlayerAttack : MonoBehaviour
     private int comboCounter = 0;
 
     [SerializeField] private List<AudioClip> swordSwingSounds;
-
-    [SerializeField] private float attackCoolDown = 1f;
     private void OnEnable()
     {
         PlayerInputHandler.OnAttack += Attack;
@@ -38,12 +38,7 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Update()
     {
-        attackCoolDown -= Time.deltaTime;
-
-        if(attackCoolDown < 0f)
-        {
-            comboCounter = 0;
-        }
+        attackTimer += Time.deltaTime;
     }
 
     private void Attack()
@@ -54,14 +49,16 @@ public class PlayerAttack : MonoBehaviour
         //only attack once
         if (!isAttacking)
         {
+            if (attackTimer < attackCoolDown) return;
+
             AudioManager.Instance.PlayClip(swordSwingSounds);
             isAttacking = true;
             
-            //reset combo
+            /*//reset combo
             if (comboCounter > 1)
             {
                 comboCounter = 0;
-            }
+            }*/
 
             //set animation
             animator.Attack(comboCounter);
@@ -82,8 +79,6 @@ public class PlayerAttack : MonoBehaviour
 
             //increase combo
             comboCounter++;
-
-            attackCoolDown += 1;
         }
     }
 
@@ -99,8 +94,7 @@ public class PlayerAttack : MonoBehaviour
         isAttacking = false;
         animator.isAttacking = false;
         swordModel.enabled = false;
-
-        attackCoolDown = 1f;
+        attackTimer = attackCoolDown;
     }
 
 

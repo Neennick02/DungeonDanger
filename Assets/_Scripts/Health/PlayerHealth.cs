@@ -13,6 +13,8 @@ public class PlayerHealth : BaseHealth
 
     private PlayerMovement movement;
     private CharacterController controller;
+
+    [Header("Sound Effects")]
     [SerializeField] private List<AudioClip> healSounds;
     [SerializeField] private List<AudioClip> potionSounds;
 
