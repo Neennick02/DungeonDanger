@@ -871,6 +871,10 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   _animator: {fileID: 2757163570945586261}
+  doorSounds:
+  - {fileID: 8300000, guid: eefa9699a2215f64ba86e7260f1f94a4, type: 3}
+  clickSounds:
+  - {fileID: 8300000, guid: 68e4fb47b4ff70045a54ea2270d04de6, type: 3}
 --- !u!1 &7370593237238747512
 GameObject:
   m_ObjectHideFlags: 0

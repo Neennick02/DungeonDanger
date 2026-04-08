@@ -17,6 +17,9 @@ public class OrderedTorchManager : MonoBehaviour
     private List<int> currentOrder = new List<int>();
     [SerializeField] private Animator _animator;
     private static bool locked = true;
+
+    [SerializeField] private List<AudioClip> doorSounds;
+    [SerializeField] private List<AudioClip> clickSounds;
     #region OnEnable
     private void OnEnable()
     {
@@ -65,6 +68,9 @@ public class OrderedTorchManager : MonoBehaviour
         OnPuzzleSolved?.Invoke();
         foreach (var torch in torches)
         {
+            AudioManager.Instance.PlayClip(clickSounds);
+            AudioManager.Instance.PlayClip(doorSounds);
+
             torch.KeepOn();
 
         }

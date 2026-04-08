@@ -8,6 +8,7 @@ public class TorchManager : MonoBehaviour
     public List<OnOffInteractable> Torches;
     public UnityEvent OnAllTorchesLit;
     [SerializeField] private List<AudioClip> doorSounds;
+    [SerializeField] private List<AudioClip> clickSounds;
     private bool opened;
     private void Update()
     {
@@ -28,6 +29,8 @@ public class TorchManager : MonoBehaviour
         if (!opened)
         {
             AudioManager.Instance.PlayClip(doorSounds);
+            AudioManager.Instance.PlayClip(clickSounds);
+
             opened = true;
         }
     }

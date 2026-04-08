@@ -480,6 +480,8 @@ MonoBehaviour:
         m_CallState: 2
   doorSounds:
   - {fileID: 8300000, guid: eefa9699a2215f64ba86e7260f1f94a4, type: 3}
+  clickSounds:
+  - {fileID: 8300000, guid: 68e4fb47b4ff70045a54ea2270d04de6, type: 3}
 --- !u!1 &4639477769326478493
 GameObject:
   m_ObjectHideFlags: 0
