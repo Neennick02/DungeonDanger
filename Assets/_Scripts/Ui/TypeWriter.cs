@@ -18,6 +18,8 @@ public class TypeWriter : MonoBehaviour
     [SerializeField] private Image blackScreen;
     [SerializeField] private TextMeshProUGUI skipButton;
     private TextMeshProUGUI textObject;
+    [SerializeField] private List<AudioClip> clickSounds;
+
     private void Start()
     {
         textObject = GetComponent<TextMeshProUGUI>();
@@ -83,5 +85,6 @@ public class TypeWriter : MonoBehaviour
     public void Skip()
     {
         SceneManager.LoadScene("LevelBuildingScene");
+        AudioManager.Instance.PlayClip(clickSounds);
     }
 }

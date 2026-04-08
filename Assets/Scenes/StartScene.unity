@@ -4260,12 +4260,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   continueButton: {fileID: 1626860360}
-  UI_Accept:
-  - {fileID: 8300000, guid: 7745c1a880d00664a8a8a7622940f418, type: 3}
-  - {fileID: 8300000, guid: 7745c1a880d00664a8a8a7622940f418, type: 3}
-  UI_Return:
-  - {fileID: 8300000, guid: afc83bfa8e0d31c4787c4d89170f7f42, type: 3}
-  - {fileID: 8300000, guid: afc83bfa8e0d31c4787c4d89170f7f42, type: 3}
+  clickSounds:
+  - {fileID: 8300000, guid: b12c1e501b51c1340b16ba9a959678c5, type: 3}
 --- !u!1 &1388369010
 GameObject:
   m_ObjectHideFlags: 0

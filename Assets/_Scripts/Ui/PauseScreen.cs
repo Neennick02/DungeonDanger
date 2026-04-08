@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,8 @@ public class PauseScreen : MonoBehaviour
     [SerializeField] private GameObject keyboard, controller;
     private bool isPaused;
     private bool isShowingControls;
+    [SerializeField] private List<AudioClip> clickSounds;
+
     private void OnEnable()
     {
         PlayerInputHandler.OnPause += TogglePause;
@@ -56,5 +59,10 @@ public class PauseScreen : MonoBehaviour
             controller.SetActive(false);
 
         }
+    }
+
+    public void Click()
+    {
+        AudioManager.Instance.PlayClip(clickSounds);
     }
 }

@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class StartScreenManager : MonoBehaviour
 {
     [SerializeField] private GameObject continueButton;
-    public List<AudioClip> UI_Accept = new List<AudioClip>();
-    public List<AudioClip> UI_Return = new List<AudioClip>();
+    public List<AudioClip> clickSounds;
 
     private void Awake()
     {   //only enable continue button if data is saved
@@ -22,21 +21,21 @@ public class StartScreenManager : MonoBehaviour
     public void StartNewGame()
     {
         PlayerPrefs.DeleteAll();
-        StartCoroutine(ClickRoutine(UI_Accept, "StoryScene"));
+        StartCoroutine(ClickRoutine("StoryScene"));
     }
 
     public void LoadMainScene()
     {
-        StartCoroutine(ClickRoutine(UI_Accept, "LevelBuildingScene"));
+        StartCoroutine(ClickRoutine("LevelBuildingScene"));
     }
     public void Quit()
     {
-        StartCoroutine(ClickRoutine(UI_Return));
+        StartCoroutine(ClickRoutine());
     }
 
-    private IEnumerator ClickRoutine(List<AudioClip> clips, string sceneName = default)
+    private IEnumerator ClickRoutine(string sceneName = default)
     {
-        AudioManager.Instance.PlayClip(clips, 1f);
+        AudioManager.Instance.PlayClip(clickSounds, 1f);
         yield return new WaitForSeconds(.3f);
 
         
@@ -49,5 +48,4 @@ public class StartScreenManager : MonoBehaviour
             Application.Quit();
         }
     }
-
 }

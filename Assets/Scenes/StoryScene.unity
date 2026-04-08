@@ -852,6 +852,8 @@ MonoBehaviour:
     awakened in the temple that night.
   blackScreen: {fileID: 143741958}
   skipButton: {fileID: 470285878}
+  clickSounds:
+  - {fileID: 8300000, guid: b12c1e501b51c1340b16ba9a959678c5, type: 3}
 --- !u!1001 &284501042
 PrefabInstance:
   m_ObjectHideFlags: 0
