@@ -1,11 +1,7 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using System;
-using UnityEngine.Analytics;
 
 public class TargetFinder : MonoBehaviour
 {
