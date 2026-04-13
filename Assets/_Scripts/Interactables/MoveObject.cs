@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,8 +30,14 @@ public class MoveObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("End");
-            SceneManager.LoadScene("Credits");
+            StartCoroutine(LoadCredits());
         }
+    }
+
+    IEnumerator LoadCredits()
+    {
+        yield return new WaitForSeconds(1f);
+        Debug.Log("End");
+        SceneManager.LoadScene("Credits");
     }
 }

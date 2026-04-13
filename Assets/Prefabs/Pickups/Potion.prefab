@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f32cc63917503e418cfd77f055fe523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  despawnTime: 5
+  despawnTime: 1e+29
   pickupSound:
   - {fileID: 8300000, guid: 99176e09e2d49034e8cb84922199cfba, type: 3}
 --- !u!1001 &4422008378178230101
@@ -80,15 +80,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ebe01334c09c3684793c69a48a2a5787, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.19
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebe01334c09c3684793c69a48a2a5787, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.19
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebe01334c09c3684793c69a48a2a5787, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.19
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ebe01334c09c3684793c69a48a2a5787, type: 3}
       propertyPath: m_LocalPosition.x

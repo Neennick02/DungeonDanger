@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
@@ -9,6 +11,7 @@ public class Segment : MonoBehaviour
     [SerializeField] private BossObject bossObject;
     [SerializeField] private Collider trigger;
     [SerializeField] private BossBehaviour bossBehaviour;
+    [SerializeField] private List<AudioClip> DamageClips;
 
     private static bool isHit;
     private float regenTime = 1f;
@@ -63,7 +66,6 @@ public class Segment : MonoBehaviour
 
         if (other.CompareTag("Sword") && isTail)
         {
-            Debug.Log("damage boss :)");
             StartCoroutine(TakeDamageRoutine());
         }
     }
@@ -76,10 +78,10 @@ public class Segment : MonoBehaviour
 
     IEnumerator TakeDamageRoutine()
     {
+        AudioManager.Instance.PlayClip(DamageClips, 0.2f);
         isHit = true;
         bossBehaviour.AssignNewSegment();
         yield return new WaitForSeconds(0.5f);
-        
         Destroy(gameObject);
     }
 }

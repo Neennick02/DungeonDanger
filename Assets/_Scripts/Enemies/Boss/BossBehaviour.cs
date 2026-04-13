@@ -16,6 +16,8 @@ public class BossBehaviour : MonoBehaviour
     [SerializeField] private float spacing = 0.5f;
     [SerializeField] private List<Segment> Segments = new List<Segment>();
     [SerializeField] private Material tailMaterial;
+    [SerializeField] private List<AudioClip> DamageClips;
+
     private int destroyedSegmentsCount = 0;
     public int currentSegment;
     private bool isDead;
@@ -89,7 +91,7 @@ public class BossBehaviour : MonoBehaviour
     public void AssignNewSegment()
     {
         Segments.RemoveAt(Segments.Count - 1);
-        speed = speed + speed / 3;
+        speed = speed + speed / 4;
         destroyedSegmentsCount++;
         currentSegment = Segments.Count -1 ;
 
@@ -108,8 +110,10 @@ public class BossBehaviour : MonoBehaviour
     private IEnumerator KillBoss()
     {
         isDead = true;
+        OnBossDefeated?.Invoke();
+        AudioManager.Instance.PlayClip(DamageClips);
 
-        while(Segments.Count > 0)
+        while (Segments.Count > 0)
         {
             GameObject tailSegment = Segments[Segments.Count -1].gameObject;
             Segments.RemoveAt(Segments.Count - 1);
@@ -117,9 +121,8 @@ public class BossBehaviour : MonoBehaviour
             Destroy(tailSegment);
 
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.7f);
         }
-        OnBossDefeated?.Invoke();
         Destroy(gameObject);
     } 
 }
