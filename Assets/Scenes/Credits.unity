@@ -425,7 +425,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 96.78}
-  m_SizeDelta: {x: 500, y: 50}
+  m_SizeDelta: {x: 600, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &699014603
 MonoBehaviour:
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Insert name here
+  m_text: Legend of the Light Temple
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5aea0283a18b1904eac972913e1c248c, type: 2}
   m_sharedMaterial: {fileID: 1173863154055522218, guid: 5aea0283a18b1904eac972913e1c248c, type: 2}
@@ -562,7 +562,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -380.82}
   m_SizeDelta: {x: 524.77, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1128155899
@@ -577,8 +577,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eeaaf9273d96fb40a6d0845c92099c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 200
-  scrollSpeed: 15
+  moveSpeed: 500
+  scrollSpeed: 50
 --- !u!114 &1128155900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,15 +599,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-    in culpa qui officia deserunt mollit anim id est laborum.
+  m_text: "Main Credits:\nProgramming - Yannick Garbe\nLevel Design - Yannick Garbe\n\nModels
+    And Textures:\nCoins, Torches, Hearts, Keys & Locks - Yannick Garbe\nDungeonModularPack\nFantasyEffectsPack
+    - ErbGameArt\nFantasy Skybox FREE\nFloor Materials Pack\nCartoon FX - JMO Assets\nStatues
+    - KE Statues - Lite\nStylized Grass Textures - LowlyPoly \nWeapons and Potions
+    - pp_freedantasyRPGWeapons\nBrick Textures - Forgotten Realms/ Shaded Spectrum
+    \n\nSound Credits:\n\nMusic - TabletopAudio.com \nUI sfx - SKRIL studio\nHealth
+    & Damage System Sound Effects Pack - Hove Audio\nCombat Music - Roger Gabald\xE0
+    \n\nOther sound effects:\nPixabay.com\n\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 898de4cba8c0ddc4896e01cb0be0f925, type: 2}
+  m_sharedMaterial: {fileID: -1583311758888098716, guid: 898de4cba8c0ddc4896e01cb0be0f925, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -631,8 +633,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -863,15 +865,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Return to Title
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 898de4cba8c0ddc4896e01cb0be0f925, type: 2}
+  m_sharedMaterial: {fileID: -1583311758888098716, guid: 898de4cba8c0ddc4896e01cb0be0f925, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4289769648
+  m_fontColor: {r: 0.690566, g: 0.690566, b: 0.690566, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -952,6 +954,7 @@ GameObject:
   - component: {fileID: 2057153713}
   - component: {fileID: 2057153712}
   - component: {fileID: 2057153711}
+  - component: {fileID: 2057153714}
   m_Layer: 5
   m_Name: Return
   m_TagString: Untagged
@@ -976,8 +979,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100, y: 40}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 70, y: 40}
+  m_SizeDelta: {x: 140, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2057153711
 MonoBehaviour:
@@ -1022,7 +1025,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2057153712}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2057153714}
+        m_TargetAssemblyTypeName: ReturnToTitle, Assembly-CSharp
+        m_MethodName: Return
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2057153712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1036,7 +1051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1061,6 +1076,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057153709}
   m_CullTransparentMesh: 1
+--- !u!114 &2057153714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057153709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e39790ef0d53a9340b0f94bc1942bd5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2117334690
 GameObject:
   m_ObjectHideFlags: 0
