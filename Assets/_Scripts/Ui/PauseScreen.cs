@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PauseScreen : MonoBehaviour
 {
@@ -64,5 +65,10 @@ public class PauseScreen : MonoBehaviour
     public void Click()
     {
         AudioManager.Instance.PlayClip(clickSounds);
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene("LevelBuildingScene");
     }
 }

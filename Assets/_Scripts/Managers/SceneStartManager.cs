@@ -10,6 +10,9 @@ public class SceneStartManager : MonoBehaviour
     public static event Action OnSceneLoad;
     private void Start()
     {
+        blackPanel.color = Color.black;
+        //fade black screen to clear
+
         if (PlayerPrefs.HasKey("xPos"))
         {
             OnSceneLoad?.Invoke();
@@ -17,12 +20,11 @@ public class SceneStartManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        StartCoroutine(FadeIn());
     }
 
     IEnumerator FadeIn()
     {
+        Debug.Log("fade");
         float timer = 0f;
         Color startColor = Color.black;
         Color endColor = Color.clear;
@@ -33,5 +35,7 @@ public class SceneStartManager : MonoBehaviour
             blackPanel.color = Color.Lerp(startColor, endColor, timer / duration);
             yield return null;
         }
+
+        blackPanel.color = endColor;
     }
 }
