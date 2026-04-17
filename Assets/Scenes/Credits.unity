@@ -735,7 +735,7 @@ MonoBehaviour:
     - pp_freedantasyRPGWeapons\nBrick Textures - Forgotten Realms/ Shaded Spectrum
     \n\nSound Credits:\n\nMusic - TabletopAudio.com \nUI sfx - SKRIL studio\nHealth
     & Damage System Sound Effects Pack - Hove Audio\nCombat Music - Roger Gabald\xE0
-    \n\nOther sound effects:\nPixabay.com\n\n"
+    \n\nOther sound effects:\nPixabay.com\n\n\n\nThank You For Playing!\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 898de4cba8c0ddc4896e01cb0be0f925, type: 2}
   m_sharedMaterial: {fileID: -1583311758888098716, guid: 898de4cba8c0ddc4896e01cb0be0f925, type: 2}
@@ -762,8 +762,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34
-  m_fontSizeBase: 34
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
