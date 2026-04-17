@@ -5,7 +5,7 @@ public class ReturnToTitle : MonoBehaviour
 {
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
     public void Return()

@@ -10,6 +10,9 @@ public class SceneStartManager : MonoBehaviour
     public static event Action OnSceneLoad;
     private void Start()
     {
+        Time.timeScale = 1f;
+
+        StartCoroutine(FadeIn());
         blackPanel.color = Color.black;
         //fade black screen to clear
 
